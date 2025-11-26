@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { SplitText } from 'gsap/SplitText'
 import 'swiper/css'
-import './PrinmaryService.scss'
+import './PointPanelSection.scss'
 
 // GSAP 플러그인 등록
 gsap.registerPlugin(SplitText)
@@ -13,18 +13,31 @@ export default function PointPanelSection() {
    const textRef2 = useRef(null)
    const sectionRef1 = useRef(null)
    const sectionRef2 = useRef(null)
-   const animated1 = useRef(false)
-   const animated2 = useRef(false)
+   const timeline1Ref = useRef(null)
+   const timeline2Ref = useRef(null)
+   const split1Ref = useRef(null)
+   const split2Ref = useRef(null)
 
    useEffect(() => {
       const animateText1 = (element) => {
          if (!element) return
 
+         // 기존 애니메이션 정리
+         if (timeline1Ref.current) {
+            timeline1Ref.current.kill()
+         }
+         if (split1Ref.current) {
+            split1Ref.current.revert()
+         }
+
          document.fonts.ready.then(() => {
             const split = SplitText.create(element, {
                type: "chars"
             })
+            split1Ref.current = split
+
             const tl = gsap.timeline({ repeat: 30 })
+            timeline1Ref.current = tl
 
             gsap.set(element, { opacity: 1 })
             
@@ -57,12 +70,15 @@ export default function PointPanelSection() {
       }
 
       const animateText2 = (element) => {
-         if (!element) {
-            console.log('No element provided for text2')
-            return
-         }
+         if (!element) return
 
-         console.log('animateText2 called with element:', element)
+         // 기존 애니메이션 정리
+         if (timeline2Ref.current) {
+            timeline2Ref.current.kill()
+         }
+         if (split2Ref.current) {
+            split2Ref.current.revert()
+         }
 
          // 즉시 실행하여 폰트 로딩 문제 해결
          gsap.set(element, { opacity: 1 })
@@ -70,8 +86,7 @@ export default function PointPanelSection() {
          const split = SplitText.create(element, {
             type: "words"
          })
-
-         console.log('Split words:', split.words, 'Length:', split.words.length)
+         split2Ref.current = split
 
          // 초기 상태 설정
          gsap.set(split.words, {
@@ -81,43 +96,44 @@ export default function PointPanelSection() {
          })
 
          // 애니메이션 실행
-         gsap.to(split.words, {
+         const tl = gsap.to(split.words, {
             y: 0,
             opacity: 1,
             rotation: 0,
             stagger: 0.15,
             duration: 0.8,
-            ease: "back.out(1.7)",
-            onComplete: () => {
-               console.log('Text2 animation completed')
-            }
+            ease: "back.out(1.7)"
          })
+         timeline2Ref.current = tl
       }
 
       // Intersection Observer 설정
+      // 스크롤 스냅과 함께 사용하기 위해 threshold를 낮추고 rootMargin 추가
       const observerOptions = {
-         threshold: 0.5, // 50% 보일 때 트리거
-         rootMargin: '0px'
+         threshold: 0.3, // 30% 보일 때 트리거 (스크롤 스냅 대응)
+         rootMargin: '-10% 0px -10% 0px' // 상하 10% 여유를 두어 섹션이 완전히 보일 때 트리거
       }
 
       const observer1 = new IntersectionObserver((entries) => {
          entries.forEach((entry) => {
-            if (entry.isIntersecting && textRef1.current && !animated1.current) {
-               console.log('Section 1 is visible, starting animation')
-               animated1.current = true
-               animateText1(textRef1.current)
+            // 섹션이 보일 때마다 애니메이션 실행
+            if (entry.isIntersecting && textRef1.current) {
+               // 약간의 지연을 두어 스크롤 스냅이 완료된 후 실행
+               requestAnimationFrame(() => {
+                  animateText1(textRef1.current)
+               })
             }
          })
       }, observerOptions)
 
       const observer2 = new IntersectionObserver((entries) => {
          entries.forEach((entry) => {
-            if (entry.isIntersecting && textRef2.current && !animated2.current) {
-               console.log('Section 2 is visible, starting animation')
-               animated2.current = true
-               setTimeout(() => {
+            // 섹션이 보일 때마다 애니메이션 실행
+            if (entry.isIntersecting && textRef2.current) {
+               // 약간의 지연을 두어 스크롤 스냅이 완료된 후 실행
+               requestAnimationFrame(() => {
                   animateText2(textRef2.current)
-               }, 500) // 0.5초 지연
+               })
             }
          })
       }, observerOptions)
@@ -134,6 +150,18 @@ export default function PointPanelSection() {
       return () => {
          observer1.disconnect()
          observer2.disconnect()
+         if (timeline1Ref.current) {
+            timeline1Ref.current.kill()
+         }
+         if (timeline2Ref.current) {
+            timeline2Ref.current.kill()
+         }
+         if (split1Ref.current) {
+            split1Ref.current.revert()
+         }
+         if (split2Ref.current) {
+            split2Ref.current.revert()
+         }
       }
    }, [])
 
@@ -144,7 +172,7 @@ export default function PointPanelSection() {
             className="panel showcase1" 
             ref={sectionRef1}
             style={{
-               background: 'linear-gradient(to bottom, #ff6b6b 0%, #ffd93d 60%, #ffffff 100%)',
+               background: 'linear-gradient(to top, #d1e95d 0%, #ffffff 60%, #ffffff 100%)',
                textAlign: 'center',
                padding: '120px 24px 40px',
                height: '100vh',

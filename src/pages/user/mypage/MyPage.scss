@@ -1,375 +1,384 @@
-.mypage {
-  min-height: 100vh;
-  background-color: var( --bg-gray);
-  
-  &__container {
-    display: flex;
-    max-width: 1200px;
-    margin: 0 auto;
-    min-height: 100vh;
-  }
+@import '../../../styles/variables';
 
+.user-page {
   // 사이드바
   &__sidebar {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
     position: sticky;
     top: 0;
-    height: 100vh;
-    overflow: hidden;
     align-self: flex-start;
-    box-sizing: border-box;
-  }
 
-  &__sidebar__card__list {
-    padding: 10px;
-    background-color: #fff;
-    border-radius: var(--border-radius);
-  }
+    &__contents {
+      border-radius: $radius-lg;
+      background-color: $color-bg-white;
+      padding: $spacing-container-padding;
+    }
 
-  // 홈 버튼
-  &__home-button {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
-  &__home-btn {
-    padding: 4px 8px;
-    background: none;
-    border: none;
-    color: var(--maincolor);
-    font-weight: 700;
-    font-size: 0.875rem;
-    letter-spacing: 1px;
-    cursor: pointer;
-    display: inline-block;
-    transition: color 0.3s ease;
-    
-    &:hover {
-      color: var(--point-b);
+    // 카드 타이틀 기본 스타일 (마이페이지 전용)
+    // .carbon-reduction-card__title 스타일 적용
+    h4,
+    span {
+      font-size: $font-body-regular;
+      font-weight: $weight-medium;
+      color: $color-text-primary;
     }
   }
 
-  &__profile__card {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
+  // 마이페이지 전용 카드 스타일
   &__card {
-    background-color: var(--subcolor-m);
-    border-radius: var(--border-radius);
-    padding: 8px;
+    background-color: $color-bg-sub-m;
+    border-radius: $radius-lg;
+    padding: $spacing-margin-mobile;
   }
-
 
   &__avatar {
-    min-height: 80px;
-    min-width: 80px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     
     img {
       width: 100%;
       height: 100%;
-      border-radius: 0;
+      object-fit: cover;
     }
   }
 
-  &__user-info {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 5px;
-  }
-
   &__username {
-    font-weight: 600;
-    color: var(--maintext);
+    font-size: $font-body-regular;
+    font-weight: $weight-medium;
+    color: $color-text-primary;
   }
 
   &__edit-profile {
     background: none;
-    text-decoration: none;
-    color: var(--subtext);
-    padding: 8px;
-    font-size: 0.875rem;
-    cursor: pointer;
+    border: none;
+    color: $color-text-secondary;
+    font-size: $font-caption;
+    font-weight: $weight-regular;
     
     &:hover {
-      background-color: var(--point-y);
-      border: none;
-      color: #fff;
+      color: $color-text-primary;
+      text-decoration: underline;
     }
-  }
-
-  &__sprout {
-    span {
-      font-size: 0.875rem;
-      color: var(--maintext);
-    }
-  }
-
-  &__progress-bar {
-    width: 100%;
-    height: 8px;
-    background-color: var(--subcolor-m);
-    border-radius: 4px;
-    overflow: hidden;
   }
 
   &__progress-fill {
     width: 60%;
     height: 100%;
-    background-color: var(--subcolor-d);
-    border-radius: 4px;
-  }
-
-  &__practice-count {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 0;
-    border-bottom: 1px solid #e9ecef;
-    
-    span {
-      font-size: 0.875rem;
-      color: var(--maintext);
-    }
-    
-    img {
-      width: 16px;
-      height: 16px;
-      border-radius: 0;
-    }
+    background-color: $color-main;
+    border-radius: $radius-sm;
   }
 
   &__count-number {
-    color: var(--point-b);
-    font-weight: 600;
-    font-size: 1rem;
-  }
-
-  &__point-balance {
-    h4 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: var(--maintext);
-    }
+    font-size: $font-body-large;
+    font-weight: $weight-medium;
+    color: $color-point-blue;
   }
 
   &__point-amount {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--maintext);
-    margin-bottom: 15px;
+    font-size: $font-h3;
+    font-weight: $weight-bold;
+    color: $color-text-primary;
   }
 
-  &__collect-points {
-    width: 100%;
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    
-    img {
-      width: 16px;
-      height: 16px;
-      border-radius: 0;
-    }
-  }
-
-  &__carbon-reduction {
-    h4 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: var(--maintext);
-    }
-    
-    p {
-      font-size: 0.875rem;
-      color: var(--subtext);
-      margin-bottom: 15px;
-    }
-  }
-
-  &__tree-icons {
-    display: flex;
-    gap: 8px;
-  }
-
-  &__tree {
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    opacity: 0.3;
-    
-    &--filled {
-      opacity: 1;
-    }
-  }
-
-  &__bottom-links {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  &__link {
-    color: var(--subtext);
-    font-size: 0.875rem;
+  &__link-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: $font-body-regular;
+    font-weight: $weight-regular;
+    color: $color-text-secondary;
     text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
     
     &:hover {
-      color: var(--maintext);
+      color: $color-text-primary;
       text-decoration: underline;
     }
   }
 
   // 메인 컨텐츠
-  &__main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    height: auto;
-  }
-
   &__tabs {
-    width: 100%;
     position: sticky;
     top: 0;
-    background-color: var(--bg-gray);
+    background-color: $color-bg-gray;
     z-index: 10;
-    padding: 10px 0;
+    padding: $spacing-input-gap 0;
     
-    .nav-tabs {
+    &__list {
       display: flex;
+      gap: $radius-sm;
       width: 100%;
-      gap: 8px;
-      border-bottom: none;
-      margin-bottom: 0;
+      flex-wrap: wrap;
     }
     
-    .nav-item {
-      flex: 1;
-      
-      .nav-link {
-        width: 100%;
-        text-align: center;
-        border: none;
-        border-radius: var(--border-radius);
-        padding: 10px;
-        font-size: 1rem;
-        font-weight: 500;
-        color: var(--subtext);
-        background-color: #ffff;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        
-        &:hover {
-          color: var(--maintext);
-        }
-        
-        &.active {
-          color: var(--maintext);
-          font-weight: 600;
-          background-color: var(--maincolor);
-        }
-      }
+  &__item {
+    flex: 1;
+    min-width: fit-content;
+    // 버튼 기본 스타일 리셋
+    background: none;
+    border: none;
+    border-radius: $radius-lg;
+    color: $color-text-secondary;
+    background-color: $color-bg-white;
+    font-size: $font-body-regular;
+    font-family: $font-body;
+    font-weight: $weight-regular;
+    padding: clamp(8px, 1.5vw, 12px) clamp(12px, 2vw, 16px);
+    margin: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    text-align: center;
+    outline: none;
+    
+    &:hover {
+      color: $color-text-primary;
+    }
+    
+    &:focus {
+      outline: none;
+    }
+    
+    &--active {
+      color: $color-text-primary;
+      font-weight: $weight-medium;
+      background-color: $color-sub-green;
     }
   }
-
+  }
 
   &__content {
-    // 탭 컨텐츠 영역
-    padding: 30px;
-    flex: 1;
-    background-color: #ffffff;
-    border-radius: var(--border-radius);
-    overflow-y: auto;
-    box-sizing: border-box;
-    margin-top: 0;
+    background-color: $color-bg-white;
+    border-radius: $radius-lg;
+    padding: $spacing-container-padding;
   }
 }
 
-// 반응형 디자인
-@media (max-width: 768px) {
-  .mypage {
-    &__container {
-      flex-direction: column;
-    }
+// ========== 마이페이지 전용 클래스 (mypage__ 접두사) ==========
+.mypage__sidebar {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+}
+
+.mypage__sidebar__contents {
+  border-radius: $radius-lg;
+  background-color: $color-bg-white;
+  padding: $spacing-container-padding;
+}
+
+.mypage__avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.mypage__username {
+  font-size: $font-body-regular;
+  font-weight: $weight-medium;
+  color: $color-text-primary;
+}
+
+.mypage__edit-profile {
+  background: none;
+  border: none;
+  color: $color-text-secondary;
+  font-size: $font-caption;
+  font-weight: $weight-regular;
+  cursor: pointer;
+  
+  &:hover {
+    color: $color-text-primary;
+    text-decoration: underline;
+  }
+}
+
+.mypage__card {
+  background-color: $color-bg-sub-m;
+  border-radius: $radius-lg;
+  padding: $spacing-margin-mobile;
+}
+
+.mypage__card-title {
+  font-size: $font-body-large;
+  font-weight: $weight-medium;
+  color: $color-text-primary;
+}
+
+.mypage__card-description {
+  font-size: $font-caption;
+  color: $color-text-secondary;
+}
+
+.mypage__tree-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $radius-sm;
+  justify-content: center;
+}
+
+.mypage__tree {
+  width: $spacing-container-padding;
+  height: $spacing-container-padding;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-body-regular;
+  opacity: 0.3;
+  
+  &--filled {
+    opacity: 1;
+  }
+}
+
+.mypage__progress-fill {
+  width: 60%;
+  height: 100%;
+  background-color: $color-main;
+  border-radius: $radius-sm;
+}
+
+.mypage__count-number {
+  font-size: $font-body-large;
+  font-weight: $weight-medium;
+  color: $color-point-blue;
+}
+
+.mypage__point-amount {
+  font-size: $font-h3;
+  font-weight: $weight-bold;
+  color: $color-text-primary;
+}
+
+.mypage__link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: $font-body-regular;
+  font-weight: $weight-regular;
+  color: $color-text-secondary;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  
+  &:hover {
+    color: $color-text-primary;
+    text-decoration: underline;
+  }
+}
+
+
+.mypage__tabs {
+  position: sticky;
+  top: 0;
+  background-color: $color-bg-gray;
+  z-index: 10;
+  padding: $spacing-input-gap 0;
+  
+  @media (max-width: 768px) {
+    padding: $spacing-input-gap * 0.8 0;
+  }
+  
+  @media (max-width: 576px) {
+    padding: $spacing-input-gap * 0.6 0;
+  }
+  
+  &__list {
+    display: flex;
+    gap: $radius-sm;
+    width: 100%;
+    flex-wrap: wrap;
     
-    &__sidebar {
-      width: 100%;
-      order: 2;
-      position: static;
-      height: auto;
-      overflow-y: visible;
-    }
-    
-    &__main {
-      order: 1;
-      padding: 20px;
-    }
-    
-    &__tabs {
+    @media (max-width: 768px) {
+      gap: $radius-sm * 0.75;
       overflow-x: auto;
       flex-wrap: nowrap;
-      position: sticky;
-      top: 0;
-      background-color: var(--bg-gray);
-      z-index: 10;
-      padding: 10px 0;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
     
-    &__tab {
-      white-space: nowrap;
-      min-width: max-content;
+    @media (max-width: 576px) {
+      gap: $radius-sm * 0.5;
+    }
+  }
+  
+  &__item {
+    flex: 1;
+    min-width: fit-content;
+    // 버튼 기본 스타일 리셋
+    background: none;
+    border: none;
+    border-radius: $radius-lg;
+    color: $color-text-secondary;
+    background-color: $color-bg-white;
+    font-size: $font-body-regular;
+    font-family: $font-body;
+    font-weight: $weight-regular;
+    padding: clamp(8px, 1.5vw, 12px) clamp(12px, 2vw, 16px);
+    margin: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    text-align: center;
+    outline: none;
+    
+    @media (max-width: 768px) {
+      flex-shrink: 0;
+      padding: clamp(6px, 1.2vw, 10px) clamp(10px, 1.8vw, 14px);
+      font-size: $font-size-input-tablet;
     }
     
+    @media (max-width: 576px) {
+      padding: clamp(5px, 1vw, 8px) clamp(8px, 1.5vw, 12px);
+      font-size: $font-size-input-mobile;
+      border-radius: $radius-md;
+    }
+    
+    &:hover {
+      color: $color-text-primary;
+    }
+    
+    &:focus {
+      outline: none;
+    }
+    
+    &--active {
+      color: $color-text-primary;
+      font-weight: $weight-medium;
+      background-color: $color-sub-green;
+    }
   }
 }
 
-@media (max-width: 480px) {
-  .mypage {
+.mypage__content {
+  background-color: $color-bg-white;
+  border-radius: $radius-lg;
+  padding: $spacing-container-padding;
+}
+
+// ========== 반응형 디자인 ==========
+@media (max-width: 768px) {
+  .user-page {
     &__sidebar {
-      padding: 20px 15px;
+      position: static;
     }
-    
-    &__main {
-      padding: 15px;
-    }
-    
-    &__profile {
-      flex-direction: column;
-      text-align: center;
-      gap: 10px;
-    }
-    
-    &__user-info {
-      flex-direction: column;
-      gap: 5px;
-    }
-    
+  }
+  
+  .mypage__sidebar {
+    position: static;
   }
 }
 

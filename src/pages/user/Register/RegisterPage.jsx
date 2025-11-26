@@ -12,8 +12,10 @@ import InputCheckPassword from "../../../components/common/InputCheckPassword";
 import InputPhoneNumber from "../../../components/common/InputPhoneNumber";
 import InputWithBtn from "../../../components/common/InputWithBtn";
 import InputAddress from "../../../components/common/InputAddress";
+import Button from "../../../components/common/Button";
+import Alert from "../../../components/common/Alert";
+import AuthPageLayout from "../../../components/auth/AuthPageLayout";
 
-import "./register.scss";
 import { useNavigate } from "react-router-dom";
 
 // 백엔드와 동일한 규칙
@@ -34,7 +36,16 @@ export default function RegisterPage() {
     addr1: "", // 기본/우편
     addr2: "", // 상세
   });
+  const [alert, setAlert] = useState({ isOpen: false, message: '', variant: 'info', title: null });
   const navigate = useNavigate();
+
+  const showAlert = (message, variant = 'info', title = null) => {
+    setAlert({ isOpen: true, message, variant, title });
+  };
+
+  const hideAlert = () => {
+    setAlert({ isOpen: false, message: '', variant: 'info', title: null });
+  };
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -49,18 +60,20 @@ export default function RegisterPage() {
     e.preventDefault();
     const id = form.id.trim();
     if (!USERID_REGEX.test(id)) {
-      alert("아이디는 4~20자의 영문/숫자만 가능합니다.");
+      showAlert("아이디는 4~20자의 영문/숫자만 가능합니다.", "warning", "입력 오류");
       return;
     }
     try {
       const { data } = await checkUsername(id);
-      alert(
+      showAlert(
         data.available
           ? "사용 가능한 아이디입니다."
-          : "이미 사용 중인 아이디입니다."
+          : "이미 사용 중인 아이디입니다.",
+        data.available ? "success" : "error",
+        data.available ? "사용 가능" : "중복됨"
       );
     } catch (err) {
-      alert("아이디 중복 확인 중 오류가 발생했습니다.");
+      showAlert("아이디 중복 확인 중 오류가 발생했습니다.", "error", "오류");
     }
   };
 
@@ -68,18 +81,20 @@ export default function RegisterPage() {
     e.preventDefault();
     const nick = form.nick.trim();
     if (!NICK_REGEX.test(nick)) {
-      alert("닉네임은 공백 없이 2~20자여야 합니다.");
+      showAlert("닉네임은 공백 없이 2~20자여야 합니다.", "warning", "입력 오류");
       return;
     }
     try {
       const { data } = await checkNickname(nick);
-      alert(
+      showAlert(
         data.available
           ? "사용 가능한 닉네임입니다."
-          : "이미 사용 중인 닉네임입니다."
+          : "이미 사용 중인 닉네임입니다.",
+        data.available ? "success" : "error",
+        data.available ? "사용 가능" : "중복됨"
       );
     } catch (err) {
-      alert("닉네임 중복 확인 중 오류가 발생했습니다.");
+      showAlert("닉네임 중복 확인 중 오류가 발생했습니다.", "error", "오류");
     }
   };
 
@@ -87,18 +102,20 @@ export default function RegisterPage() {
     e.preventDefault();
     const email = form.email.trim().toLowerCase();
     if (!email) {
-      alert("이메일을 입력하세요.");
+      showAlert("이메일을 입력하세요.", "warning", "입력 오류");
       return;
     }
     try {
       const { data } = await checkEmail(email);
-      alert(
+      showAlert(
         data.available
           ? "사용 가능한 이메일입니다."
-          : "이미 사용 중인 이메일입니다."
+          : "이미 사용 중인 이메일입니다.",
+        data.available ? "success" : "error",
+        data.available ? "사용 가능" : "중복됨"
       );
     } catch (err) {
-      alert("이메일 중복 확인 중 오류가 발생했습니다.");
+      showAlert("이메일 중복 확인 중 오류가 발생했습니다.", "error", "오류");
     }
   };
 
@@ -115,18 +132,18 @@ export default function RegisterPage() {
 
     // 비밀번호 규칙 / 일치 검사
     if (!PASSWORD_REGEX.test(form.password)) {
-      alert("비밀번호는 영문/숫자/특수문자를 포함해 8자 이상이어야 합니다.");
+      showAlert("비밀번호는 영문/숫자/특수문자를 포함해 8자 이상이어야 합니다.", "warning", "입력 오류");
       return;
     }
     if (form.password !== form.password2) {
-      alert("비밀번호가 일치하지 않습니다.");
+      showAlert("비밀번호가 일치하지 않습니다.", "error", "입력 오류");
       return;
     }
 
     // userId(선택) 유효성 검사
     const userId = form.id.trim();
     if (userId && !USERID_REGEX.test(userId)) {
-      alert("아이디는 4~20자의 영문/숫자만 가능합니다.");
+      showAlert("아이디는 4~20자의 영문/숫자만 가능합니다.", "warning", "입력 오류");
       return;
     }
 
@@ -149,22 +166,33 @@ export default function RegisterPage() {
       const res = await registerUser(payload);
       console.log("가입 결과:", res.data);
 
-      alert("회원가입이 완료되었습니다!");
-      navigate("/login", { replace: true });
+      showAlert("회원가입이 완료되었습니다!", "success", "가입 완료");
+      setTimeout(() => {
+        navigate("/login", { replace: true });
+      }, 1500);
     } catch (err) {
       const msg =
         err?.response?.data?.message || "회원가입 중 오류가 발생했습니다.";
-      alert(msg);
+      showAlert(msg, "error", "가입 실패");
     }
   };
 
   return (
-    <section id="main1">
-      <div id="area" className="container">
-        <div id="register">
-          <div className="user-register">
-            <h3>회원정보입력</h3>
-            <form className="registerform mt-80" onSubmit={handleSubmit}>
+    <>
+      {alert.isOpen && (
+        <Alert
+          variant={alert.variant}
+          title={alert.title}
+          isModal={true}
+          dismissible={true}
+          onClose={hideAlert}
+          size="sm"
+        >
+          {alert.message}
+        </Alert>
+      )}
+      <AuthPageLayout id="register" title="회원정보입력" formClassName="mt-80">
+        <form onSubmit={handleSubmit}>
               {/* 아이디 */}
               <InputWithBtn
                 label="아이디"
@@ -231,13 +259,11 @@ export default function RegisterPage() {
                 inputChange={onChange}
               />
 
-              <button type="submit" className="btn default main1 mt-40">
-                회원가입
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
+        <Button variant="main1" type="submit" className="mt-40" fullWidth>
+          회원가입
+        </Button>
+      </form>
+    </AuthPageLayout>
+    </>
   );
 }

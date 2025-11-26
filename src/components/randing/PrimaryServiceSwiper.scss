@@ -1,0 +1,180 @@
+// PrimaryServiceSwiper.scss
+// PrimaryServiceSwiper 컴포넌트 전용 스타일
+
+@import '../../styles/variables';
+
+.ps-swiper-container {
+   position: relative;
+   width: 100%;
+   max-width: 1400px;
+   margin: 0 auto;
+   padding: 0 20px;
+   
+   @media (min-width: 1024px) {
+      padding: 0 40px;
+   }
+
+   @media (max-width: 768px) {
+      padding: 0 15px;
+   }
+
+   @media (max-width: 480px) {
+      padding: 0 10px;
+   }
+}
+
+.ps-swiper {
+   padding: 20px 0;
+   width: 100%;
+   
+   .swiper-slide {
+      height: auto;
+      box-sizing: border-box;
+      
+      @media (max-width: 767px) {
+         width: 100% !important;
+      }
+   }
+}
+
+.ps-card {
+   width: 100%;
+   max-width: 100%;
+   height: 450px;
+   border-radius: 24px;
+   cursor: pointer;
+   position: relative;
+   overflow: hidden;
+   display: flex;
+   flex-direction: column;
+   transition: transform 0.3s ease;
+
+   &:hover {
+      transform: translateY(-8px);
+
+      .ps-card-icon-section {
+         border-radius: 24px 24px 0 0;
+      }
+
+      .ps-card-text-section {
+         border-radius: 0 0 24px 24px;
+      }
+   }
+
+   @media (max-width: 768px) {
+      height: 380px;
+   }
+
+   @media (max-width: 480px) {
+      height: 350px;
+   }
+}
+
+.ps-card-icon-section {
+   width: 100%;
+   height: 62%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 40px 32px 20px;
+   position: relative;
+   overflow: hidden;
+   border-radius: 24px;
+   transition: transform 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
+
+   @media (max-width: 768px) {
+      height: 60%;
+      padding: 32px 24px 16px;
+   }
+
+   @media (max-width: 480px) {
+      height: 58%;
+      padding: 28px 20px 12px;
+   }
+}
+
+.ps-icon-image {
+   width: 100%;
+   height: 100%;
+   object-fit: contain;
+   display: block;
+   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+   animation: float 3s ease-in-out infinite;
+}
+
+.ps-card-text-section {
+   width: 100%;
+   height: 38%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+   padding: 20px 32px 40px;
+   border-radius: 24px;
+   transition: transform 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
+
+   &.light-bg {
+      .ps-card-title {
+         color: #000;
+      }
+
+      .ps-card-description {
+         color: #333;
+      }
+   }
+
+   @media (max-width: 768px) {
+      height: 40%;
+      padding: 16px 24px 32px;
+   }
+
+   @media (max-width: 480px) {
+      height: 42%;
+      padding: 12px 20px 28px;
+   }
+}
+
+@keyframes float {
+   0%, 100% {
+      transform: translateY(0px);
+   }
+   50% {
+      transform: translateY(-10px);
+   }
+}
+
+.ps-card-title {
+   font-size: 24px;
+   font-weight: 700;
+   color: #fff;
+   line-height: 1.4;
+   margin: 0;
+   word-break: keep-all;
+
+   @media (max-width: 768px) {
+      font-size: 20px;
+   }
+
+   @media (max-width: 480px) {
+      font-size: 18px;
+   }
+}
+
+.ps-card-description {
+   font-size: 16px;
+   font-weight: 400;
+   color: #fff;
+   line-height: 1.6;
+   margin: 0;
+   word-break: keep-all;
+
+   @media (max-width: 768px) {
+      font-size: 14px;
+   }
+
+   @media (max-width: 480px) {
+      font-size: 13px;
+   }
+}
+

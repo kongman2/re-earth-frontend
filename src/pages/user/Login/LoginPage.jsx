@@ -1,19 +1,12 @@
 // re-earth-frontend/src/pages/user/Login/LoginPage.jsx
 import LoginForm from './LoginForm'
-import './login.scss'
+import AuthPageLayout from '../../../components/auth/AuthPageLayout'
 
 function LoginPage() {
    return (
-      <>
-         <section id="main1">
-            <div id="area" className="container">
-               <div id="login">
-                  <h2>로그인하기</h2>
-                  <LoginForm />
-               </div>
-            </div>
-         </section>
-      </>
+      <AuthPageLayout id="login" title="로그인하기">
+         <LoginForm />
+      </AuthPageLayout>
    )
 }
 

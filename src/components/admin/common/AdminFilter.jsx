@@ -39,7 +39,7 @@ const AdminFilter = ({ options, onFilterChange }) => {
             className="admin-filter__toggle btn"
             onClick={() => setIsOpen(!isOpen)}
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path 
                 d="M3 6h18M7 12h10M11 18h2" 
                 stroke="currentColor" 

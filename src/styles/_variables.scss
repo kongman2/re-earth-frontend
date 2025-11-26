@@ -1,0 +1,109 @@
+// re-earth-frontend/src/styles/_variables.scss
+// ======================================
+// SCSS Variables
+
+// ========== Colors ==========
+// 통일된 색상 변수 (표준 변수)
+$color-main: #72C63A; /* Green - Natural, stable, comfortable */
+$color-point-blue: #1D6FF2;
+$color-point-yellow: #FFCE55;
+$color-point-orange: #FB6E52;
+$color-sub-green: #D1E95D;
+$color-text-primary: #333333;
+$color-text-secondary: #9E9E9E;
+$color-text-sub-green: #568265;
+$color-bg-white: #FFFFFF;
+$color-bg-light-gray: #F5F5F5;
+$color-bg-sub-m: #f2f6eb; // 서브 배경색
+$color-bg-gray: #f7f7f7; // 그레이 배경색
+
+// ========== Typography ==========
+// Font Families
+$font-heading: 'Gmarket Sans', sans-serif;
+$font-body: 'Pretendard', sans-serif;
+
+// Typography - Responsive (clamp 사용)
+$font-h1: clamp(2rem, 4vw, 3rem); /* 32px ~ 48px */
+$font-h2: clamp(1.5rem, 3vw, 2rem); /* 24px ~ 32px */
+$font-h3: clamp(1.25rem, 2.5vw, 1.5rem); /* 20px ~ 24px */
+$font-body-large: clamp(1rem, 1.5vw, 1.125rem); /* 16px ~ 18px */
+$font-body-regular: clamp(0.875rem, 1.2vw, 1rem); /* 14px ~ 16px */
+$font-caption: clamp(0.75rem, 1vw, 0.875rem); /* 12px ~ 14px */
+$font-button: clamp(0.875rem, 1.2vw, 1rem); /* 14px ~ 16px */
+
+// Line Heights
+$line-height-h1: 1.3;
+$line-height-h2: 1.4;
+$line-height-h3: 1.5;
+$line-height-body: 1.6;
+$line-height-caption: 1.5;
+
+// Font Weights
+$weight-bold: 800;
+$weight-medium: 600;
+$weight-regular: 400;
+
+// ========== Spacing & Grid ==========
+$spacing-gutter: 1.5rem; /* 24px - Column spacing */
+$spacing-margin-pc: 1.5rem; /* 24px - PC margin */
+$spacing-margin-mobile: 1rem; /* 16px - Mobile margin */
+$spacing-section-padding: 3rem; /* 48px - Section top/bottom padding */
+$spacing-container-padding: 1.5rem; /* 24px - Card/Container inner padding */
+$spacing-button-padding: 0.75rem 1.5rem; /* 12px ~ 24px - Button padding */
+$spacing-page-padding: 5rem; /* 페이지 패딩 */
+// ========== Component Heights ==========
+// Input/Button 공통 height (반응형)
+$height-input-default: clamp(48px, 5vw, 56px); /* 기본 height */
+$height-input-tablet: 52px; /* 768px 이하 */
+$height-input-mobile: 48px; /* 576px 이하 */
+
+// Textarea min-height (반응형)
+$height-textarea-default: clamp(120px, 15vw, 160px); /* 기본 min-height */
+$height-textarea-tablet: 120px; /* 768px 이하 */
+$height-textarea-mobile: 100px; /* 576px 이하 */
+
+// ========== Input/Form Component Variables ==========
+// Input 좌우 padding (반응형)
+$padding-input-horizontal-default: clamp(20px, 4vw, 40px); /* 기본 좌우 padding */
+$padding-input-horizontal-tablet: 24px; /* 768px 이하 */
+$padding-input-horizontal-mobile: 20px; /* 576px 이하 */
+
+// Textarea padding (반응형)
+$padding-textarea-vertical-default: clamp(16px, 2.5vw, 20px); /* 기본 상하 padding */
+$padding-textarea-vertical-tablet: 16px; /* 768px 이하 */
+$padding-textarea-vertical-mobile: 14px; /* 576px 이하 */
+$padding-textarea-horizontal-default: clamp(20px, 4vw, 40px); /* 기본 좌우 padding */
+$padding-textarea-horizontal-tablet: 24px; /* 768px 이하 */
+$padding-textarea-horizontal-mobile: 20px; /* 576px 이하 */
+
+// Password input 오른쪽 padding (아이콘 공간)
+$padding-password-right-default: clamp(50px, 5vw, 60px); /* 기본 padding-right */
+$padding-password-right-tablet: 50px; /* 768px 이하 */
+$padding-password-right-mobile: 45px; /* 576px 이하 */
+
+// Input font-size (반응형)
+$font-size-input-tablet: 0.9375rem; /* 15px - 768px 이하 */
+$font-size-input-mobile: 0.875rem; /* 14px - 576px 이하 */
+
+// Input/Form Spacing
+$spacing-input-gap: 10px; /* input 간격 */
+$spacing-input-phone-gap: clamp(5px, 1vw, 10px); /* 전화번호 input 간격 */
+$spacing-form-label-margin-bottom: 10px; /* form label 하단 여백 */
+$spacing-form-label-padding-left: 20px; /* form label 좌측 여백 */
+
+// Input/Form Widths
+$width-input-with-btn-max: 400px; /* 버튼이 있는 input 최대 너비 */
+$width-input-with-btn-button-max: 100px; /* 버튼이 있는 input의 버튼 최대 너비 */
+$width-input-phone-item: 30%; /* 전화번호 input 각 항목 너비 */
+
+// ========== Border Radius ==========
+$radius-xl: 24px;
+$radius-lg: 20px;
+$radius-md: 12px;
+$radius-sm: 8px;
+
+// ========== Shadows ==========
+$shadow-card: 0 2px 4px rgba(0, 0, 0, 0.08);
+$shadow-card-inner: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.15);
+

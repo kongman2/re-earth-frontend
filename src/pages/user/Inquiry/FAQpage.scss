@@ -1,76 +1,251 @@
-.faq-area {
-   padding-top: 120px;
-   margin: 0 auto;
+@import '../../../styles/variables';
+
+// ========== FAQPage 전용 반응형 스타일 ==========
+// FAQPage에만 적용되도록 구체적인 선택자 사용
+.faq-page {
+   @media (max-width: 991.98px) {
+      padding: 0;
+      overflow-x: hidden;
+      min-height: 100vh;
+      min-height: 100svh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+
+      .container {
+         padding-left: 0;
+         padding-right: 0;
+         max-width: 100%;
+         height: 100%;
+         flex: 1;
+         display: flex;
+         flex-direction: column;
+      }
+
+      .row {
+         margin-left: 0;
+         margin-right: 0;
+         height: 100%;
+         flex: 1;
+         display: flex;
+         flex-direction: column;
+      }
+
+      .col-12 {
+         padding-left: 0;
+         padding-right: 0;
+         height: 100%;
+         flex: 1;
+         display: flex;
+         flex-direction: column;
+      }
+   }
 }
 
-.faq {
-   width: 100%;
-   background-color: #ffffff;
-   border-radius: 20px;
-   padding: 40px;
+.faq-form-layout {
+   @media (max-width: 991.98px) {
+      padding-top: 0;
+      padding-bottom: 0;
+      min-height: 100vh;
+      min-height: 100svh;
+      min-height: 100dvh;
+      height: 100%;
+      flex: 1;
+   }
+   .form-layout__header {
+      margin-bottom: $spacing-section-padding * 0.625;
+      text-align: center;
+
+      @media (min-width: 768px) {
+         text-align: left;
+      }
+
+      h2 {
+         @media (max-width: 575.98px) {
+            font-size: $font-h3;
+         }
+      }
+   }
+
+   .form-layout__content {
+      gap: $spacing-section-padding * 0.625;
+   }
 }
 
 .faq--tab {
-   margin: 40px auto;
+   margin: $spacing-section-padding * 0.625 auto;
    display: flex;
    justify-content: space-between;
    align-items: center;
    width: 100%;
    max-width: 780px;
-   background-color: var(--maincolor);
-   border-radius: 20px;
-}
-.faq--tab .tab {
-   padding: 15px 0;
-   width: 100%;
-   height: 100%;
-   max-height: 50px;
-   text-align: center;
-   font-family: var(--headings);
-   &:not(:last-child) {
-      border-right: 1px solid white;
+   background-color: $color-sub-green;
+   border-radius: $radius-lg;
+   overflow-x: auto;
+   overflow-y: hidden;
+   -webkit-overflow-scrolling: touch;
+   scrollbar-width: none; // Firefox
+   -ms-overflow-style: none; // IE/Edge
+
+   &::-webkit-scrollbar {
+      display: none; // Chrome/Safari
    }
-   &:hover {
+
+   @media (max-width: 767.98px) {
+      flex-wrap: nowrap;
+      border-radius: $radius-md;
+   }
+
+   .tab {
+      padding: $spacing-container-padding * 0.625 $spacing-margin-mobile * 0.5;
+      min-width: fit-content;
+      flex: 1;
+      text-align: center;
+      font-family: $font-heading;
+      font-size: $font-body-regular;
+      font-weight: $weight-medium;
+      color: $color-text-primary;
+      transition: all 0.3s ease;
       cursor: pointer;
-      background-color: #b2d700;
-   }
-   &:hover:first-child {
-      border-radius: 20px 0 0 20px;
-   }
-   &:hover:last-child {
-      border-radius: 0 20px 20px 0;
-   }
-   &:hover:not(:first-child):not(:last-child) {
-      border-radius: 0;
+      user-select: none;
+
+      @media (max-width: 767.98px) {
+         padding: $spacing-margin-mobile * 0.5;
+         font-size: $font-caption;
+         white-space: nowrap;
+      }
+
+      &:not(:last-child) {
+         border-right: 1px solid rgba(255, 255, 255, 0.5);
+      }
+
+      &:hover {
+         background-color: rgba(178, 215, 0, 0.8);
+      }
+
+      &:hover:first-child {
+         border-radius: $radius-lg 0 0 $radius-lg;
+
+         @media (max-width: 767.98px) {
+            border-radius: $radius-md 0 0 $radius-md;
+         }
+      }
+
+      &:hover:last-child {
+         border-radius: 0 $radius-lg $radius-lg 0;
+
+         @media (max-width: 767.98px) {
+            border-radius: 0 $radius-md $radius-md 0;
+         }
+      }
+
+      &:hover:not(:first-child):not(:last-child) {
+         border-radius: 0;
+      }
+
+      &.active {
+         background-color: $color-main;
+         color: $color-bg-white;
+         font-weight: $weight-bold;
+
+         &:first-child {
+            border-radius: $radius-lg 0 0 $radius-lg;
+
+            @media (max-width: 767.98px) {
+               border-radius: $radius-md 0 0 $radius-md;
+            }
+         }
+
+         &:last-child {
+            border-radius: 0 $radius-lg $radius-lg 0;
+
+            @media (max-width: 767.98px) {
+               border-radius: 0 $radius-md $radius-md 0;
+            }
+         }
+      }
    }
 }
-.faq--tab .tab.active {
-   background-color: var(--subcolor-d);
-   color: var(--subcolor-m);
-   &:first-child {
-      border-radius: 20px 0 0 20px;
-   }
-   &:last-child {
-      border-radius: 0 20px 20px 0;
-   }
+
+.faq--board {
+   margin-top: $spacing-section-padding * 0.625;
 }
+
 .faq--board--title {
-   padding: 0 40px;
+   padding: 0 $spacing-section-padding * 0.625;
+
+   @media (max-width: 767.98px) {
+      padding: 0;
+   }
+
    & .board--toggle {
-      border-top: 2px dashed rgb(158, 158, 158);
+      border-top: 2px dashed $color-text-secondary;
    }
 }
 
 .board--content,
 .board--toggle {
    display: flex;
-   gap: 40px;
-   padding: 20px 0;
-   & :nth-child(2) {
-      width: 90%;
+   gap: $spacing-section-padding * 0.625;
+   padding: $spacing-margin-pc 0;
+   align-items: flex-start;
+
+   @media (max-width: 767.98px) {
+      gap: $spacing-margin-mobile;
+      padding: $spacing-margin-mobile 0;
    }
+
+   img {
+      width: $spacing-section-padding * 0.625;
+      height: $spacing-section-padding * 0.625;
+      flex-shrink: 0;
+      object-fit: contain;
+
+      @media (max-width: 767.98px) {
+         width: $spacing-margin-mobile;
+         height: $spacing-margin-mobile;
+      }
+   }
+
+   & :nth-child(2) {
+      flex: 1;
+      min-width: 0;
+   }
+
    & p {
       margin: 0;
+      font-size: $font-body-regular;
+      line-height: $line-height-body;
+      color: $color-text-primary;
+      word-break: keep-all;
+
+      @media (max-width: 767.98px) {
+         font-size: $font-body-regular;
+      }
+   }
+}
+
+.board--content {
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+
+   &:hover {
+      background-color: rgba(0, 0, 0, 0.02);
+      border-radius: $radius-sm;
+   }
+
+   .faq-dropdown-icon {
+      flex-shrink: 0;
+      color: $color-text-secondary;
+      transition: transform 0.3s ease;
+      display: inline-block;
+      vertical-align: middle;
+   }
+
+   &.toggled {
+      .faq-dropdown-icon {
+         transform: rotate(180deg);
+      }
    }
 }
 
@@ -80,36 +255,81 @@
    overflow: hidden;
    opacity: 0;
    transition: all 0.5s ease;
+
    &.open {
-      max-height: 600px;
+      max-height: 1000px;
       opacity: 1;
-      padding: 20px 0;
+      padding: $spacing-margin-pc 0;
+
+      @media (max-width: 767.98px) {
+         padding: $spacing-margin-mobile 0;
+      }
+   }
+
+   span {
+      color: $color-main;
+   }
+
+   div {
+      white-space: pre-line;
    }
 }
 
-.board--toggle span {
-   color: var(--subcolor-d);
+.faq-empty {
+   color: $color-text-secondary;
+   font-size: $font-body-large;
+   padding: $spacing-section-padding 0;
+
+   @media (max-width: 767.98px) {
+      font-size: $font-body-regular;
+      padding: $spacing-section-padding * 0.5 0;
+   }
 }
-.board--toggle div {
-   white-space: pre-line;
+
+.faq-pagination {
+   margin-top: $spacing-section-padding * 0.625;
+   display: flex;
+   justify-content: center;
+
+   @media (max-width: 767.98px) {
+      margin-top: $spacing-margin-pc;
+   }
 }
 
 .btn.link-btn {
    width: 100%;
-   max-height: 60px;
-   border-radius: 20px;
+   max-height: $height-input-default;
+   border-radius: $radius-lg;
    display: flex;
    align-items: center;
-   padding: 15px 20px;
-   gap: 40px;
+   padding: $spacing-container-padding * 0.625 $spacing-margin-pc;
+   gap: $spacing-section-padding * 0.625;
+
+   @media (max-width: 767.98px) {
+      padding: $spacing-margin-mobile * 0.75 $spacing-margin-mobile;
+      gap: $spacing-margin-mobile;
+      border-radius: $radius-md;
+   }
 
    & img {
-      width: 24px;
-      height: 24px;
+      width: $spacing-margin-pc;
+      height: $spacing-margin-pc;
+      flex-shrink: 0;
+
+      @media (max-width: 767.98px) {
+         width: $spacing-margin-mobile * 1.5;
+         height: $spacing-margin-mobile * 1.5;
+      }
    }
+
    & p {
-      width: 90%;
+      flex: 1;
       text-align: left;
       margin: 0;
+      font-size: $font-body-regular;
+
+      @media (max-width: 767.98px) {
+         font-size: $font-caption;
+      }
    }
 }

@@ -1,25 +1,23 @@
-import FindForm from './FindForm'
-import FindSuccessForm from './FindSuccessForm'
-import FindFailForm from './FindFailForm'
-import PasswordSearchForm from './PasswordSearchForm'
-import ReissuePassword from './ReissuePasswordForm'
-import './Finding.scss'
+// re-earth-frontend/src/pages/user/Finding/FindingPage.jsx
+import FindIdForm from '../../../components/finding/FindIdForm'
+import FindIdSuccessForm from '../../../components/finding/FindIdSuccessForm'
+import FindIdFailForm from '../../../components/finding/FindIdFailForm'
+import FindPasswordForm from '../../../components/finding/FindPasswordForm'
+import ReissuePasswordForm from '../../../components/finding/ReissuePasswordForm'
+
 function IdfindPage() {
    return (
-      <>
-         <section id="main1">
-            
-            <div id="area" className="container">
-               <div id="login">
-                  <FindForm />
-                  <FindSuccessForm />
-                  <FindFailForm />
-                  <PasswordSearchForm />
-                  <ReissuePassword />
-               </div>
+      <section id="main1" className="user-page bg-sub-m">
+         <div id="area" className="container">
+            <div id="finding" className="auth-page">
+               <FindIdForm />
+               <FindIdSuccessForm />
+               <FindIdFailForm />
+               <FindPasswordForm />
+               <ReissuePasswordForm />
             </div>
-         </section>
-      </>
+         </div>
+      </section>
    )
 }
 export default IdfindPage

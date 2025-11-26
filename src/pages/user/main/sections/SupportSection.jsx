@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Card from "../../../../components/layout/Card";
 import "../mainpage.scss";
 import inquiryIcon from "../../../../assets/images/1대1문의.png";
 import faqIcon from "../../../../assets/images/FAQ.png";
@@ -44,33 +45,31 @@ export default function SupportSection() {
     <section id="support" className="main-support section">
       <div className="container">
         <div className="row">
-          <div className="col-md-4 mb-5">
-            <h2 className="font-weight-bold mb-2 main--section__title main--section__title--support">
+          <div className="col-md-4 d-flex flex-column justify-content-start mb-4 mb-md-0">
+            <h2 className="main--section__title main--section__title--support mb-1">
               Customer Support
             </h2>
-            <p className="text-muted">고객지원</p>
+            <p className="support-section-subtitle">고객지원</p>
           </div>
           <div className="col-md-8">
-            <div className="row">
+            <div className="row g-3">
               {SUPPORT.map((item, idx) => (
-                <div className="col-md-6 mb-4" key={idx}>
-                  <div
-                    className="card h-100 support-card"
+                <div className="col-sm-6" key={idx}>
+                  <Card
+                    variant="elevated"
+                    className="h-100 support-card"
                     onClick={() => handleCardClick(item.path)}
-                    style={{ cursor: "pointer" }}
                   >
-                    <div className="card-body support-card-body">
-                      <h6 className="card-title support-card-title font-weight-bold">
-                        {item.title}
-                      </h6>
-                      <p className="card-text support-card-text text-muted small">
-                        {item.desc}
-                      </p>
-                      <div className="support-icon">
-                        <img src={item.img} alt={item.title} />
-                      </div>
+                    <h6 className="support-card-title">
+                      {item.title}
+                    </h6>
+                    <p className="support-card-text">
+                      {item.desc}
+                    </p>
+                    <div className="support-icon">
+                      <img src={item.img} alt={item.title} />
                     </div>
-                  </div>
+                  </Card>
                 </div>
               ))}
             </div>

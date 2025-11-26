@@ -10,10 +10,9 @@ import { hydrateAuthThunk } from './features/authSlice'
 import App from './App.jsx'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './assets/styles/commons.scss'
-import './index.css'
+import './styles/commons.scss'
 
-// ✅ 하이드레이션이 끝난 뒤에 렌더 시작
+// 하이드레이션이 끝난 뒤에 렌더 시작
 const container = document.getElementById('root')
 const root = createRoot(container)
 

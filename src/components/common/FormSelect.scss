@@ -1,0 +1,99 @@
+/**
+ * FormSelect 컴포넌트 스타일
+ */
+
+@import '../../styles/variables';
+
+// ========== Wrapper ==========
+.form-select-wrapper {
+  width: 100%;
+}
+
+.form-select-container {
+  position: relative;
+  width: 100%;
+}
+
+// ========== Select Control ==========
+.form-select-control {
+  // 브라우저 기본 스타일 제거
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: none;
+  
+  // 기본 스타일
+  background-color: $color-bg-sub-m;
+  border: none;
+  border-radius: $radius-lg;
+  box-sizing: border-box;
+  margin: 0;
+  width: 100%;
+  height: $height-input-default;
+  padding: 0 $padding-input-horizontal-default;
+  padding-right: calc(#{$padding-input-horizontal-default} + 30px);
+  
+  // 텍스트 스타일
+  text-align: left;
+  color: $color-text-primary;
+  font-size: $font-body-regular;
+  font-family: $font-body;
+  line-height: normal;
+  
+  // 인터랙션
+  cursor: pointer;
+  outline: none;
+  
+  // 브라우저별 리셋
+  &::-ms-expand {
+    display: none;
+  }
+  
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  &:focus {
+    outline: none;
+    border: none;
+    box-shadow: 0 0 0 2px $color-sub-green;
+  }
+  
+  // 반응형
+  @media (max-width: 768px) {
+    height: $height-input-tablet;
+    padding: 0 $padding-input-horizontal-tablet;
+    padding-right: calc(#{$padding-input-horizontal-tablet} + 30px);
+    font-size: $font-size-input-tablet;
+  }
+
+  @media (max-width: 576px) {
+    height: $height-input-mobile;
+    padding: 0 $padding-input-horizontal-mobile;
+    padding-right: calc(#{$padding-input-horizontal-mobile} + 30px);
+    font-size: $font-size-input-mobile;
+  }
+}
+
+// ========== Dropdown Icon ==========
+.form-select-icon {
+  position: absolute;
+  right: $padding-input-horizontal-default;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: $color-text-secondary;
+  flex-shrink: 0;
+  
+  @media (max-width: 768px) {
+    right: $padding-input-horizontal-tablet;
+  }
+
+  @media (max-width: 576px) {
+    right: $padding-input-horizontal-mobile;
+  }
+}
+
+

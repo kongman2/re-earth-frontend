@@ -19,7 +19,7 @@
 
   &__y-label {
     font-size: 0.75rem;
-    color: var(--subtext);
+    color: $color-text-secondary;
     text-align: right;
     padding-right: 8px;
   }
@@ -68,7 +68,7 @@
 
   &__x-label {
     font-size: 0.75rem;
-    color: var(--subtext);
+    color: $color-text-secondary;
     text-align: center;
     flex: 1;
   }
@@ -93,6 +93,6 @@
 
   &__legend-label {
     font-size: 0.875rem;
-    color: var(--maintext);
+    color: $color-text-primary;
   }
 }

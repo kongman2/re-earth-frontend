@@ -18,7 +18,7 @@ import FindingPage from "../pages/user/Finding/FindingPage";
 import MainPage from "../pages/user/main/MainPage";
 // 기부
 import DonationInfoPage from "../pages/user/Donate/DonationInfoPage";
-import DonationPage from "../pages/user/Donate/DonationPage";
+import DonationFormPage from "../pages/user/Donate/DonationFormPage";
 import DonationCompletePage from "../pages/user/Donate/DonationCompletePage";
 // 인증/적립
 import SavingInfoPage from "../pages/user/saving/SavingInfoPage";
@@ -27,7 +27,7 @@ import SavingBicycle from "../pages/user/saving/SavingBicycle";
 import CalcPointPage from "../pages_extra/Point/CalcPointPage";
 
 // 고객센터
-import InquiryForm from "../pages/user/Inquiry/Create/InquiryForm";
+import InquiryFormPage from "../pages/user/Inquiry/Create/InquiryFormPage";
 
 // 마이페이지
 import MyPage from "../pages/user/mypage/MyPage";
@@ -39,12 +39,15 @@ import ItemDetailPage from '../pages/market/ItemDetailPage'
 
 // 관리자 페이지
 import AdminPage from '../pages/Admin/AdminPage'
-import ItemCreatePage from '../pages/Admin/ItemCreate/itemCreatePage'
+
+// 마켓 페이지
+import ItemCreatePage from '../pages/market/ItemCreatePage'
 
 // Extra
 import LoadingPage from "../pages_extra/Unloaded/LoadingPage";
 import ErrorPage from "../pages_extra/Unloaded/ErrorPage";
 import UnderConstruction from "../pages_extra/Unloaded/UnderConstruction";
+import MobileRequiredPage from "../pages_extra/Unloaded/MobileRequiredPage";
 
 export default function AppRouter() {
   return (
@@ -71,10 +74,10 @@ export default function AppRouter() {
         {/* 기부페이지 */}
         <Route path="/donate/info" element={<DonationInfoPage />} />
         <Route path="/donate/complete/:id" element={<DonationCompletePage />} />
-        <Route path="/donate" element={<DonationPage />} />
+        <Route path="/donate" element={<DonationFormPage />} />
 
         {/* 고객센터 */}
-        <Route path="/inquiry/new" element={<InquiryForm />} />
+        <Route path="/inquiry/new" element={<InquiryFormPage />} />
         <Route path="/inquiry/faq" element={<FAQPage />} />
 
         {/* 인증/적립 */}
@@ -92,6 +95,7 @@ export default function AppRouter() {
 
       {/* 유틸 페이지 */}
       <Route path="/loading" element={<LoadingPage />} />
+      <Route path="/mobile-required" element={<MobileRequiredPage />} />
       <Route path="*" element={<ErrorPage />} />
       <Route path="readysoon" element={<UnderConstruction />} />
     </Routes>

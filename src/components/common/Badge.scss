@@ -1,0 +1,59 @@
+// Badge.scss
+// 공통 Badge 컴포넌트 스타일
+
+@import '../../styles/variables';
+
+.badge {
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   padding: 4px 12px;
+   border-radius: $radius-sm;
+   font-weight: $weight-medium;
+   font-size: $font-body-regular;
+   line-height: $line-height-h2;
+   white-space: nowrap;
+
+   // Variants
+   &--default {
+      background-color: $color-bg-sub-m;
+      color: $color-text-primary;
+   }
+
+   &--primary {
+      background-color: $color-sub-green;
+      color: $color-text-primary;
+   }
+
+   &--success {
+      background-color: $color-main;
+      color: #ffffff;
+   }
+
+   &--warning {
+      background-color: $color-point-yellow;
+      color: $color-text-primary;
+   }
+
+   &--danger {
+      background-color: $color-point-orange;
+      color: #ffffff;
+   }
+
+   &--info {
+      background-color: $color-point-blue;
+      color: #ffffff;
+   }
+
+   // Sizes
+   &--sm {
+      padding: 2px 8px;
+      font-size: $font-caption;
+   }
+
+   &--lg {
+      padding: 6px 16px;
+      font-size: $font-body-large;
+   }
+}
+

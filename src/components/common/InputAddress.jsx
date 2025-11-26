@@ -1,15 +1,22 @@
-function InputAddress({ marginTop, value1, value2, inputChange }) {
+import Input from './Input';
+import './Input.scss';
+
+/**
+ * @deprecated InputAddress는 Input 컴포넌트의 'address' variant로 대체되었습니다.
+ * 하위 호환성을 위해 유지되며, 새로운 코드에서는 Input 컴포넌트를 직접 사용하세요.
+ */
+function InputAddress({ marginTop, value1, value2, inputChange, onAddressSearch }) {
    return (
-      <div className={`form--input ${marginTop || ''}`}>
-         <p className="text-body">주소/우편번호</p>
-         <div className="with-btn">
-            <input type="text" name="addr1" placeholder="기본 주소" value={value1} onChange={inputChange} />
-            <button type="button" className="btn main1 default">
-               검색
-            </button>
-         </div>
-         <input type="text" name="addr2" placeholder="상세 주소를 입력하세요." className="mt-10" value={value2} onChange={inputChange} required />
-      </div>
+      <Input
+         variant="address"
+         marginTop={marginTop}
+         onChange={inputChange}
+         variantProps={{
+            address1: value1,
+            address2: value2,
+            onAddressSearch: onAddressSearch || (() => {}),
+         }}
+      />
    )
 }
 

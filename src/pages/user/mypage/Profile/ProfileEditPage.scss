@@ -1,35 +1,20 @@
+@import '../../../../styles/variables';
+
 .profile-edit {
-  min-height: 100vh;
-  background-color: var(--subcolor-m);
-
-  &__title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--maintext);
-    padding: 8px 15px;
-  }
-
-  &__content {
-    min-height: calc(100vh - 60px);
-  }
-
-  &__left {
-    background-color: #fff;
-    border-radius: var(--border-radius);
-    padding: 40px 20px;
-    max-height: calc(100vh - 60px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  &__sidebar {
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
   }
 
   &__avatar-section {
-    width: 100%;
+    background-color: $color-bg-white;
+    border-radius: $radius-lg;
+    padding: $spacing-section-padding $spacing-container-padding;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: $spacing-margin-mobile;
   }
 
   &__avatar {
@@ -40,7 +25,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #fff;
+    background-color: $color-bg-white;
 
     img {
       width: 100%;
@@ -49,83 +34,57 @@
     }
   }
 
-  &__right {
-    min-height: calc(100vh - 60px);
+  &__photo-btn,
+  &__password-btn {
+    margin-bottom: $spacing-margin-mobile;
   }
 
+  &__form-layout {
+    .form-layout__content {
+      gap: $spacing-margin-mobile;
+    }
+  }
 
-
-  &__form {
-    max-width: 800px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  &__actions {
+    margin-top: $spacing-section-padding;
+    width: 100%;
   }
 }
 
-// 커스텀 모달 스타일 (부트스트랩과 구분)
-.profile-edit .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1050;
-}
-
-.profile-edit .modal-content {
-  background-color: #fff;
-  border-radius: var(--border-radius);
-  padding: 40px;
-  max-width: 500px;
-  width: 90%;
-  text-align: center;
-  box-shadow: var(--box-shadow);
-  border: 2px solid #dee2e6;
-  
-}
-
+// ========== 모달 스타일 ==========
 .password-change-form {
   text-align: left;
-  margin-bottom: 30px;
-
+  margin-bottom: $spacing-section-padding * 0.625;
 }
 
-.profile-edit .modal-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  
-}
-
-// 반응형
+// ========== 반응형 디자인 ==========
 @media (max-width: 768px) {
   .profile-edit {
-    &__content {
-      flex-direction: column;
+    &__sidebar {
+      position: static;
+      margin-bottom: $spacing-margin-mobile;
     }
 
-    &__left {
-      width: 100%;
-      padding: 30px 20px;
+    &__avatar-section {
+      padding: $spacing-container-padding;
     }
 
-    &__right {
-      padding: 30px 20px;
+    &__avatar {
+      width: 100px;
+      height: 100px;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .profile-edit {
+    &__avatar-section {
+      padding: $spacing-margin-mobile;
     }
 
-    &__input-group {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    &__phone-group {
-      flex-wrap: wrap;
-      justify-content: center;
+    &__avatar {
+      width: 80px;
+      height: 80px;
     }
   }
 }

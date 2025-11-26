@@ -4,10 +4,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { loginUserThunk, hydrateAuthThunk } from '../../../features/authSlice'
-// ⛔ 임시 비활성화: 소셜 리다이렉트 함수 import 제거
+//  임시 비활성화: 소셜 리다이렉트 함수 import 제거
 // import { redirectToGoogleLogin, redirectToKakaoLogin } from '../../../api/authApi'
 
 import InputField from '../../../components/common/InputField'
+import Button from '../../../components/common/Button'
+import Loading from '../../../components/common/Loading'
+import Alert from '../../../components/common/Alert'
 import googleIcon from '../../../assets/icons/google.svg'
 import kakaoIcon from '../../../assets/icons/kakao.svg'
 
@@ -16,8 +19,17 @@ export default function LoginForm() {
    const navigate = useNavigate()
    const { loading, isAuthenticated, user, error, hydrated } = useSelector((s) => s.auth)
    const [form, setForm] = useState({ idOrEmail: '', password: '' })
+   const [alert, setAlert] = useState({ isOpen: false, message: '', variant: 'info', title: null })
 
    const didRedirect = useRef(false)
+
+   const showAlert = (message, variant = 'info', title = null) => {
+      setAlert({ isOpen: true, message, variant, title })
+   }
+
+   const hideAlert = () => {
+      setAlert({ isOpen: false, message: '', variant: 'info', title: null })
+   }
 
    // 이미 로그인 상태로 /login 접근 시 역할별 자동 이동
    useEffect(() => {
@@ -44,13 +56,19 @@ export default function LoginForm() {
       e.preventDefault()
       if (loading) return
 
-      // ✅ 이미 로그인 상태라면 /auth/login 다시 치지 않음
+      //  이미 로그인 상태라면 /auth/login 다시 치지 않음
       if (hydrated && isAuthenticated) return
 
       const idOrEmail = form.idOrEmail.trim()
       const password = form.password
-      if (!idOrEmail) return alert('아이디 또는 이메일을 입력하세요.')
-      if (!password) return alert('비밀번호를 입력하세요.')
+      if (!idOrEmail) {
+         showAlert('아이디 또는 이메일을 입력하세요.', 'warning', '입력 오류')
+         return
+      }
+      if (!password) {
+         showAlert('비밀번호를 입력하세요.', 'warning', '입력 오류')
+         return
+      }
 
       // 백엔드 호환: idOrEmail, userId 둘 다 전달
       const payload = { idOrEmail, userId: idOrEmail, password }
@@ -67,65 +85,91 @@ export default function LoginForm() {
          if (!didRedirect.current) {
             didRedirect.current = true
             if (loggedUser?.role === 'ADMIN') {
-               alert('관리자 로그인 성공! 환영합니다 :)')
-               navigate('/admin', { replace: true })
+               showAlert('관리자 로그인 성공! 환영합니다 :)', 'success', '로그인 성공')
+               setTimeout(() => navigate('/admin', { replace: true }), 1500)
             } else {
-               alert('로그인 성공! 환영합니다 :)')
-               navigate('/user', { replace: true })
+               showAlert('로그인 성공! 환영합니다 :)', 'success', '로그인 성공')
+               setTimeout(() => navigate('/user', { replace: true }), 1500)
             }
          }
       } catch (err) {
          console.error('[LoginForm] loginUserThunk error →', err)
-         alert(typeof err === 'string' ? err : '로그인에 실패했습니다.')
+         showAlert(typeof err === 'string' ? err : '로그인에 실패했습니다.', 'error', '로그인 실패')
       } finally {
          // 보안상 비밀번호 초기화
          setForm((prev) => ({ ...prev, password: '' }))
       }
    }
 
-   // ✅ 소셜 로그인 임시 비활성화: /login 페이지 유지 + 알림만 표시
+   //  소셜 로그인 임시 비활성화: /login 페이지 유지 + 알림만 표시
    const handleGoogle = () => {
       if (loading) return
-      alert('구글 로그인은 기능 구현 예정입니다.')
+      showAlert('구글 로그인은 기능 구현 예정입니다.', 'info', '알림')
       // redirectToGoogleLogin()  // ← 재활성화 시 복구
    }
 
    const handleKakao = () => {
       if (loading) return
-      alert('카카오 로그인은 기능 구현 예정입니다.')
+      showAlert('카카오 로그인은 기능 구현 예정입니다.', 'info', '알림')
       // redirectToKakaoLogin()  // ← 재활성화 시 복구
    }
 
    return (
-      <div className="user-login mt-40">
-         <form className="loginform" onSubmit={handleSubmit}>
+      <>
+         {alert.isOpen && (
+            <Alert
+               variant={alert.variant}
+               title={alert.title}
+               isModal={true}
+               dismissible={true}
+               onClose={hideAlert}
+               size="sm"
+            >
+               {alert.message}
+            </Alert>
+         )}
+         <div className="user-login mt-40">
+            <form onSubmit={handleSubmit}>
             <InputField label="아이디" type="text" name="idOrEmail" placeholder="아이디 또는 이메일을 입력하세요." value={form.idOrEmail} inputChange={onChange} disabled={loading} required autoComplete="username" />
             <InputField label="비밀번호" type="password" name="password" placeholder="비밀번호를 입력하세요." required value={form.password} inputChange={onChange} disabled={loading} marginTop="mt-20" autoComplete="current-password" />
 
-            <a href="/finding" className="btn find">
+            <Button variant="find" type="button" className="mt-10" onClick={() => window.location.href = '/finding'}>
                아이디 / 비밀번호 찾기
-            </a>
+            </Button>
 
-            <button type="submit" className="btn default main1 mt-40" disabled={loading || didRedirect.current}>
+            <Button 
+               variant="main1" 
+               type="submit" 
+               className="mt-40" 
+               disabled={loading || didRedirect.current}
+               fullWidth
+            >
                {loading ? '로그인 중…' : '로그인'}
-            </button>
+            </Button>
          </form>
 
          <div className="socialLogin mt-40">
-            <button type="button" className="btn google" onClick={handleGoogle} disabled={loading}>
-               <div className="btn--inside">
-                  <img src={googleIcon} alt="구글" />
-                  <span>구글 아이디로 로그인</span>
-               </div>
-            </button>
+            <Button 
+               variant="google" 
+               type="button" 
+               onClick={handleGoogle} 
+               disabled={loading}
+               icon={<img src={googleIcon} alt="구글" />}
+            >
+               <span>구글 아이디로 로그인</span>
+            </Button>
 
-            <button type="button" className="btn kakao" onClick={handleKakao} disabled={loading}>
-               <div className="btn--inside">
-                  <img src={kakaoIcon} alt="카카오" />
-                  <span>카카오 아이디로 로그인</span>
-               </div>
-            </button>
+            <Button 
+               variant="kakao" 
+               type="button" 
+               onClick={handleKakao} 
+               disabled={loading}
+               icon={<img src={kakaoIcon} alt="카카오" />}
+            >
+               <span>카카오 아이디로 로그인</span>
+            </Button>
          </div>
       </div>
+      </>
    )
 }

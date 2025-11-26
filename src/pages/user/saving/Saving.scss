@@ -1,6 +1,31 @@
-.map {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+@import '../../../styles/variables';
+
+.saving-bicycle {
+  &__title {
+    font-size: $font-h2;
+    font-weight: $weight-bold;
+    color: $color-text-primary;
+    margin-bottom: $spacing-section-padding * 0.625;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-section-padding * 0.625;
+  }
+
+  &__map {
+    width: 100%;
+    border-radius: $radius-lg;
+    overflow: hidden;
+  }
+
+  &__actions {
+    width: 100%;
+  }
+
+  &__start-btn,
+  &__stop-btn {
+    width: 100%;
+  }
 }

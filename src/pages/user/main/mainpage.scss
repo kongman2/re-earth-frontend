@@ -1,292 +1,504 @@
-/* ========== Section Title Colors ========== */
-.main--section__title--pointshop,
-.main--section__title--news {
-  color: var(--point-r);
-}
+@import '../../../styles/variables';
 
-.main--section__title--support {
-  color: var(--point-b);
-}
-// main
-.main-content {
-  background: linear-gradient(
-    180deg,
-    rgba(209, 233, 93, 0.8) 0%,
-    rgba(255, 255, 255, 100%) 10%,
-    rgba(255, 255, 255, 100%) 100%
-  );
+// ========== Main Content ==========
+.user-page {
   height: 100%;
-}
-.main-hero {
-  padding: 60px 0;
-}
-/* StatsAndMapSection */
-.main--stats {
-  background-color: #ffffff;
-}
 
-.custom-card {
-  background-color: var(--subcolor-m);
-  border-radius: var(--border-radius);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 230px;
-  padding: 20px;
-  margin: 0;
-  box-shadow: var(--box-shadow);
-  transition: all 0.3s ease;
-  cursor: pointer;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--box-shadow);
+  &.bg-gradient-green-to-white {
+    padding-bottom: 0;
   }
 
-  &:active {
-    transform: translateY(-2px);
-  }
-}
+  .section {
+    padding: $spacing-section-padding 0;
 
-.custom-card-content {
-  padding: 1.5rem;
-}
-
-.custom-card-text {
-  margin-bottom: 1rem;
-}
-
-.custom-card-body {
-  flex: unset;
-  padding: 0;
-}
-
-.col-md-6 .custom-card .custom-card-content {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* 커스텀 카드 색상 클래스 */
-body .section .custom-card.custom-card-green-bg {
-  background: var(--subcolor-d);
-  color: #fff;
-}
-body .section .custom-card.custom-card-green-border {
-  border-color: var(--subcolor-d);
-}
-body .section .custom-card.custom-card-yellow-bg {
-  background: #ffe4b5;
-}
-
-body .section .custom-card.map-custom-card-green-bg {
-  background-color: var(--maincolor);
-}
-
-/* 텍스트 색상 클래스 */
-body .text-green {
-  color: var(--subcolor-d);
-}
-body .text-white {
-  color: #fff;
-}
-
-/* 미션 버튼 - commons.scss로 이동됨 */
-
-/* 나무 아이콘 */
-.tree-icon {
-  width: 24px;
-  height: 24px;
-  margin-right: 4px;
-
-  svg {
-    width: 100%;
-    height: 100%;
-
-    path {
-      fill: #fff; /* 기본 흰색 */
-      transition: fill 0.3s ease;
+    @media (max-width: 575.98px) {
+      padding: $spacing-section-padding * 0.5 0;
     }
   }
-
-  &.active svg path {
-    fill: var(--subcolor-d); /* 활성화된 나무는 초록색 */
-  }
-}
-
-/* 커뮤니티 */
-.community-custom-card {
-  border-radius: var(--border-radius);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  min-height: 230px;
-  height: 100%;
-  cursor: pointer;
-}
-
-.community-title {
-  background-color: var(--point-y);
-  display: flex;
-  justify-content: space-between;
-  height: 20%;
-  padding: 10px;
-  border-radius: var(--border-radius);
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--box-shadow);
+  // ========== Section Title Colors ==========
+  .main--section__title--pointshop,
+  .main--section__title--news {
+    color: $color-point-orange;
   }
 
-  &:active {
-    transform: translateY(-2px);
-  }
-}
-
-.community-feed {
-  padding: 10px;
-  height: 80%;
-  border-radius: var(--border-radius);
-  background-color: #ffe7aa; //연한 --point-y
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--box-shadow);
+  .main--section__title--support {
+    color: $color-point-blue;
+    font-weight: $weight-bold;
   }
 
-  &:active {
-    transform: translateY(-2px);
+  .main-hero {
+    background: linear-gradient(
+      180deg,
+      rgba($color-sub-green, 0.8) 0%,
+      $color-bg-white 50%,
+      $color-bg-white 100%
+    );
   }
-}
-/* ========== pointshop ========== */
-.main--pointshop {
-  background-color: var(--subcolor-m);
-}
 
-/* ========== news ========== */
-.main-news {
-  background-color: #ffffff;
-}
-
-/* 뉴스 카드 호버 효과 */
-.news--card {
-  display: flex;
-  flex-direction: column;
-  border-radius: var(--border-radius);
-  background: #fff;
-  padding: 1rem;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: var(--maincolor); /* 포인트 연두색 배경 */
-    transform: translateY(-2px);
-    box-shadow: var(--box-shadow);
+  // ========== StatsAndMapSection ==========
+  .main--stats {
+    background-color: $color-bg-white;
   }
-}
 
-/* 뉴스 카드 */
-.news--card .news--card__img {
-  border-radius: var(--border-radius);
-  aspect-ratio: 1/1;
-  object-fit: cover;
-}
-
-/* Swiper 기본 네비게이션 스타일 조정 */
-.news-swiper {
-  .swiper-button-prev,
-  .swiper-button-next {
-    color: var(--subcolor-d);
-    width: 40px;
-    height: 40px;
-
-    &:after {
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    &:hover {
-      color: var(--maincolor);
-    }
-  }
-}
-
-/* ============ SupportSection ========= */
-.main-support {
-  background-color: var(--subcolor-m);
-
-  .support-icon {
-    width: 100%;
-    height: 100px;
-    object-fit: contain;
+  // ========== Custom Card (StatsAndMapSection) ==========
+  .custom-card {
+    background-color: $color-bg-sub-m;
+    border-radius: $radius-lg;
     display: flex;
-    justify-content: end;
-  }
-
-  /* 카드 커스터마이징 */
-  .support-card {
-    border: none;
-    border-radius: 16px;
+    flex-direction: column;
+    justify-content: center;
+    min-height: $spacing-section-padding * 3.59375; // 230px
+    padding: $spacing-container-padding;
+    margin: 0;
+    box-shadow: $shadow-card-inner;
     transition: all 0.3s ease;
-    background: #fff;
     cursor: pointer;
 
     &:hover {
       transform: translateY(-4px);
-      box-shadow: var(--box-shadow);
+      box-shadow: $shadow-card-inner;
     }
 
     &:active {
       transform: translateY(-2px);
-      box-shadow: var(--box-shadow);
     }
 
-    .support-card-body {
-      padding: 2rem;
-      text-align: left;
+    &.custom-card-green-bg {
+      background: $color-main;
+      color: $color-bg-white;
+    }
+
+    &.custom-card-yellow-bg {
+      background: $color-point-yellow;
+    }
+
+    &.map-custom-card-green-bg {
+      background-color: $color-sub-green;
+    }
+  }
+
+  .custom-card-body {
+    flex: unset;
+    padding: 0;
+  }
+
+  .custom-card-content {
+    text-align: center;
+    width: 100%;
+
+    .custom-card-green-bg & {
+      color: $color-bg-white;
+    }
+  }
+
+  .custom-card-title {
+    font-size: $font-h3;
+    color: $color-text-primary;
+
+    .custom-card-green-bg & {
+      color: $color-bg-white;
+    }
+  }
+
+  .custom-card-text {
+    margin: 0 0 $spacing-margin-mobile;
+    line-height: $line-height-h3;
+    color: $color-bg-white;
+
+    .custom-card-green-bg & {
+      color: $color-bg-white;
+    }
+  }
+
+  .custom-card-point {
+    color: $color-point-blue;
+    font-weight: $weight-medium;
+  }
+
+  .custom-card-subtitle {
+    font-size: $font-body-regular;
+    color: $color-text-secondary;
+    margin: 0 0 $spacing-margin-mobile * 0.5;
+    &--orange {
+      color: $color-point-orange;
+    }
+  }
+
+  .custom-card-label {
+    color: $color-text-secondary;
+    margin: 0 0 $spacing-margin-mobile * 0.25;
+    font-size: $font-body-regular;
+  }
+
+  .custom-card-value {
+    font-size: clamp(1.5rem, 2.5vw, 1.75rem);
+    font-weight: $weight-bold;
+    color: $color-main;
+    margin: 0;
+  }
+
+  .custom-card-header {
+    margin-bottom: $spacing-margin-mobile;
+  }
+
+  .custom-card-description {
+    color: $color-text-secondary;
+    margin: 0 0 $spacing-margin-mobile;
+  }
+
+  .community-feed-item {
+    font-size: $font-body-regular;
+    color: $color-text-secondary;
+    margin: 0 0 $spacing-margin-mobile * 0.5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // ========== Carbon Reduction Inline ==========
+  .carbon-reduction-inline {
+    text-align: center;
+
+    &__title {
+      font-size: $font-h3;
+      color: $color-text-primary;
+      margin: 0 0 $spacing-margin-mobile * 0.5;
+    }
+
+    &__description {
+      font-size: $font-body-regular;
+      color: $color-text-secondary;
+      margin: 0 0 $spacing-margin-mobile * 0.75;
+    }
+
+    &__tree-icons {
+      justify-content: center;
+      gap: $spacing-margin-mobile * 0.5;
+    }
+
+    &__tree {
+      width: $spacing-margin-pc;
+      height: $spacing-margin-pc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.3;
+
+      &--filled {
+        opacity: 1;
+      }
+    }
+  }
+
+  // ========== Tree Icon ==========
+  .tree-icon {
+    width: $spacing-margin-pc;
+    height: $spacing-margin-pc;
+    margin-right: $spacing-margin-mobile * 0.25;
+
+    svg {
+      width: 100%;
+      height: 100%;
+
+      path {
+        fill: $color-bg-white;
+        transition: fill 0.3s ease;
+      }
+    }
+
+    &.active svg path {
+      fill: $color-main;
+    }
+  }
+
+  // ========== Community ==========
+  .community-custom-card {
+    border-radius: $radius-lg;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-margin-mobile * 0.625;
+    min-height: $spacing-section-padding * 3.59375; // 230px
+    height: 100%;
+    cursor: pointer;
+  }
+
+  .community-title {
+    background-color: $color-point-yellow;
+    height: 20%;
+    padding: $spacing-margin-mobile * 0.625;
+    border-radius: $radius-lg;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: $shadow-card-inner;
+    }
+
+    &:active {
+      transform: translateY(-2px);
+    }
+  }
+
+  .community-feed {
+    padding: $spacing-margin-mobile * 0.625;
+    height: 80%;
+    border-radius: $radius-lg;
+    background-color: rgba($color-point-yellow, 0.3);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: $shadow-card-inner;
+    }
+
+    &:active {
+      transform: translateY(-2px);
+    }
+  }
+
+  // ========== PointShop Section ==========
+  .main--pointshop {
+    background-color: $color-bg-sub-m;
+  }
+
+  // ========== News Section ==========
+  .main-news {
+    background-color: $color-bg-white;
+
+    .news--card {
+      display: flex;
+      flex-direction: column;
+      border-radius: $radius-lg;
+      background: $color-bg-white;
+      padding: $spacing-margin-mobile;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: $color-sub-green;
+        transform: translateY(-2px);
+        box-shadow: $shadow-card-inner;
+      }
+
+      .news--card__img {
+        border-radius: $radius-lg;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+      }
+    }
+
+    .news-swiper {
+      .swiper-button-prev,
+      .swiper-button-next {
+        color: $color-main;
+        width: $height-input-mobile;
+        height: $height-input-mobile;
+
+        &:after {
+          font-size: $font-body-regular;
+          font-weight: $weight-bold;
+        }
+
+        &:hover {
+          color: $color-main;
+        }
+      }
+    }
+  }
+
+  // ========== Support Section ==========
+  .main-support {
+    background-color: $color-bg-sub-m;
+
+    .support-section-subtitle {
+      color: $color-text-secondary;
+     font-weight: $weight-bold;
+      font-size: $font-body-regular;
+      margin: 0;
+    }
+
+    .support-icon {
+      width: 100%;
+      height: $spacing-section-padding * 1.5625; // 100px
+      object-fit: contain;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+
+    .support-card {
+      border: none;
+      border-radius: $radius-lg;
+      transition: all 0.3s ease;
+      background: $color-bg-white;
+      cursor: pointer;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: $shadow-card-inner;
+      }
+
+      &:active {
+        transform: translateY(-2px);
+        box-shadow: $shadow-card-inner;
+      }
+
+      .card__body {
+        padding: $spacing-section-padding * 0.5; // 32px
+      }
 
       .support-card-title {
-        color: var(--maintext);
-        font-size: 1.1rem;
-        margin-bottom: 0.75rem;
+        color: $color-text-primary;
+        font-size: $font-body-large;
+        font-weight: $weight-bold;
+        margin: 0 0 $spacing-margin-mobile * 0.75;
       }
 
       .support-card-text {
-        color: #666;
-        line-height: 1.5;
-        margin-bottom: 1rem;
+        color: $color-text-secondary;
+        font-size: $font-body-regular;
+        line-height: $line-height-body;
+        margin: 0 0 $spacing-margin-mobile;
+      }
+    }
+  }
+
+  // ========== Partner Section ==========
+  .main--partner {
+    background-color: $color-bg-white;
+    padding: $spacing-section-padding * 0.75 0; // 48px
+
+    .partner-subtitle {
+      font-size: $font-body-regular;
+      color: $color-text-secondary;
+      margin: 0 0 $spacing-margin-mobile * 0.5;
+    }
+
+    .partner-title {
+      font-size: $font-h2;
+      font-weight: $weight-bold;
+      color: $color-text-primary;
+      margin: 0;
+    }
+
+    .partner-logos-wrapper {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+      min-height: $spacing-section-padding * 1.5625; // 100px
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .partner-logos {
+      display: flex;
+      align-items: center;
+      gap: $spacing-section-padding * 0.5; // 32px
+      animation: partnerScroll 30s linear infinite;
+      width: fit-content;
+
+      @media (max-width: 767.98px) {
+        gap: $spacing-margin-mobile;
+      }
+    }
+
+    .partner-logo-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+    }
+
+    .partner-logo {
+      max-width: 120px;
+      max-height: 60px;
+      object-fit: contain;
+
+      @media (max-width: 767.98px) {
+        max-width: 100px;
+        max-height: 50px;
+      }
+    }
+
+    .partner-logo-placeholder {
+      padding: $spacing-margin-mobile;
+      background-color: $color-bg-light-gray;
+      color: $color-text-secondary;
+      font-size: $font-body-regular;
+      min-width: 120px;
+      text-align: center;
+
+      @media (max-width: 767.98px) {
+        min-width: 100px;
+        padding: $spacing-margin-mobile * 0.75;
+        font-size: $font-caption;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      padding: $spacing-section-padding * 0.5 0; // 32px
+    }
+  }
+
+  // ========== App CTA Section ==========
+  .app-cta {
+    background: $color-sub-green;
+    padding: $spacing-section-padding * 0.75 0; // 48px
+
+    .app-cta-title {
+      font-size: $font-h3;
+      font-weight: $weight-bold;
+      color: $color-text-primary;
+      margin: 0;
+      line-height: $line-height-h3;
+    }
+
+    .phone-image {
+      transform: rotate(20deg);
+      animation: phoneShake 1.5s ease-in-out infinite;
+      max-width: 120px;
+      height: auto;
+      display: block;
+      border-radius: 0;
+      z-index: 1;
+      position: relative;
+
+      @media (max-width: 767.98px) {
+        max-width: 80px;
+      }
+    }
+
+    .qr-image {
+      display: block;
+      border-radius: 0;
+      position: relative;
+      z-index: 2;
+
+    }
+
+    @media (max-width: 767.98px) {
+      padding: $spacing-section-padding * 0.5 0; // 32px
+      
+      .row {
+        text-align: center;
       }
     }
   }
 }
 
-/* 하단 앱 배너 */
-.app-cta {
-  background: var(--maincolor);
-
-  img {
-    max-width: 100%;
-    height: auto;
-    display: block;
+// ========== Animation ==========
+@keyframes partnerScroll {
+  0% {
+    transform: translateX(0);
   }
-
-  h4 {
-    color: var(--maintext);
-  }
-
-  /* phone-image 흔들리는 애니메이션 */
-  .phone-image {
-    transform: rotate(20deg);
-    animation: phoneShake 1.5s ease-in-out infinite;
+  100% {
+    transform: translateX(-33.333%);
   }
 }
 
-/* phone 살짝 흔들리는 애니메이션 키프레임 */
 @keyframes phoneShake {
   0%,
   100% {
@@ -303,13 +515,41 @@ body .text-white {
   }
 }
 
-/* 반응형 */
+// ========== Responsive ==========
 @media (max-width: 991.98px) {
-  .section {
-    padding: 48px 0;
+  .user-page {
+    .main--stats {
+      .custom-card {
+        min-height: $spacing-section-padding * 3.125; // 200px
+      }
+
+      .community-custom-card {
+        min-height: $spacing-section-padding * 3.125; // 200px
+      }
+    }
   }
 }
 
-.app-cta .qr-image {
-  max-width: 120px;
+@media (max-width: 575.98px) {
+  .user-page {
+    .main--stats {
+      .custom-card {
+        min-height: $spacing-section-padding * 2.8125; // 180px
+        padding: $spacing-margin-mobile;
+      }
+
+      .custom-card-content {
+        padding: $spacing-margin-mobile;
+      }
+
+      .community-custom-card {
+        min-height: $spacing-section-padding * 2.8125; // 180px
+      }
+
+      .community-title,
+      .community-feed {
+        padding: $spacing-margin-mobile * 0.5;
+      }
+    }
+  }
 }

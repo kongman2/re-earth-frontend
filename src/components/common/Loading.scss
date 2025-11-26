@@ -1,0 +1,178 @@
+// Loading.scss
+// 공통 Loading 컴포넌트 스타일
+
+@import '../../styles/variables';
+
+.loading {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap: 12px;
+
+   &-text {
+      margin: 0;
+      color: $color-text-secondary;
+      font-size: $font-body-regular;
+   }
+
+   // Spinner variant
+   &--spinner {
+      .loading-spinner {
+         .spinner {
+            border: 3px solid $color-bg-sub-m;
+            border-top-color: $color-sub-green;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+         }
+      }
+   }
+
+   // Dots variant
+   &--dots {
+      .loading-dots {
+         display: flex;
+         gap: 6px;
+
+         span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: $color-sub-green;
+            animation: dots 1.4s ease-in-out infinite;
+
+            &:nth-child(1) {
+               animation-delay: 0s;
+            }
+
+            &:nth-child(2) {
+               animation-delay: 0.2s;
+            }
+
+            &:nth-child(3) {
+               animation-delay: 0.4s;
+            }
+         }
+      }
+   }
+
+   // Pulse variant
+   &--pulse {
+      .loading-pulse {
+         display: flex;
+         gap: 8px;
+
+         div {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: $color-sub-green;
+            animation: pulse 1.4s ease-in-out infinite;
+
+            &:nth-child(1) {
+               animation-delay: 0s;
+            }
+
+            &:nth-child(2) {
+               animation-delay: 0.2s;
+            }
+
+            &:nth-child(3) {
+               animation-delay: 0.4s;
+            }
+         }
+      }
+   }
+
+   // Sizes
+   &--sm {
+      .loading-spinner .spinner {
+         width: 20px;
+         height: 20px;
+         border-width: 2px;
+      }
+
+      .loading-dots span {
+         width: 6px;
+         height: 6px;
+      }
+
+      .loading-pulse div {
+         width: 8px;
+         height: 8px;
+      }
+
+      .loading-text {
+         font-size: $font-caption;
+      }
+   }
+
+   &--md {
+      .loading-spinner .spinner {
+         width: 40px;
+         height: 40px;
+         border-width: 3px;
+      }
+
+      .loading-dots span {
+         width: 8px;
+         height: 8px;
+      }
+
+      .loading-pulse div {
+         width: 12px;
+         height: 12px;
+      }
+   }
+
+   &--lg {
+      .loading-spinner .spinner {
+         width: 60px;
+         height: 60px;
+         border-width: 4px;
+      }
+
+      .loading-dots span {
+         width: 12px;
+         height: 12px;
+      }
+
+      .loading-pulse div {
+         width: 16px;
+         height: 16px;
+      }
+
+      .loading-text {
+         font-size: $font-body-large;
+      }
+   }
+}
+
+@keyframes spin {
+   to {
+      transform: rotate(360deg);
+   }
+}
+
+@keyframes dots {
+   0%, 80%, 100% {
+      transform: scale(0.8);
+      opacity: 0.5;
+   }
+   40% {
+      transform: scale(1);
+      opacity: 1;
+   }
+}
+
+@keyframes pulse {
+   0%, 100% {
+      transform: scale(0.8);
+      opacity: 0.5;
+   }
+   50% {
+      transform: scale(1.2);
+      opacity: 1;
+   }
+}
+

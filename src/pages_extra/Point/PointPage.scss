@@ -8,7 +8,7 @@
 }
 
 .calcpoint p {
-  font-family: var(--headings);
+  font-family: $font-heading;
 }
 .calcpoint .group {
   display: flex;
@@ -27,5 +27,5 @@ p.text-bold {
   font-weight: 800;
 }
 p.point-description {
-  color: var(--subtext);
+  color: $color-text-secondary;
 }

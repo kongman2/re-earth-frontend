@@ -1,91 +1,55 @@
 // re-earth-frontend/src/pages/public/Landing/sections/PrimaryService.jsx
 import React from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, Mousewheel } from 'swiper/modules'
-import 'swiper/css'
+import LandingSectionLayout from './LandingSectionLayout'
+import PrimaryServiceSwiper from '../../../../components/randing/PrimaryServiceSwiper'
 import './PrinmaryService.scss'
 
 // 이미지 임포트
-import card1 from '../../../../assets/images/randingpage(card2) (1).svg'
-import card2 from '../../../../assets/images/randingpage(card2) (2).svg'
-import card3 from '../../../../assets/images/randingpage(card2) (3).svg'
-import card4 from '../../../../assets/images/randingpage(card2).svg'
+import icon1 from '../../../../assets/images/primary img1.png'
+import icon2 from '../../../../assets/images/primary img2.png'
+import icon3 from '../../../../assets/images/primary img3.png'
+import icon4 from '../../../../assets/images/primary img4.png'
 
 export default function PrimaryService() {
-   const slides = [card1, card2, card3, card4].filter(Boolean)
+   const cards = [
+      {
+         id: 1,
+         bgColor: '#FFCE55',
+         icon: icon1,
+         title: '환경은 지키고, 포인트는 쌓고',
+         description: '대중교통 타고, 재활용하면 탄소중립포인트가 자동으로 적립돼요.'
+      },
+      {
+         id: 2,
+         bgColor: '#1D6FF2',
+         icon: icon2,
+         title: '버리면 쓰레기, 기부하면 포인트',
+         description: '탄소 절감 + 포인트 + 소득공제까지, 착한 기부가 진짜 혜택이 됩니다.'
+      },
+      {
+         id: 3,
+         bgColor: '#FB6E52',
+         icon: icon3,
+         title: '포인트로 만나는 ESG 상품',
+         description: '적립한 포인트로 환경 친화적 상품을 구매하고 더 나은 세상을 만들어가요.'
+      },
+      {
+         id: 4,
+         bgColor: '#D1E95D',
+         icon: icon4,
+         title: '혼자가 아닌, 함께여서 더 즐겁다',
+         description: '소통하고, 나누고, 바꾸고, 즐기면서 라이프스타일로 만들어가요.'
+      }
+   ]
 
    return (
-      <>
-
-         <section className="panel ps-wrapper">
-            <div className="container">
-               <div className="row justify-content-center">
-                  <div className="col-12 col-md-10">
-                     <div className="randing--section__title mt-40">
-                        <p>이렇게 해결할 수 있어요.</p>
-                        <h2>Primary Service</h2>
-                     </div>
-                  </div>
-
-                  <div className="col-12 col-md-10 mt-40">
-                     <div className="ps-swiper-container">
-               <Swiper
-                  modules={[Autoplay, Mousewheel]}
-                  spaceBetween={30}
-                  slidesPerView={3}
-                  autoplay={{
-                     delay: 3000,
-                     disableOnInteraction: false,
-                  }}
-                  mousewheel={{
-                     forceToAxis: true,
-                     sensitivity: 1,
-                     releaseOnEdges: true,
-                  }}
-                  loop={true}
-                  breakpoints={{
-                     480: {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
-                     },
-                     768: {
-                        slidesPerView: 2,
-                        spaceBetween: 30,
-                     },
-                     1024: {
-                        slidesPerView: 3,
-                        spaceBetween: 40,
-                     },
-                     1200: {
-                        slidesPerView: 3,
-                        spaceBetween: 50,
-                     }
-                  }}
-                  className="ps-swiper"
-               >
-                  {slides.map((src, idx) => (
-                     <SwiperSlide key={idx}>
-                        <div className="ps-card">
-                           <img 
-                              src={src} 
-                              alt={`Service ${idx + 1}`}
-                              className="ps-card-image"
-                              onError={(e) => {
-                                 console.error('이미지 로딩 실패:', src);
-                                 e.target.style.display = 'none';
-                              }}
-                           />
-
-                        </div>
-                     </SwiperSlide>
-                  ))}
-               </Swiper>
-                     </div>
-
-                  </div>
-               </div>
-            </div>
-         </section>
-      </>
+      <LandingSectionLayout
+         sectionClass="ps-wrapper"
+         rowClass="justify-content-center"
+         titleSubtext="이렇게 해결할 수 있어요."
+         titleText="Primary Service"
+      >
+         <PrimaryServiceSwiper cards={cards} />
+      </LandingSectionLayout>
    )
 }

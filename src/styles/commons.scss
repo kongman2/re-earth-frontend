@@ -1,0 +1,482 @@
+// re-earth-frontend/src/styles/commons.scss
+// ======================================
+// Main Stylesheet - Imports all styles
+
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+// Import shared styles
+@import "variables";
+@import "mixins";
+@import "base";
+
+// ========== Bootstrap Override ==========
+/* Bootstrap은 main.jsx에서 이미 import되므로 기본 스타일은 그대로 사용 */
+/* 필요한 경우에만 특정 컨텍스트에서 override */
+
+// ========== Font Classes ==========
+.gmarket {
+  font-family: $font-heading;
+}
+
+// ========== Admin Page Styles ==========
+// 관리자 드롭다운 버튼
+.admin-dropdown {
+  position: relative;
+  display: inline-block;
+
+  &__toggle {
+    background: $color-sub-green;
+    border: none;
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: $radius-lg;
+    cursor: pointer;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $color-main;
+    }
+
+    &::after {
+      content: '▼';
+      font-size: 0.75rem;
+    }
+  }
+
+  &__menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #ffffff;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-card-inner;
+    z-index: 1000;
+    min-width: 150px;
+    margin-top: 5px;
+    overflow: hidden;
+  }
+
+  &__item {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    background: none;
+    border: none;
+    text-align: left;
+    color: $color-text-primary;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $color-bg-gray;
+    }
+
+    &--danger {
+      color: $color-point-orange;
+
+      &:hover {
+        background-color: rgba(244, 67, 54, 0.1);
+      }
+    }
+  }
+}
+
+// 관리자 상태 배지
+.admin-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+
+  &--active {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: $color-sub-green;
+  }
+
+  &--inactive {
+    background-color: rgba(158, 158, 158, 0.1);
+    color: $color-text-secondary;
+  }
+
+  &--suspended {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: $color-point-orange;
+  }
+
+  &--pending {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: $color-point-yellow;
+  }
+}
+
+// 관리자 통계 카드
+.admin-stat-card {
+  background: linear-gradient(135deg, $color-sub-green 0%, $color-main 100%);
+  color: #ffffff;
+  border-radius: $radius-lg;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  &__value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 10px 0;
+  }
+
+  &__label {
+    font-size: 0.875rem;
+    opacity: 0.9;
+  }
+
+  &__change {
+    font-size: 0.75rem;
+    margin-top: 5px;
+    
+    &--positive {
+      color: #c8e6c9;
+    }
+    
+    &--negative {
+      color: #ffcdd2;
+    }
+  }
+}
+
+// 관리자 모달 스타일
+.member-detail {
+  &__section {
+    margin-bottom: 25px;
+  }
+
+  &__section-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: $color-text-primary;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid $color-sub-green;
+  }
+
+  &__info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+  }
+
+  &__info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: $color-bg-gray;
+    border-radius: $radius-lg;
+  }
+
+  &__info-label {
+    font-weight: 500;
+    color: $color-text-secondary;
+    font-size: 0.875rem;
+  }
+
+  &__info-value {
+    font-weight: 600;
+    color: $color-text-primary;
+    font-size: 0.875rem;
+  }
+
+  &__stat-card {
+    background-color: $color-bg-gray;
+    padding: 15px;
+    border-radius: $radius-lg;
+    text-align: center;
+
+    h6 {
+      font-size: 0.875rem;
+      color: $color-text-secondary;
+      margin-bottom: 8px;
+    }
+  }
+
+  &__stat-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+}
+
+// 설정 페이지 스타일
+.settings-content {
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: $color-text-primary;
+  }
+}
+
+.settings-section {
+  background-color: $color-bg-gray;
+  padding: 25px;
+  border-radius: $radius-lg;
+  margin-bottom: 20px;
+
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: $color-text-primary;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e9ecef;
+  }
+}
+
+// ========== User Page 공통 스타일 ==========
+.user-page {
+  min-height: 100vh;
+  padding: $spacing-page-padding * 0.875 0; // 56px
+  
+  @media (max-width: 575.98px) {
+    padding: $spacing-page-padding * 0.5 0; // 32px
+  }
+}
+
+// ========== 배경색 유틸리티 클래스 ==========
+// 색상별 배경 유틸리티 (재사용 가능, 변수 기반으로 자동 생성)
+$bg-colors: (
+  'gray': $color-bg-gray,
+  'white': $color-bg-white,
+  'sub-m': $color-bg-sub-m,
+  'light-gray': $color-bg-light-gray,
+);
+
+// 그라디언트 배경 유틸리티 (재사용 가능)
+$bg-gradients: (
+  'green-to-white': linear-gradient(180deg, rgba(209, 233, 93, 0.8) 0%, $color-bg-white 50%, $color-bg-white 100%),
+  'green-fade': linear-gradient(180deg, $color-sub-green 0%, $color-bg-white 50%, $color-bg-white 100%),
+  'sub-to-main': linear-gradient(135deg, $color-sub-green 0%, $color-main 100%),
+  'main-to-sub': linear-gradient(135deg, $color-main 0%, $color-sub-green 100%),
+);
+
+// 범용 배경색 유틸리티 클래스 (어떤 요소에나 사용 가능)
+@each $name, $color in $bg-colors {
+  .bg-#{$name} {
+    background-color: $color;
+  }
+}
+
+// 범용 그라디언트 배경 유틸리티 클래스 (어떤 요소에나 사용 가능)
+@each $name, $gradient in $bg-gradients {
+  .bg-gradient-#{$name} {
+    background: $gradient;
+  }
+}
+
+// User Page 전용 (기존 호환성 유지)
+.user-page {
+  // 단색 배경
+  @each $name, $color in $bg-colors {
+    &.bg-#{$name} {
+      background-color: $color;
+    }
+  }
+  
+  // 그라디언트 배경
+  @each $name, $gradient in $bg-gradients {
+    &.bg-gradient-#{$name} {
+      background: $gradient;
+    }
+  }
+}
+
+.settings-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px 0;
+
+  .form-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &-input {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+    }
+
+    &-label {
+      font-size: 0.875rem;
+      color: $color-text-primary;
+      margin: 0;
+      cursor: pointer;
+    }
+  }
+}
+
+.settings-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: $radius-lg;
+  }
+
+  &__label {
+    font-weight: 500;
+    color: $color-text-secondary;
+    font-size: 0.875rem;
+  }
+
+  &__value {
+    font-weight: 600;
+    color: $color-text-primary;
+    font-size: 0.875rem;
+  }
+}
+
+// 관리자 모달 공통 스타일
+.admin-modal-content {
+  .section {
+    margin-bottom: 24px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    h6 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: $color-text-primary;
+      margin-bottom: 12px;
+    }
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      
+      h6 {
+        margin: 0;
+      }
+      
+      .item-count {
+        background: $color-bg-gray;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        color: $color-text-secondary;
+      }
+    }
+  }
+  
+  .info-grid {
+    background: $color-bg-sub-m;
+    border: 2px solid $color-sub-green;
+    border-radius: $radius-lg;
+    padding: 16px;
+    
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      
+      &:last-child {
+        border-bottom: none;
+      }
+      
+      .label {
+        font-weight: 500;
+        color: $color-text-primary;
+        font-size: 0.9rem;
+      }
+      
+      .value {
+        font-weight: 400;
+        color: $color-text-primary;
+        font-size: 0.9rem;
+        text-align: right;
+        
+        &.status-good {
+          color: $color-main;
+          font-weight: 600;
+        }
+        
+        &.editable {
+          background: #ffffff;
+          border: 1px solid #e9ecef;
+          border-radius: 8px;
+          padding: 4px 8px;
+          min-width: 120px;
+        }
+      }
+    }
+  }
+  
+  .inspection-grid {
+    background: $color-bg-sub-m;
+    border: 2px solid $color-sub-green;
+    border-radius: $radius-lg;
+    padding: 16px;
+    
+    .inspection-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      
+      &:last-child {
+        border-bottom: none;
+      }
+      
+      .label {
+        font-weight: 500;
+        color: $color-text-primary;
+        font-size: 0.9rem;
+      }
+      
+      .value {
+        font-weight: 400;
+        color: $color-text-primary;
+        font-size: 0.9rem;
+        text-align: right;
+        
+        &.status-good {
+          color: $color-main;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+  
+}
+

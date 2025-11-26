@@ -12,7 +12,7 @@ function CalcPointPage() {
 
   return (
     result && (
-      <section id="main1">
+      <section id="main1" className="user-page">
         <div className="container calcpoint" id="area">
           {isLoading ? (
             <>

@@ -1,4 +1,5 @@
 import React from 'react';
+import './EarthOrbit.scss';
 
 const EarthOrbit = () => {
   return (

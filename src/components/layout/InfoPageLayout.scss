@@ -1,0 +1,146 @@
+// InfoPageLayout.scss
+// InfoPageLayout 컴포넌트 스타일
+
+@import '../../styles/variables';
+
+.info-hero {
+  position: relative;
+  width: 100%;
+  height: 790px;
+  color: $color-text-primary;
+  border-radius: 0 0 24px 24px;
+  overflow: hidden;
+  background: url('../../assets/images/re-earth_heroBG.png') center/cover no-repeat;
+
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(247, 247, 247, 0.5);
+    z-index: 1;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 24px 0 120px;
+
+    @media (max-width: 991.98px) {
+      padding-left: 40px;
+    }
+    @media (max-width: 575.98px) {
+      padding-left: 24px;
+    }
+  }
+
+  .hero-block {
+    position: static !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-title,
+  .hero-sub,
+  .hero-tags {
+    position: static !important;
+    top: auto !important;
+    transform: none !important;
+    text-align: left;
+    margin: 0;
+  }
+
+  .hero-title {
+    font-size: clamp(28px, 4.2vw, 40px);
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .hero-sub {
+    font-size: clamp(16px, 2.2vw, 20px);
+    font-weight: 600;
+  }
+
+  .hero-tags {
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.65);
+    letter-spacing: 0.2px;
+  }
+
+  .hero-arrow {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 24px;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+  }
+
+  .arrow-btn {
+    background: transparent;
+    border: none;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.7);
+    animation: hero-bounce 1.6s infinite;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+
+    &:hover {
+      transform: translateY(2px);
+    }
+  }
+}
+
+@keyframes hero-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+/* ============ Guide (섹션 2) ============ */
+.info-guide-wrapper {
+  padding: 56px 0 80px;
+
+  /* 위 영역 */
+  .guide-head {
+    margin-bottom: 24px;
+  }
+
+  .guide-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+
+  .guide-sub {
+    color: $color-text-secondary;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* 아래 영역 (좌: 이미지 / 우: 텍스트) */
+  .guide-row {
+    gap: 0;
+    flex-wrap: wrap;
+  }
+
+  @media (min-width: 992px) {
+    .guide-row {
+      flex-wrap: nowrap;
+    }
+  }
+}
+
+

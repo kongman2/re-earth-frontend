@@ -1,0 +1,106 @@
+/**
+ * FormLayout 컴포넌트 스타일
+ * 통일된 form 레이아웃 스타일
+ */
+
+@import '../../styles/variables';
+
+// ========== Form Layout 변수 ==========
+// Form 너비
+$width-form-default: 400px; /* 기본 폼 너비 (로그인, 회원가입 등) */
+$width-form-wide: 920px; /* 넓은 폼 너비 (문의, 기부 등) */
+
+// Form 간격
+$spacing-form-gap: clamp(16px, 2vw, 20px); /* form 내부 요소 간격 */
+
+// Form Container Padding
+$spacing-form-container-padding: 80px; /* form 컨테이너 패딩 */
+$spacing-form-container-padding-tablet: 40px; /* 768px 이하 */
+$spacing-form-container-padding-mobile: 30px; /* 576px 이하 */
+
+// Form Header
+$spacing-form-header-margin-bottom: clamp(32px, 4vw, 40px); /* form 헤더 하단 여백 */
+
+// ========== Form 기본 스타일 ==========
+// FormLayout 컴포넌트를 사용하지 않는 경우를 위한 기본 form 스타일
+form {
+  background-color: $color-bg-white;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+}
+
+// FormLayout 컴포넌트 스타일
+.form-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+  background-color: $color-bg-white;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+  padding: $spacing-form-container-padding;
+
+  @media (max-width: 991.98px) {
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  @media (max-width: 768px) {
+    padding: $spacing-form-container-padding-tablet;
+  }
+
+  @media (max-width: 576px) {
+    padding: $spacing-form-container-padding-mobile;
+  }
+}
+
+// ========== Form Variants ==========
+.form-layout--default {
+  max-width: $width-form-default;
+
+  @media (max-width: 991.98px) {
+    max-width: 100%;
+    border-radius: 0;
+    margin: 0;
+  }
+}
+
+.form-layout--wide {
+  max-width: $width-form-wide;
+
+  @media (max-width: 991.98px) {
+    max-width: 100%;
+    border-radius: 0;
+    margin: 0;
+  }
+}
+
+.form-layout--full {
+  max-width: 100%;
+}
+
+// ========== Form Header ==========
+.form-layout__header {
+  width: 100%;
+  margin-bottom: $spacing-form-header-margin-bottom;
+  text-align: left;
+
+  h2 {
+    font-size: $font-h2;
+    font-weight: $weight-bold;
+    color: $color-text-primary;
+    margin: 0;
+  }
+}
+
+// ========== Form Content ==========
+.form-layout__content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-form-gap;
+}
+

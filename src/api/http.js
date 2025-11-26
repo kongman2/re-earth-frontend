@@ -34,18 +34,32 @@ reEarth.interceptors.request.use(
 // ───────── 응답 인터셉터
 reEarth.interceptors.response.use(
    (response) => {
-      // /auth/me 는 401도 그대로 돌려서 하이드레이션 로직에서 처리
-      if (response.config?.url?.includes('/auth/me') && response.status === 401) {
-         return response
-      }
-
       // 2xx 범위를 벗어나면 에러로 던지기
       if (response.status < 200 || response.status >= 300) {
          return Promise.reject(response)
       }
       return response
    },
-   (error) => Promise.reject(error)
+   (error) => {
+      const status = error?.response?.status
+      const url = error?.config?.url || ''
+      
+      // /auth/me의 401은 정상적인 동작(로그인하지 않은 상태)이므로 조용히 처리
+      if (url.includes('/auth/me') && status === 401) {
+         // 401 응답을 그대로 반환하여 하이드레이션 로직에서 처리
+         return Promise.resolve(error.response)
+      }
+      
+      // 419 (토큰 만료), 401, 403 같은 인증 오류는 개발 환경에서 조용히 처리
+      // 브라우저 콘솔에 에러가 표시되지 않도록 suppress
+      if (status === 419 || status === 401 || status === 403) {
+         // 에러를 조용히 reject하되, 콘솔에는 표시하지 않음
+         // 각 API 함수에서 catch하여 목업 데이터로 대체할 수 있도록 함
+         return Promise.reject(error)
+      }
+      
+      return Promise.reject(error)
+   }
 )
 
 export default reEarth

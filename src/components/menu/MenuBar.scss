@@ -1,26 +1,28 @@
+@import '../../styles/variables';
+
 // 완전 커스텀 투명 메뉴바 (구체적 셀렉터로 우선순위 확보)
 nav.menu-bar-custom {
   position: sticky;
   top: 0;
   width: 100%;
-  height: 60px;
+  height: 50px;
   background: transparent;
   background-color: transparent;
   background-image: none;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  z-index: 1030;
+  z-index: 9999;
   border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   margin: 0;
   padding: 0;
 }
 
 .logo-custom {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--subcolor-d);
+  font-size: $font-body-large;
+  font-weight: $weight-bold;
+  color: $color-main;
   letter-spacing: -0.5px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -31,12 +33,14 @@ nav.menu-bar-custom {
 }
 
 .icon-container-custom {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   background: none;
   cursor: pointer;
  
   svg {
+    width: 28px;
+    height: 28px;
     transition: all 0.3s ease-out;
   }
 
@@ -45,18 +49,32 @@ nav.menu-bar-custom {
   }
 }
 
+// 사용자 페이지 래퍼 (메뉴바와 겹치도록)
+.user-page-wrapper {
+  margin-top: -50px;
+}
+
 // 반응형  
 @media (max-width: 575.98px) {
   .menu-bar-custom {
-    height: 50px;
+    height: 45px;
   }
 
   .logo-custom {
-    font-size: 1.25rem;
+    font-size: $font-body-regular;
   }
   
   .icon-container-custom {
-    width: 35px;
-    height: 35px;
+    width: 32px;
+    height: 32px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .user-page-wrapper {
+    margin-top: -45px;
   }
 }

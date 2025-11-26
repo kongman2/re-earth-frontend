@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import InputField from '../common/InputField'
 import FormSelect from '../common/FormSelect'
+import Alert from '../common/Alert'
 import { formatWithComma, stripComma } from '../../utils/priceSet'
 
 function ItemCreateForm({ onCreateSubmit }) {
@@ -14,6 +15,15 @@ function ItemCreateForm({ onCreateSubmit }) {
    const [itemSummary, setItemSummary] = useState('') // 상품요약
    const [brandName, setBrandName] = useState('') //브랜드명
    const [vendorName, setVendorName] = useState('') //업체명
+   const [alert, setAlert] = useState({ isOpen: false, message: '', variant: 'info', title: null })
+
+   const showAlert = (message, variant = 'info', title = null) => {
+      setAlert({ isOpen: true, message, variant, title })
+   }
+
+   const hideAlert = () => {
+      setAlert({ isOpen: false, message: '', variant: 'info', title: null })
+   }
 
    // 이미지 미리보기
    const handleImageChange = (e) => {
@@ -46,30 +56,30 @@ function ItemCreateForm({ onCreateSubmit }) {
       e.preventDefault()
 
       if (!itemNm.trim()) {
-         alert('상품명을 입력하세요!')
+         showAlert('상품명을 입력하세요!', 'warning', '입력 오류')
          return
       }
 
       if (!String(price).trim()) {
-         alert('가격을 입력하세요!')
+         showAlert('가격을 입력하세요!', 'warning', '입력 오류')
          return
       }
 
       if (!String(stockNumber).trim()) {
-         alert('재고를 입력하세요.')
+         showAlert('재고를 입력하세요.', 'warning', '입력 오류')
          return
       }
       if (!String(brandName).trim()) {
-         alert('브랜드명을 입력하세요.')
+         showAlert('브랜드명을 입력하세요.', 'warning', '입력 오류')
          return
       }
       if (!String(vendorName).trim()) {
-         alert('업체명을 입력하세요.')
+         showAlert('업체명을 입력하세요.', 'warning', '입력 오류')
          return
       }
 
       if (imgFiles.length === 0) {
-         alert('이미지 최소 1개 이상 업로드 하세요.')
+         showAlert('이미지 최소 1개 이상 업로드 하세요.', 'warning', '입력 오류')
          return
       }
 
@@ -111,7 +121,20 @@ function ItemCreateForm({ onCreateSubmit }) {
    }
 
    return (
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
+      <>
+         {alert.isOpen && (
+            <Alert
+               variant={alert.variant}
+               title={alert.title}
+               isModal={true}
+               dismissible={true}
+               onClose={hideAlert}
+               size="sm"
+            >
+               {alert.message}
+            </Alert>
+         )}
+         <form onSubmit={handleSubmit} encType="multipart/form-data">
          {/* 이미지 업로드 섹션 */}
          <div className="row mb-4">
             <div className="col-12">
@@ -299,6 +322,7 @@ function ItemCreateForm({ onCreateSubmit }) {
             </div>
          </div>
       </form>
+      </>
    )
 }
 

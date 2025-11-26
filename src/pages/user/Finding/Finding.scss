@@ -25,35 +25,23 @@
    width: 100%;
    gap: 10px;
 }
-#register {
-   padding: 80px;
+
+// Finding 페이지 전용 스타일
+#finding.auth-page {
    @media (max-width: 646px) {
-      padding: 0px;
-      width: 100%;
+      padding: 30px;
    }
 }
+
 .user-register {
    background-color: white;
    padding: 40px;
    border-radius: 20px;
    max-width: 920px;
    margin: 0 auto;
+   
    @media (max-width: 646px) {
       padding: 30px;
       width: 100%;
    }
-}
-#login {
-   background-color: #ffffff;
-   padding: 80px;
-   border-radius: 20px;
-   max-width: 920px;
-   margin: 0 auto;
-   @media (max-width: 646px) {
-      padding: 30px;
-      width: 100%;
-   }
-}
-h2 {
-   font-size: 1.25rem;
 }

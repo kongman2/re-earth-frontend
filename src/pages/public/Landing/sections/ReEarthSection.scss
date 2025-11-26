@@ -1,0 +1,47 @@
+// ReEarthSection.scss
+// RE:EARTH split word section
+
+.panel--reearth {
+   background: linear-gradient(to bottom, #fff 0 50%, $color-bg-sub-m 50% 100%);
+   position: relative;
+   margin-top: -40px;
+   height: 80vh;
+   scroll-snap-align: start;
+
+   .reearth-hero {
+      position: relative;
+      height: 100vh;
+   }
+
+   .word {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: inline-block;
+      font-family: $font-heading;
+      font-weight: 800;
+      font-size: clamp(72px, 18vw, 240px);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      margin: 0;
+      text-align: center;
+
+      .top {
+         position: relative;
+         display: block;
+         color: var(--word-red);
+         -webkit-mask: linear-gradient(to bottom, #000 0 calc(50% - 0.5px), transparent 50% 100%);
+         mask: linear-gradient(to bottom, #000 0 calc(50% - 0.5px), transparent 50% 100%);
+      }
+
+      .bottom {
+         position: absolute;
+         inset: 0;
+         color: var(--word-green);
+         -webkit-mask: linear-gradient(to bottom, transparent 0 50%, #000 calc(50% + 0.5px) 100%);
+         mask: linear-gradient(to bottom, transparent 0 50%, #000 calc(50% + 0.5px) 100%);
+      }
+   }
+}
+

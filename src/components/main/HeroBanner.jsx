@@ -13,27 +13,27 @@ export default function HeroBanner() {
     {
       id: 1,
       title: '앱 설치 소개',
-      image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1200&h=600&fit=crop'
+      image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=1200&h=600&fit=crop' // ESG/지속가능성
     },
     {
       id: 2,
       title: '슈퍼빈 파트너쉽 소개',
-      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=600&fit=crop'
+      image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1200&h=600&fit=crop' // 재활용/순환경제
     },
     {
       id: 3,
       title: '카본프리 프로젝트 소개',
-      image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&h=600&fit=crop'
+      image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&h=600&fit=crop' // 자연/환경보호
     },
     {
       id: 4,
-      title: '이벤트 배너(오늘의 미션 소개)',
-      image: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=1200&h=600&fit=crop'
+      title: '오늘의 미션 소개',
+      image: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1200&h=600&fit=crop' // 친환경/탄소중립
     },
     {
       id: 5,
       title: '아나바다장터 소개',
-      image: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=1200&h=600&fit=crop'
+      image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&h=600&fit=crop' // 지속가능한 소비
     }
   ];
 
@@ -52,6 +52,9 @@ export default function HeroBanner() {
           }}
           loop={true}
           speed={800}
+          slidesPerView={1}
+          spaceBetween={0}
+          watchSlidesProgress={true}
           className="hero-swiper"
         >
           {slides.map((slide) => (

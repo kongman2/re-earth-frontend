@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import MapComponent from "../../../components/map/MapComponent";
 import SearchTap from "./SearchTap";
-import QrScanner from "../../../components/common/QrScanner";
-
+import Button from "../../../components/common/Button";
 import "./SavingMap.scss";
-import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
 function SavingMap() {
   const category = "nephron";
@@ -26,62 +23,61 @@ function SavingMap() {
   }, []);
 
   return (
-    <>
-      <section id="main1" className="savingmap">
-        <div className="container" id="area">
-          {/* 영역 */}
-          <div className="finding">
-            <h2>
+    <section id="main1" className="user-page saving-map">
+      <div className="container p-3">
+            <h2 className="saving-map__title">
               내 주변 {category === "nephron" ? "네프론" : "따릉이 대여소"}
             </h2>
-            <div className="finding--content mt-40">
-              <SearchTap
-                category={category}
-                isMobile={isMobile}
-                data={data}
-                setData={setData}
-                position={position}
-              />
-              <MapComponent
-                category={category}
-                setPosition={setPosition}
-                position={position}
-                data={data}
-              />
-            </div>
-          </div>
-
-          {isMobile ? (
-            <div className="mobileOnly mt-40">
-              {category === "nephron" ? (
-                <p>내가 찾는 네프론이 지도에 보이지 않나요?</p>
-              ) : (
-                <p>내 주변 대여소가 지도에 보이지 않나요?</p>
-              )}
-              <button
-                className="btn main1 default"
-                onClick={() => {
-                  navigate("/readysoon");
-                }}
-              >
-                QR코드 스캔하기
-              </button>
-            </div>
-          ) : (
-            <div className="verify mt-80">
-              <h3>인증하기</h3>
-              <div className="mobileOnly mt-20">
-                <a href="">어플리케이션 설치</a>
-                <p className="mt-40">
-                  해당 기능은 모바일 또는 태블릿 환경(가로 768px 이하)에서만
-                  실행 가능합니다.{" "}
-                </p>
+            <div className="saving-map__content">
+              <div className="row g-3">
+                <div className="col-lg-5 col-md-12 order-lg-1 order-2">
+                  <SearchTap
+                    category={category}
+                    isMobile={isMobile}
+                    data={data}
+                    setData={setData}
+                    position={position}
+                  />
+                </div>
+                <div className="col-lg-7 col-md-12 order-lg-2 order-1">
+                  <MapComponent
+                    category={category}
+                    setPosition={setPosition}
+                    position={position}
+                    data={data}
+                  />
+                </div>
               </div>
             </div>
-          )}
-        </div>
-      </section>
-    </>
+
+            {isMobile ? (
+              <div className="saving-map__mobile-actions">
+                <p className="saving-map__mobile-text">
+                  {category === "nephron" 
+                    ? "내가 찾는 네프론이 지도에 보이지 않나요?" 
+                    : "내 주변 대여소가 지도에 보이지 않나요?"}
+                </p>
+                <Button
+                  variant="main1"
+                  onClick={() => navigate("/readysoon")}
+                  fullWidth
+                >
+                  QR코드 스캔하기
+                </Button>
+              </div>
+            ) : (
+              <div className="saving-map__verify">
+                <h3 className="saving-map__verify-title">인증하기</h3>
+                <div className="saving-map__verify-content">
+                  <p className="saving-map__verify-text">
+                    해당 기능은 모바일 또는 태블릿 환경에서만<br />
+                    이용 가능합니다. 모바일 기기로 접속해주세요.
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+    </section>
   );
 }
 

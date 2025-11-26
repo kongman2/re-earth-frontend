@@ -1,142 +1,213 @@
-section.savingmap #area {
-   @media (min-width: 769px) and (max-width: 1199px) {
-      padding: 20px;
-   }
-}
-.finding {
-   width: 100%;
-}
-.finding--content {
-   display: flex;
-   flex-direction: row;
-   gap: 20px;
-   width: 100%;
+@import '../../../styles/variables';
 
-   @media (max-width: 768px) and (max-width: 1000px) {
-      flex-direction: column-reverse;
-      max-height: fit-content;
-   }
+.saving-map {
+  &__title {
+    font-size: $font-h2;
+    font-weight: $weight-bold;
+    color: $color-text-primary;
+    margin-bottom: $spacing-section-padding * 0.625;
+  }
+
+  &__content {
+    margin-bottom: $spacing-section-padding * 0.625;
+  }
+
+  &__mobile-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-margin-mobile;
+    margin-top: $spacing-section-padding * 0.625;
+  }
+
+  &__mobile-text {
+    color: $color-text-primary;
+    font-size: $font-body-regular;
+    text-align: center;
+    margin: 0;
+  }
+
+  &__verify {
+    margin-top: $spacing-section-padding;
+  }
+
+  &__verify-title {
+    font-size: $font-h3;
+    font-weight: $weight-bold;
+    color: $color-text-primary;
+    margin-bottom: $spacing-margin-mobile;
+  }
+
+  &__verify-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-section-padding * 0.625;
+  }
+
+  &__app-link {
+    display: inline-block;
+    text-align: center;
+    width: 20%;
+    max-width: 200px;
+    padding: $spacing-margin-mobile * 0.9375 $spacing-margin-mobile * 0.625;
+    background-color: $color-sub-green;
+    border-radius: $radius-lg;
+    color: $color-text-primary;
+    text-decoration: none;
+    font-size: $font-body-regular;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: darken($color-sub-green, 10%);
+      color: $color-text-primary;
+      text-decoration: none;
+    }
+  }
+
+  &__verify-text {
+    color: $color-text-secondary;
+    font-size: $font-body-regular;
+    text-align: center;
+    margin: 0;
+  }
 }
-p.none {
-   color: var(--point-r);
-   font-weight: 700;
-}
-p.active {
-   color: var(--point-b);
-   font-weight: 700;
-}
+
+// ========== SearchTap 스타일 ==========
 .searchtap {
-   width: 55%;
-   max-height: 400px;
-   overflow-y: auto;
-   overflow-x: hidden;
-   & input {
-      background-color: #ffffff;
-   }
-   @media (min-width: 769px) and (max-width: 1000px) {
-      width: 100%;
-   }
-   @media (max-width: 768px) {
-      & input {
-         width: 100%;
-         top: 0;
-         position: sticky;
-      }
-   }
-}
+  width: 100%;
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
 
-.searchtap .result {
-   display: flex;
-   gap: 5px;
-   & p {
-      margin: 0;
-   }
-}
+  & input {
+    background-color: $color-bg-white;
+  }
 
-.searchtap--spot {
-   display: flex;
-   gap: 10px;
-   align-items: center;
-   background-color: #ffffff;
-   border-radius: 10px;
-   padding: 10px 15px;
-   & .spot--address {
+  @media (max-width: 768px) {
+    & input {
       width: 100%;
-   }
-   & .btn {
-      width: 100%;
-      max-width: 100px;
-      max-height: 50px;
-      padding: 10px;
-   }
-   @media (max-width: 768px) {
+      top: 0;
+      position: sticky;
+    }
+  }
+
+  &__result {
+    display: flex;
+    gap: $spacing-margin-mobile * 0.3125;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: $spacing-margin-mobile;
+    font-size: $font-body-regular;
+    color: $color-text-primary;
+  }
+
+  &__count {
+    font-weight: $weight-bold;
+  }
+
+  &__spot {
+    display: flex;
+    gap: $spacing-margin-mobile * 0.625;
+    align-items: center;
+    background-color: $color-bg-white;
+    border-radius: $radius-md;
+    padding: $spacing-margin-mobile * 0.625 $spacing-margin-mobile * 0.9375;
+    margin-bottom: $spacing-margin-mobile * 0.625;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 768px) {
       justify-content: space-between;
-      & .spot--address {
-         width: 70%;
-      }
-   }
-}
-.spot--address p {
-   margin: 0;
-   font-weight: 700;
-}
-.address--text {
-   width: 100%;
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   & .dist {
+    }
+  }
+
+  &__marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: $color-main;
+    color: $color-bg-white;
+    font-size: $font-caption;
+    font-weight: $weight-bold;
+    flex-shrink: 0;
+  }
+
+  &__address {
+    width: 100%;
+  }
+
+  &__address-text {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-margin-mobile * 0.5;
+  }
+
+  &__station-name {
+    margin: 0;
+    font-weight: $weight-bold;
+    font-size: $font-body-regular;
+    color: $color-text-primary;
+  }
+
+  &__distance {
+    display: flex;
+    font-size: $font-caption;
+    color: $color-text-secondary;
+  }
+
+  &__description {
+    display: flex;
+    gap: $spacing-margin-mobile * 0.9375;
+    font-size: $font-caption;
+    color: $color-text-secondary;
+
+    &-item {
       display: flex;
-      font-size: 0.75rem;
-   }
-}
+      gap: $spacing-margin-mobile * 0.3125;
+      align-items: center;
+    }
 
-.spot--address .description {
-   display: flex;
-   gap: 15px;
-   font-size: 0.75rem;
-   color: var(--subtext);
-
-   & > * {
-      display: flex;
-      gap: 5px;
-   }
-
-   @media (min-width: 769px) and (max-width: 1199px) {
+    @media (max-width: 991.98px) {
       flex-direction: column;
-      gap: 5px;
-   }
+      gap: $spacing-margin-mobile * 0.3125;
+    }
+  }
 }
 
-.mobileOnly {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   & a {
-      display: inline-block;
-      text-align: center;
-      width: 20%;
-      max-width: 200px;
-      max-height: 60px;
-      padding: 15px 10px;
-      background-color: var(--maincolor);
-      border-radius: 20px;
-      color: var(--maintext);
-   }
-   & p {
-      color: var(--subtext);
-      text-align: center;
-   }
+// ========== 상태 표시 스타일 ==========
+p.none {
+  color: $color-point-orange;
+  font-weight: $weight-bold;
+  margin: 0;
 }
 
+p.active {
+  color: $color-point-blue;
+  font-weight: $weight-bold;
+  margin: 0;
+}
+
+// ========== 결과 없음 스타일 ==========
 .no-result {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   text-align: center;
-   padding: 20px;
-   & p {
-      color: var(--subtext);
-      font-weight: 700;
-   }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: $spacing-container-padding;
+
+  & p {
+    color: $color-text-secondary;
+    font-weight: $weight-bold;
+    font-size: $font-body-regular;
+    margin: 0;
+  }
 }

@@ -1,6 +1,6 @@
 .admin-page {
   min-height: 100vh;
-  background-color: var(--bg-gray);
+  background-color: $color-bg-gray;
 
   &__sidebar {
     padding: 30px;
@@ -21,9 +21,9 @@
 
 
   &__username {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--maintext);
+    font-size: $font-body-regular;
+    font-weight: $weight-medium;
+    color: $color-text-primary;
   }
 
   &__nav {
@@ -39,11 +39,11 @@
     padding: 12px 16px;
     border: none;
     background: none;
-    border-radius: var(--border-radius);
-    background-color: var(--subtext);
+    border-radius: $radius-lg;
+    background-color: $color-text-secondary;
     color: #fff;
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: $font-body-regular;
+    font-weight: $weight-medium;
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: left;
@@ -51,18 +51,18 @@
 
     &:hover {
       background-color: #FFE7AA;
-      color: var(--maintext);
+      color: $color-text-primary;
     }
 
     &--active {
-      background-color: var(--point-y);
-      color: var(--maintext);
-      font-weight: 600;
+      background-color: $color-point-yellow;
+      color: $color-text-primary;
+      font-weight: $weight-medium;
     }
   }
 
   &__nav-icon {
-    font-size: 1rem;
+    font-size: $font-body-large;
     width: 20px;
     text-align: center;
   }
@@ -78,10 +78,10 @@
 
   &__content {
     background-color: #ffffff;
-    border-radius: var(--border-radius);
+    border-radius: $radius-lg;
     padding: 30px;
     min-height: calc(100vh - 60px);
-    box-shadow: var(--box-shadow);
+    box-shadow: $shadow-card-inner;
   }
 }
 

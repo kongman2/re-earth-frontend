@@ -4,7 +4,7 @@
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 30px;
-    color: var(--maintext);
+    color: $color-text-primary;
   }
 
   &__stats {
@@ -15,7 +15,7 @@
   }
 
   &__stat-card {
-    background: linear-gradient(135deg, var(--subcolor-m) 0%, #ffffff 100%);
+    background: linear-gradient(135deg, $color-bg-sub-m 0%, #ffffff 100%);
     padding: 25px;
     border-radius: 15px;
     text-align: center;
@@ -24,7 +24,7 @@
     h3 {
       font-size: 1rem;
       font-weight: 600;
-      color: var(--maintext);
+      color: $color-text-primary;
       margin-bottom: 10px;
     }
   }
@@ -32,13 +32,13 @@
   &__stat-value {
     font-size: 2rem;
     font-weight: 700;
-    color: var(--subcolor-d);
+    color: $color-main;
     margin-bottom: 5px;
   }
 
   &__stat-desc {
     font-size: 0.875rem;
-    color: var(--subtext);
+    color: $color-text-secondary;
   }
 
   &__chart {
@@ -51,7 +51,7 @@
     h3 {
       font-size: 1.25rem;
       font-weight: 600;
-      color: var(--maintext);
+      color: $color-text-primary;
       margin-bottom: 25px;
       text-align: center;
     }
@@ -92,7 +92,7 @@
     top: -25px;
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--maintext);
+    color: $color-text-primary;
     background-color: rgba(255, 255, 255, 0.9);
     padding: 2px 6px;
     border-radius: 4px;
@@ -102,7 +102,7 @@
   &__bar-label {
     margin-top: 10px;
     font-size: 0.875rem;
-    color: var(--maintext);
+    color: $color-text-primary;
     font-weight: 500;
   }
 
@@ -115,7 +115,7 @@
     h3 {
       font-size: 1.25rem;
       font-weight: 600;
-      color: var(--maintext);
+      color: $color-text-primary;
       margin-bottom: 20px;
     }
   }
@@ -131,12 +131,12 @@
     align-items: center;
     gap: 15px;
     padding: 15px 20px;
-    background-color: var(--subcolor-m);
+    background-color: $color-bg-sub-m;
     border-radius: 10px;
     transition: all 0.3s ease;
     
     &:hover {
-      background-color: var(--maincolor);
+      background-color: $color-sub-green;
       transform: translateX(5px);
     }
   }
@@ -149,7 +149,7 @@
 
   &__achievement span:last-child {
     font-weight: 500;
-    color: var(--maintext);
+    color: $color-text-primary;
   }
 }
 

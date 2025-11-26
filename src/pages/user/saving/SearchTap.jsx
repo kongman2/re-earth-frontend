@@ -87,10 +87,10 @@ function SearchTap({ category, isMobile, data, setData, position }) {
     console.log("🎈data:", data);
   }
   return data?.length > 0 ? (
-    <div className="searchtap">
-      <div className="text-right result">
+    <div className="searchtap user-page">
+      <div className="searchtap__result">
         내 주변 반경 1km 이내의 대여소
-        <p className="active">{data?.length}</p>&nbsp;곳
+        <span className="searchtap__count active">{data?.length}</span>곳
       </div>
       {data.map((spot, index) => {
         const distMeter = getDistance(
@@ -101,31 +101,31 @@ function SearchTap({ category, isMobile, data, setData, position }) {
         ).toFixed(0);
 
         return (
-          <div className="searchtap--spot mt-10" key={index}>
-            <div className="spotmarker">{index + 1}</div>
-            <div className="spot--address">
-              <div className="address--text">
-                <p>{spot.stationName.replace(/^\d+\.\s*/, "")}</p>
-                <div className="spot-data dist">
+          <div className="searchtap__spot" key={index}>
+            <div className="searchtap__marker">{index + 1}</div>
+            <div className="searchtap__address">
+              <div className="searchtap__address-text">
+                <p className="searchtap__station-name">{spot.stationName.replace(/^\d+\.\s*/, "")}</p>
+                <div className="searchtap__distance">
                   {isMobile && <span>내 위치에서&nbsp;</span>}
                   {distMeter} m
                 </div>
               </div>
-              <div className="description">
-                <div className="description--parking">
+              <div className="searchtap__description">
+                <div className="searchtap__description-item">
                   대여 가능{" "}
                   {spot.parkingBikeTotCnt > 0 ? (
-                    <p className="active">{spot.parkingBikeTotCnt}대</p>
+                    <span className="active">{spot.parkingBikeTotCnt}대</span>
                   ) : (
-                    <p className="none">없음</p>
+                    <span className="none">없음</span>
                   )}
                 </div>
-                <div className="description--shared">
+                <div className="searchtap__description-item">
                   주차 가능 거치대{" "}
                   {spot.shared > 100 ? (
-                    <p className="none ">없음</p>
+                    <span className="none">없음</span>
                   ) : (
-                    <p className="active">있음</p>
+                    <span className="active">있음</span>
                   )}
                 </div>
               </div>

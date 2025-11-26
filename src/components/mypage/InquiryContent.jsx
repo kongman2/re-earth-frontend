@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import TableContent from '../layout/TableContent'
+import Alert from '../common/Alert'
 import { fetchMyQnasThunk, fetchQnaDetailThunk } from '../../features/qnaSlice'
 
 const PER_PAGE = 10
@@ -23,6 +24,15 @@ export default function InquiryContent() {
    const { list = [], detail, loading, error } = useSelector((s) => s.qna || {})
    const [activeSubTab, setActiveSubTab] = useState('integrated')
    const [currentPage, setCurrentPage] = useState(1)
+   const [alert, setAlert] = useState({ isOpen: false, message: '', variant: 'info', title: null })
+
+   const showAlert = (message, variant = 'info', title = null) => {
+      setAlert({ isOpen: true, message, variant, title })
+   }
+
+   const hideAlert = () => {
+      setAlert({ isOpen: false, message: '', variant: 'info', title: null })
+   }
 
    // 최초 로드 시 내 문의 목록 가져오기
    useEffect(() => {
@@ -85,7 +95,7 @@ export default function InquiryContent() {
          await dispatch(fetchQnaDetailThunk(row.id)).unwrap()
          setShowModal(true)
       } catch (e) {
-         alert('문의 상세 조회에 실패했습니다.')
+         showAlert('문의 상세 조회에 실패했습니다.', 'error', '조회 실패')
       }
    }
 
@@ -100,6 +110,18 @@ export default function InquiryContent() {
 
    return (
       <>
+         {alert.isOpen && (
+            <Alert
+               variant={alert.variant}
+               title={alert.title}
+               isModal={true}
+               dismissible={true}
+               onClose={hideAlert}
+               size="sm"
+            >
+               {alert.message}
+            </Alert>
+         )}
          <TableContent
             title="1:1 문의"
             subTabs={subTabs}

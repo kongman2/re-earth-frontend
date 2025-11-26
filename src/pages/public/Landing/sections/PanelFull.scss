@@ -1,0 +1,9 @@
+// PanelFull.scss
+// Full panel section
+
+.panel--full {
+   height: 100vh;
+   min-height: 100vh;
+   scroll-snap-align: start;
+}
+

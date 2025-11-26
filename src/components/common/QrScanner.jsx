@@ -1,8 +1,18 @@
 import { useRef, useState } from 'react'
+import Alert from './Alert'
 
 function QrScanner({ label }) {
    const videoRef = useRef(null)
    const [isActive, setIsActive] = useState(false)
+   const [alert, setAlert] = useState({ isOpen: false, message: '', variant: 'info', title: null })
+
+   const showAlert = (message, variant = 'info', title = null) => {
+      setAlert({ isOpen: true, message, variant, title })
+   }
+
+   const hideAlert = () => {
+      setAlert({ isOpen: false, message: '', variant: 'info', title: null })
+   }
 
    const handleStartCamera = async () => {
       try {
@@ -15,18 +25,32 @@ function QrScanner({ label }) {
          }
       } catch (err) {
          console.error('카메라 접근 실패:', err)
-         alert('카메라 권한을 허용해 주세요!')
+         showAlert('카메라 권한을 허용해 주세요!', 'error', '권한 오류')
       }
    }
 
    return (
-      <div>
-         <button className="btn main1 default" onClick={handleStartCamera}>
-            {label}
-         </button>
+      <>
+         {alert.isOpen && (
+            <Alert
+               variant={alert.variant}
+               title={alert.title}
+               isModal={true}
+               dismissible={true}
+               onClose={hideAlert}
+               size="sm"
+            >
+               {alert.message}
+            </Alert>
+         )}
+         <div>
+            <button className="btn main1 default" onClick={handleStartCamera}>
+               {label}
+            </button>
 
-         {isActive && <video ref={videoRef} autoPlay playsInline style={{ width: '100%', maxWidth: '400px' }} />}
-      </div>
+            {isActive && <video ref={videoRef} autoPlay playsInline style={{ width: '100%', maxWidth: '400px' }} />}
+         </div>
+      </>
    )
 }
 

@@ -1,17 +1,22 @@
+import Input from './Input';
+import './Input.scss';
+
+/**
+ * @deprecated InputPhoneNumber는 Input 컴포넌트의 'phone' variant로 대체되었습니다.
+ * 하위 호환성을 위해 유지되며, 새로운 코드에서는 Input 컴포넌트를 직접 사용하세요.
+ */
 function InputPhoneNumber({ marginTop, value1, value2, value3, inputChange }) {
    return (
-      <>
-         <div className={`form--input ${marginTop || ''}`}>
-            <p className="text-body">휴대폰번호</p>
-            <div className="input-phone">
-               <input type="tel" inputMode="numeric" pattern="\d*" maxLength={3} name="phone1" placeholder="010" value={value1} onChange={inputChange} />
-               <span>-</span>
-               <input type="tel" inputMode="numeric" pattern="\d*" maxLength={4} name="phone2" placeholder="1234" value={value2} onChange={inputChange} />
-               <span>-</span>
-               <input type="tel" inputMode="numeric" pattern="\d*" maxLength={4} name="phone3" placeholder="5678" value={value3} onChange={inputChange} />
-            </div>
-         </div>
-      </>
+      <Input
+         variant="phone"
+         marginTop={marginTop}
+         onChange={inputChange}
+         variantProps={{
+            phone1: value1,
+            phone2: value2,
+            phone3: value3,
+         }}
+      />
    )
 }
 

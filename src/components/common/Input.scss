@@ -1,0 +1,148 @@
+@import '../../styles/variables';
+
+// ========== 전역 Input/Textarea 기본 스타일 ==========
+input {
+  border: none;
+  border-radius: $radius-lg;
+  background-color: $color-bg-sub-m;
+  width: 100%;
+  height: $height-input-default;
+  padding: 0 $padding-input-horizontal-default;
+  font-size: $font-body-regular;
+  font-family: $font-body;
+  color: $color-text-primary;
+
+  &::placeholder {
+    color: $color-text-secondary;
+  }
+
+  @media (max-width: 768px) {
+    height: $height-input-tablet;
+    padding: 0 $padding-input-horizontal-tablet;
+    font-size: $font-size-input-tablet;
+  }
+
+  @media (max-width: 576px) {
+    height: $height-input-mobile;
+    padding: 0 $padding-input-horizontal-mobile;
+    font-size: $font-size-input-mobile;
+  }
+}
+
+// 패스워드 입력 필드는 아이콘 공간 확보를 위해 오른쪽 패딩 추가
+input[type="password"] {
+  padding-right: $padding-password-right-default;
+
+  @media (max-width: 768px) {
+    padding-right: $padding-password-right-tablet;
+  }
+
+  @media (max-width: 576px) {
+    padding-right: $padding-password-right-mobile;
+  }
+}
+
+textarea {
+  border: none;
+  border-radius: $radius-lg;
+  background-color: $color-bg-sub-m;
+  width: 100%;
+  min-height: $height-textarea-default;
+  padding: $padding-textarea-vertical-default $padding-textarea-horizontal-default;
+  font-size: $font-body-regular;
+  font-family: $font-body;
+  color: $color-text-primary;
+  resize: vertical;
+  line-height: $line-height-body;
+
+  &::placeholder {
+    color: $color-text-secondary;
+  }
+
+  @media (max-width: 768px) {
+    min-height: $height-textarea-tablet;
+    padding: $padding-textarea-vertical-tablet $padding-textarea-horizontal-tablet;
+    font-size: $font-size-input-tablet;
+  }
+
+  @media (max-width: 576px) {
+    min-height: $height-textarea-mobile;
+    padding: $padding-textarea-vertical-mobile $padding-textarea-horizontal-mobile;
+    font-size: $font-size-input-mobile;
+  }
+}
+
+// ========== 기본 Input 컨테이너 ==========
+.form--input {
+  width: 100%;
+
+  > input {
+    display: block;
+    width: 100%;
+    
+    &::placeholder {
+      color: $color-text-secondary;
+    }
+  }
+
+  > p {
+    margin-bottom: $spacing-form-label-margin-bottom;
+    padding-left: $spacing-form-label-padding-left;
+    color: $color-text-primary;
+    text-align: left;
+  }
+}
+
+// ========== With Button Variant ==========
+form .with-btn {
+  display: flex;
+  width: 100%;
+  max-width: $width-input-with-btn-max;
+  gap: $spacing-input-gap;
+}
+
+.with-btn .btn {
+  max-width: $width-input-with-btn-button-max;
+  width: 25%;
+}
+
+// ========== Password Check Variant ==========
+.password-check {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-input-gap;
+}
+
+.password-check input {
+  width: 100%;
+}
+
+// ========== Phone Number Variant ==========
+.input-phone {
+  display: flex;
+  align-items: center;
+  gap: $spacing-input-phone-gap;
+}
+
+.input-phone input {
+  box-sizing: border-box;
+  width: $width-input-phone-item;
+  height: $height-input-default;
+  
+  &::placeholder {
+    color: $color-text-secondary;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    height: $height-input-tablet;
+  }
+
+  @media (max-width: 576px) {
+    height: $height-input-mobile;
+  }
+}
+
+// ========== Input 컴포넌트 전용 스타일 ==========
+// .form--input 내부의 input/textarea는 전역 스타일을 상속받음
+

@@ -1,111 +1,40 @@
+@import '../../styles/variables';
+
 /* 포인트샵 페이지 스타일 */
 .pointshop-page {
   min-height: 100vh;
-  background-color: #ffffff;
+  background-color: $color-bg-white;
 }
 
-/* 사이드바 스타일 */
-.pointshop-sidebar {
-  padding: 20px;
-  background-color: var(--bg-gray);
-  border-radius: var(--border-radius);
-  height: fit-content;
-  position: sticky;
-  top: 20px;
-
-  .user-info-card {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 15px;
-    background-color: var(--maincolor);
-    border-radius: var(--border-radius);
-    margin-bottom: 20px;
-
-    .user-avatar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      background-color: rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-      color: var(--maintext);
-    }
-
-    .user-name {
-      font-weight: 600;
-      color: var(--maintext);
-    }
-  }
-
-  .tab-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-
-    .tab-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 16px;
-      background: none;
-      border: none;
-      border-radius: var(--border-radius);
-      color: var(--maintext);
-      font-size: 0.9rem;
-      font-weight: 500;
-      text-align: left;
-      cursor: pointer;
-      transition: all 0.3s ease;
-
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.7);
-        color: var(--subcolor-d);
-      }
-
-      &.active {
-        background-color: var(--maincolor);
-        color: var(--maintext);
-        font-weight: 600;
-      }
-
-      iconify-icon {
-        flex-shrink: 0;
-      }
-    }
-  }
-}
-
-/* 메인 콘텐츠 스타일 */
+// ========== 메인 콘텐츠 스타일 ==========
 .pointshop-content {
   .content-header {
-    margin-bottom: 30px;
+    margin-bottom: $spacing-section-padding * 0.625;
 
     .page-title {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--maintext);
+      font-size: $font-h2;
+      font-weight: $weight-bold;
+      color: $color-text-primary;
       margin: 0;
     }
   }
 
   .filter-bar {
-    background-color: var(--bg-gray);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    margin-bottom: 30px;
+    background-color: $color-bg-gray;
+    padding: $spacing-container-padding;
+    border-radius: $radius-lg;
+    margin-bottom: $spacing-section-padding * 0.625;
 
     .filter-controls {
       .price-range {
         align-items: center;
 
-        span {
-          color: var(--subtext);
-          font-weight: 500;
+        &-separator {
+          color: $color-text-secondary;
+          font-weight: $weight-medium;
         }
 
-        input {
+        &-input {
           width: 80px;
         }
       }
@@ -115,7 +44,7 @@
   .products-grid {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: $spacing-margin-pc;
 
     .pointshop-component-wrapper {
       width: 100%;
@@ -157,25 +86,40 @@
   }
 
   .no-products {
-    h5 {
-      color: var(--subtext);
-      font-weight: 500;
+    .pointshop-empty-icon {
+      color: $color-text-secondary;
     }
 
-    p {
-      color: var(--subtext);
-      font-size: 0.9rem;
+    .pointshop-empty-title {
+      color: $color-text-secondary;
+      font-weight: $weight-regular;
+      font-size: $font-h3;
     }
+
+    .pointshop-empty-text {
+      color: $color-text-secondary;
+      font-size: $font-body-regular;
+    }
+  }
+
+  .pointshop-error-icon {
+    color: $color-point-orange;
+  }
+
+  .pointshop-error-title {
+    color: $color-point-orange;
+    font-size: $font-h3;
+    font-weight: $weight-medium;
+  }
+
+  .pointshop-error-text {
+    color: $color-text-secondary;
+    font-size: $font-body-regular;
   }
 }
 
-/* 반응형 디자인 */
+// ========== 반응형 디자인 ==========
 @media (max-width: 991.98px) {
-  .pointshop-sidebar {
-    margin-bottom: 30px;
-    position: static;
-  }
-
   .pointshop-content {
     .filter-bar {
       .filter-controls {
@@ -184,13 +128,13 @@
 
         .filter-select,
         .filter-input {
-          margin-bottom: 10px;
+          margin-bottom: $spacing-margin-mobile * 0.625;
         }
 
         .price-range {
           flex-direction: column;
           align-items: stretch;
-          gap: 8px;
+          gap: $spacing-margin-mobile * 0.5;
 
           input {
             width: 100%;
@@ -202,34 +146,20 @@
 }
 
 @media (max-width: 767.98px) {
-  .pointshop-sidebar {
-    .tab-menu {
-      .tab-item {
-        padding: 10px 12px;
-        font-size: 0.85rem;
-
-        iconify-icon {
-          width: 18px !important;
-          height: 18px !important;
-        }
-      }
-    }
-  }
-
   .pointshop-content {
     .content-header {
       .page-title {
-        font-size: 1.5rem;
+        font-size: $font-h3;
       }
     }
 
     .products-grid {
       .product__card {
         .product__card__body {
-          padding: 12px;
+          padding: $spacing-margin-mobile * 0.75;
 
           .product-image img {
-            height: 150px;
+            height: $spacing-section-padding * 3.125; // 150px
           }
         }
       }
@@ -237,131 +167,134 @@
   }
 }
 
-/* 상품 상세 페이지 스타일 */
+// ========== 상품 상세 페이지 스타일 ==========
 .product-detail-page {
-  min-height: 100vh;
-  background-color: #ffffff;
-  padding: 20px 0;
+  .product-detail-error-icon,
+  .product-detail-empty-icon {
+    color: $color-text-secondary;
+  }
 
-  .detail-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+  .product-detail-error-icon {
+    color: $color-point-orange;
+  }
+
+  .product-detail-error-title {
+    color: $color-point-orange;
+    font-size: $font-h3;
+    font-weight: $weight-medium;
+  }
+
+  .product-detail-error-text,
+  .product-detail-empty-title {
+    color: $color-text-secondary;
+    font-size: $font-body-regular;
+  }
+
+  .product-detail-back-btn {
+    color: $color-text-primary;
+    text-decoration: none;
   }
 
   .product-detail {
-    background: #ffffff;
-    border-radius: var(--border-radius);
+    background: $color-bg-white;
+    border-radius: $radius-lg;
     overflow: hidden;
-    box-shadow: var(--box-shadow);
+    box-shadow: $shadow-card-inner;
 
     .product-image-section {
       .product-main-image {
         width: 100%;
-        height: 400px;
+        height: $spacing-section-padding * 8.333;
         object-fit: cover;
+        border-radius: $radius-md;
       }
     }
 
-    .product-info-section {
-      padding: 30px;
+      .product-info-section {
+      padding: $spacing-section-padding * 0.625;
 
       .product-title {
-        font-size: 2rem;
-        font-weight: 700;
-        color: var(--maintext);
-        margin-bottom: 15px;
+        font-size: $font-h2;
+        font-weight: $weight-bold;
+        color: $color-text-primary;
+        margin-bottom: $spacing-container-padding * 0.625;
+      }
+
+      .product-status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: $spacing-margin-mobile * 0.25;
       }
 
       .product-description {
-        font-size: 1rem;
-        color: var(--subtext);
-        line-height: 1.6;
-        margin-bottom: 20px;
+        font-size: $font-body-large;
+        color: $color-text-secondary;
+        line-height: $line-height-body;
+        margin-bottom: $spacing-margin-pc;
       }
 
       .product-price {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--subcolor-d);
-        margin-bottom: 20px;
+        font-size: $font-h3;
+        font-weight: $weight-bold;
+        color: $color-main;
+        margin-bottom: $spacing-margin-pc;
+      }
+
+      .product-info-text {
+        color: $color-text-secondary;
+        font-size: $font-body-regular;
+      }
+
+      .product-total-price {
+        font-size: $font-h3;
+        font-weight: $weight-bold;
+        color: $color-text-primary;
+        margin: 0;
       }
 
       .product-actions {
         display: flex;
-        gap: 15px;
-        margin-top: 30px;
+        flex-direction: column;
+        gap: $spacing-margin-mobile * 0.75;
+        margin-top: $spacing-section-padding * 0.625;
 
-        .btn-purchase {
-          flex: 1;
-          background: var(--maincolor);
-          color: var(--maintext);
-          border: none;
-          padding: 15px 30px;
-          border-radius: var(--border-radius);
-          font-weight: 600;
-          font-size: 1rem;
-          cursor: pointer;
-          transition: all 0.3s ease;
-
-          &:hover {
-            background: var(--subcolor-d);
-            transform: translateY(-2px);
-          }
-
-          &:disabled {
-            background: var(--subtext);
-            cursor: not-allowed;
-            transform: none;
-          }
-        }
-
-        .btn-back {
-          padding: 15px 30px;
-          background: transparent;
-          border: 2px solid var(--maincolor);
-          color: var(--maintext);
-          border-radius: var(--border-radius);
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.3s ease;
-
-          &:hover {
-            background: var(--maincolor);
-          }
+        @media (min-width: 768px) {
+          flex-direction: row;
         }
       }
 
       .product-specs {
-        margin-top: 30px;
-        padding-top: 30px;
-        border-top: 1px solid #f0f0f0;
+        margin-top: $spacing-section-padding * 0.625;
+        padding-top: $spacing-section-padding * 0.625;
+        border-top: 1px solid $color-bg-light-gray;
 
         h5 {
-          font-size: 1.25rem;
-          font-weight: 600;
-          color: var(--maintext);
-          margin-bottom: 15px;
+          font-size: $font-h3;
+          font-weight: $weight-medium;
+          color: $color-text-primary;
+          margin-bottom: $spacing-container-padding * 0.625;
         }
 
         .spec-item {
           display: flex;
           justify-content: space-between;
-          padding: 10px 0;
-          border-bottom: 1px solid #f8f8f8;
+          padding: $spacing-margin-mobile * 0.625 0;
+          border-bottom: 1px solid $color-bg-gray;
 
           &:last-child {
             border-bottom: none;
           }
 
           .spec-label {
-            font-weight: 500;
-            color: var(--subtext);
+            font-weight: $weight-regular;
+            color: $color-text-secondary;
+            font-size: $font-body-regular;
           }
 
           .spec-value {
-            font-weight: 600;
-            color: var(--maintext);
+            font-weight: $weight-medium;
+            color: $color-text-primary;
+            font-size: $font-body-regular;
           }
         }
       }
@@ -369,45 +302,82 @@
   }
 
   .recommended-products {
-    margin-top: 50px;
+    margin-top: $spacing-section-padding * 1.0417;
 
-    h4 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--maintext);
-      margin-bottom: 30px;
+    &-title {
+      font-size: $font-h3;
+      font-weight: $weight-medium;
+      color: $color-text-primary;
+      margin-bottom: $spacing-section-padding * 0.625;
       text-align: center;
+    }
+
+    .product-recommend-card {
+      .product-recommend-title {
+        font-size: $font-body-regular;
+        font-weight: $weight-bold;
+        color: $color-text-primary;
+        margin: 0 0 $spacing-margin-mobile * 0.5;
+      }
+
+      .product-recommend-point {
+        font-size: $font-body-regular;
+        color: $color-main;
+        font-weight: $weight-medium;
+      }
     }
   }
 }
 
+/* 상품 등록 페이지 스타일 */
+.item-create-card {
+  .item-create-header {
+    padding: $spacing-container-padding;
+    background-color: $color-main;
+    color: $color-bg-white;
+    border-radius: $radius-lg $radius-lg 0 0;
+
+    .item-create-title {
+      font-size: $font-h3;
+      font-weight: $weight-bold;
+      color: $color-bg-white;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: $spacing-margin-mobile * 0.5;
+    }
+  }
+
+  .item-create-body {
+    padding: $spacing-container-padding;
+  }
+}
+
+// ========== 반응형 디자인 ==========
 @media (max-width: 767.98px) {
   .product-detail-page {
+    padding: $spacing-margin-pc 0;
+
     .product-detail {
       .product-image-section {
         .product-main-image {
-          height: 250px;
+          height: $spacing-section-padding * 5.208;
         }
       }
 
       .product-info-section {
-        padding: 20px;
+        padding: $spacing-margin-pc;
 
         .product-title {
-          font-size: 1.5rem;
+          font-size: $font-h3;
         }
 
         .product-price {
-          font-size: 1.25rem;
+          font-size: $font-h3;
         }
 
         .product-actions {
           flex-direction: column;
-
-          .btn-purchase,
-          .btn-back {
-            padding: 12px 20px;
-          }
         }
       }
     }

@@ -1,3 +1,10 @@
+import Input from './Input';
+import './Input.scss';
+
+/**
+ * @deprecated InputCheckPassword는 Input 컴포넌트의 'password' variant로 대체되었습니다.
+ * 하위 호환성을 위해 유지되며, 새로운 코드에서는 Input 컴포넌트를 직접 사용하세요.
+ */
 function InputCheckPassword({
   marginTop,
   value1,
@@ -6,28 +13,16 @@ function InputCheckPassword({
   showChangePasswordModal,
 }) {
   return (
-    <div className={`form--input ${marginTop || ""}`}>
-      <p className="text-body">비밀번호 </p>
-      <div className="password-check">
-        <input
-          type="password"
-          name={showChangePasswordModal ? "newPassword" : "password"}
-          placeholder="8자 이상, 영문, 숫자, 특수문자 모두 포함"
-          value={value1}
-          onChange={inputChange}
-          required
-        />
-        {/* 기존 name="check-password"를 유지하면서 상태는 password2로 매핑 */}
-        <input
-          type="password"
-          name={showChangePasswordModal ? "confirmPassword" : "check-password"}
-          placeholder="비밀번호를 한 번 더 입력하세요."
-          value={value2}
-          onChange={inputChange}
-          required
-        />
-      </div>
-    </div>
+    <Input
+      variant="password"
+      marginTop={marginTop}
+      onChange={inputChange}
+      variantProps={{
+        password1: value1,
+        password2: value2,
+        showChangePasswordModal,
+      }}
+    />
   );
 }
 

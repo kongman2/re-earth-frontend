@@ -1,0 +1,123 @@
+@import '../../../styles/variables';
+
+// ========== Finding Form 변수 ==========
+$spacing-form-gap: clamp(16px, 2vw, 20px); // form 내부 요소 간격
+$spacing-input-gap: 10px; // input 간격
+
+// ========== Finding Form 공통 스타일 ==========
+.finding-form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-form-gap;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+
+  // Header
+  &__header {
+    margin-bottom: $spacing-section-padding * 0.5;
+    text-align: center;
+
+    h2 {
+      font-size: $font-h2;
+      font-weight: $weight-bold;
+      color: $color-text-primary;
+      margin: 0;
+    }
+  }
+
+  // Content
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-form-gap;
+  }
+
+  // Input Group
+  &__input-group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-input-gap;
+  }
+
+  // Label
+  &__label {
+    font-size: $font-body-regular;
+    font-weight: $weight-medium;
+    color: $color-text-primary;
+    margin-bottom: $spacing-input-gap;
+
+    &--required::after {
+      content: ' *';
+      color: $color-point-orange;
+    }
+  }
+
+  // Actions
+  &__actions {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-margin-mobile;
+    margin-top: $spacing-section-padding * 0.5;
+  }
+
+  // Message
+  &__message {
+    padding: $spacing-container-padding;
+    border-radius: $radius-lg;
+    text-align: center;
+    margin-bottom: $spacing-margin-mobile;
+
+    &--success {
+      background-color: rgba(114, 198, 58, 0.1);
+      color: $color-main;
+    }
+
+    &--error {
+      background-color: rgba(251, 110, 82, 0.1);
+      color: $color-point-orange;
+    }
+
+    &--info {
+      background-color: $color-bg-sub-m;
+      color: $color-text-primary;
+    }
+  }
+
+  // Variants
+  &--compact {
+    gap: $spacing-margin-mobile;
+
+    .finding-form__header {
+      margin-bottom: $spacing-margin-mobile;
+    }
+
+    .finding-form__actions {
+      margin-top: $spacing-margin-mobile;
+    }
+  }
+}
+
+// ========== Phone Input ==========
+.finding-form__phone-input {
+  display: flex;
+  align-items: center;
+  gap: clamp(5px, 1vw, 10px);
+
+  input {
+    flex: 1;
+  }
+
+  span {
+    color: $color-text-secondary;
+  }
+}
+
+// ========== Responsive ==========
+@media (max-width: 768px) {
+  .finding-form {
+    max-width: 100%;
+    padding: 0 $spacing-margin-mobile;
+  }
+}
+

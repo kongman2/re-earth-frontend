@@ -1,0 +1,203 @@
+// CarbonPointSection.scss
+
+@import '../../../../styles/variables';
+
+.panel.randing--carbon-point {
+   background: $color-main;
+   padding-top: clamp(56px, 8vw, 120px);
+   padding-bottom: clamp(48px, 6vw, 96px);
+   scroll-snap-align: start;
+
+   .headline {
+      font-weight: $weight-bold;
+      font-size: $font-h1;
+      color: $color-text-primary;
+      line-height: 1.2;
+      width: fit-content;
+      max-width: 100%;
+      
+      // 작은 화면에서는 줄바꿈 허용
+      @media (max-width: 576px) {
+         white-space: normal;
+         text-align: center;
+      }
+      
+      // 큰 화면에서는 한 줄 유지
+      @media (min-width: 577px) {
+         white-space: nowrap;
+      }
+   }
+
+   .title__sub {
+      font-size: $font-h3;
+      font-weight: $weight-medium;
+      color: $color-point-blue;
+   }
+
+   .lead-ask {
+      color: $color-text-primary;
+      font-weight: $weight-medium;
+      font-size: $font-body-large;
+   }
+
+   .login-text {
+      color: $color-text-primary;
+      font-weight: $weight-medium;
+      font-size: $font-body-regular;
+   }
+
+   .login-link {
+      color: $color-text-primary;
+      font-weight: $weight-bold;
+      text-decoration: underline;
+
+      &:hover {
+         opacity: 0.85;
+      }
+   }
+
+   .image-box {
+      img {
+         max-width: 520px;
+         filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.12));
+
+         @media (max-width: 991.98px) {
+            max-width: 200px;
+         }
+
+         @media (max-width: 576px) {
+            max-width: 150px;
+         }
+      }
+   }
+}
+
+/* 버튼 스타일 */
+.carbon-point__cta {
+   @media (max-width: 576px) {
+      margin-top: 20px !important;
+   }
+}
+
+/* 둥둥 떠있는 버튼 애니메이션 */
+.floating-btn {
+   position: relative;
+   animation: floating-carbon 3s ease-in-out infinite;
+   
+   &:hover {
+      animation-play-state: paused;
+   }
+
+   &::before {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 8px;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      filter: blur(6px);
+      animation: shadow-floating-carbon 3s ease-in-out infinite;
+   }
+
+   @media (max-width: 991.98px) {
+      &::before {
+         bottom: -8px;
+         height: 5px;
+      }
+   }
+
+   @media (max-width: 576px) {
+      &::before {
+         bottom: -6px;
+         height: 4px;
+         width: 60%;
+      }
+   }
+}
+
+@keyframes floating-carbon {
+   0% {
+      transform: translateY(0px);
+   }
+   50% {
+      transform: translateY(-12px);
+   }
+   100% {
+      transform: translateY(0px);
+   }
+}
+
+@keyframes shadow-floating-carbon {
+   0% {
+      opacity: 0.2;
+      transform: translateX(-50%) scale(1);
+   }
+   50% {
+      opacity: 0.1;
+      transform: translateX(-50%) scale(0.8);
+   }
+   100% {
+      opacity: 0.2;
+      transform: translateX(-50%) scale(1);
+   }
+}
+
+/* 태블릿 반응형 애니메이션 */
+@media (max-width: 991.98px) {
+   @keyframes floating-carbon {
+      0% {
+         transform: translateY(0px);
+      }
+      50% {
+         transform: translateY(-6px);
+      }
+      100% {
+         transform: translateY(0px);
+      }
+   }
+}
+
+/* 모바일 반응형 애니메이션 */
+@media (max-width: 576px) {
+   @keyframes floating-carbon {
+      0% {
+         transform: translateY(0px);
+      }
+      50% {
+         transform: translateY(-4px);
+      }
+      100% {
+         transform: translateY(0px);
+      }
+   }
+}
+
+/* 공통 컴포넌트 */
+.value-box {
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   padding: clamp(6px, 1.2vw, 8px) clamp(12px, 2.4vw, 16px);
+   border-radius: $radius-sm;
+   background: $color-bg-white;
+   color: $color-text-primary;
+   font-weight: $weight-bold;
+   font-size: clamp(18px, 3.6vw, 28px);
+   box-shadow: $shadow-card;
+   flex-shrink: 0; /* 축소 방지 */
+
+   small {
+      margin-left: clamp(4px, 0.8vw, 6px);
+      font-size: 0.7em;
+      font-weight: $weight-bold;
+   }
+   
+   // 작은 화면에서 더 작은 패딩
+   @media (max-width: 576px) {
+      padding: 6px 12px;
+      font-size: clamp(16px, 4vw, 20px);
+   }
+}

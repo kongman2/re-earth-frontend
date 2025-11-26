@@ -1,0 +1,31 @@
+// SolutionInActionSection.scss
+
+.contents--cards {
+   background-color: $color-bg-sub-m;
+   scroll-snap-align: start;
+   height: 100vh;
+   min-height: 100vh;
+   overflow: hidden;
+   display: flex;
+   flex-direction: column;
+
+   /* 태블릿 반응형 (769px ~ 991.98px) */
+   @media (min-width: 769px) and (max-width: 991.98px) {
+      padding-top: clamp(60px, 8vh, 80px);
+      padding-bottom: clamp(60px, 8vh, 80px);
+   }
+
+   /* 모바일 반응형 (768px 이하) */
+   @media (max-width: 768px) {
+      padding-top: clamp(40px, 6vh, 60px);
+      padding-bottom: clamp(40px, 6vh, 60px);
+   }
+}
+
+.panel:has(.cards-swiper) {
+   height: 100vh;
+   min-height: 100vh;
+   place-items: center center;
+   margin-top: -40px;
+}
+

@@ -53,9 +53,9 @@ export default function PointShop({ items = [], loading = false, error = null })
    }
 
    return (
-      <div className="row">
+      <div className="row g-3">
          {items.map((item, idx) => (
-            <div className="col-lg-3 col-md-4 col-sm-6 mb-4" key={item.id || idx}>
+            <div className="col-md-3 col-sm-6 col-6 mb-4" key={item.id || idx}>
                <div className="product__card" onClick={() => handleProductClick(item.id)} style={{ cursor: 'pointer' }}>
                   <div className="product__card__body d-flex flex-column">
                      <div>

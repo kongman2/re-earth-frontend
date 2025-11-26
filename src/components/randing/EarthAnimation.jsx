@@ -1,5 +1,6 @@
 import React from 'react';
 import useEarthAnimation from '../../hooks/landing/useEarthAnimation';
+import './EarthAnimation.scss';
 
 const EarthAnimation = () => {
   const {

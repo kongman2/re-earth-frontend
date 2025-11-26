@@ -1,0 +1,110 @@
+// Alert.scss
+// 공통 Alert 컴포넌트 스타일
+
+@import '../../styles/variables';
+
+.alert {
+   display: flex;
+   align-items: flex-start;
+   padding: 16px 20px;
+   border-radius: $radius-md;
+   border-left: 4px solid;
+   margin-bottom: 16px;
+   position: relative;
+
+   // Variants
+   &--success {
+      background-color: rgba($color-main, 0.1);
+      border-left-color: $color-main;
+      color: darken($color-main, 20%);
+
+      .alert-title {
+         color: darken($color-main, 30%);
+      }
+   }
+
+   &--error {
+      background-color: rgba($color-point-orange, 0.1);
+      border-left-color: $color-point-orange;
+      color: darken($color-point-orange, 20%);
+
+      .alert-title {
+         color: darken($color-point-orange, 30%);
+      }
+   }
+
+   &--warning {
+      background-color: rgba($color-point-yellow, 0.1);
+      border-left-color: $color-point-yellow;
+      color: darken($color-point-yellow, 30%);
+
+      .alert-title {
+         color: darken($color-point-yellow, 40%);
+      }
+   }
+
+   &--info {
+      background-color: rgba($color-point-blue, 0.1);
+      border-left-color: $color-point-blue;
+      color: darken($color-point-blue, 20%);
+
+      .alert-title {
+         color: darken($color-point-blue, 30%);
+      }
+   }
+
+   // Content
+   &-content {
+      flex: 1;
+   }
+
+   &-title {
+      font-family: $font-heading;
+      font-weight: $weight-bold;
+      font-size: $font-body-large;
+      margin: 0 0 8px 0;
+   }
+
+   &-message {
+      font-size: $font-body-regular;
+      line-height: $line-height-body;
+      margin: 0;
+   }
+
+   // Dismissible
+   &--dismissible {
+      padding-right: 48px;
+   }
+
+   &-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      line-height: 1;
+      color: currentColor;
+      cursor: pointer;
+      padding: 4px;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: $radius-sm;
+      opacity: 0.6;
+      transition: opacity 0.2s ease;
+
+      &:hover {
+         opacity: 1;
+         background-color: rgba(0, 0, 0, 0.05);
+      }
+   }
+
+   // 모달 모드 스타일
+   .alert-modal-body {
+      padding: 0;
+   }
+}
+

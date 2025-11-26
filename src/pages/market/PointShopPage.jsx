@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchItemsThunk } from '../../features/itemSlice';
-import './PointShopPage.scss';
+import Button from '../../components/common/Button';
 import Pagination from '../../components/common/Pagination';
+import FilterSelect from '../../components/common/FilterSelect';
+import FilterInput from '../../components/common/FilterInput';
+import Loading from '../../components/common/Loading';
 import PointShop from '../../components/shop/PointShop';
-import MenuBar from '../../components/menu/MenuBar';
+import './PointShopPage.scss';
 
 const CATEGORIES = [
   { value: 'all', label: '전체' },
@@ -32,8 +35,7 @@ export default function PointShopPage() {
   // Redux 상태
   const { items, loading, error } = useSelector((state) => state.items);
   
-  // 상태 관리 - 현재 페이지는 pointshop이므로 홈 탭이 active
-  const [activeTab, setActiveTab] = useState('home');
+  // 상태 관리
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('popular');
@@ -110,25 +112,6 @@ export default function PointShopPage() {
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const currentItems = filteredItems.slice(startIndex, endIndex);
 
-  // 탭 변경 핸들러
-  const handleTabChange = (tab) => {
-    setActiveTab(tab); // 모든 탭 클릭 시 해당 탭이 active 상태가 됨
-    if (tab === 'anabada') {
-      // 아나바다는 준비중 페이지로 이동
-      navigate('/readysoon');
-    } else if (tab === 'mypage') {
-      // 마이페이지로 이동
-      navigate('/user/my');
-    } else if (tab === 'pointshop') {
-      // 포인트샵 페이지로 이동
-      navigate('/pointshop');
-    } else if (tab === 'settings') {
-      // 설정은 준비중 페이지로 이동
-      navigate('/readysoon');
-    }
-    // home 탭은 현재 페이지이므로 이동하지 않음
-  };
-
   // 필터 초기화
   const resetFilters = () => {
     setSelectedCategory('all');
@@ -139,65 +122,10 @@ export default function PointShopPage() {
   };
 
   return (
-    <div className="pointshop-page">
-      <MenuBar />
-      <div className="container-fluid">
-        <div className="row">
-          {/* 사이드바 - 필터 영역 */}
-          <div className="col-md-3">
-            <div className="pointshop-sidebar">
-              {/* 사용자 정보 */}
-              <div className="user-info-card">
-                <div className="user-avatar">
-                  <iconify-icon icon="mdi:account-circle" width="32" height="32"></iconify-icon>
-                </div>
-                <span className="user-name">닉네임</span>
-              </div>
-
-              {/* 탭 메뉴 */}
-              <div className="tab-menu">
-                <button
-                  className={`tab-item ${activeTab === 'home' ? 'active' : ''}`}
-                  onClick={() => handleTabChange('home')}
-                >
-                  <iconify-icon icon="mdi:home" width="20" height="20"></iconify-icon>
-                  홈
-                </button>
-                <button
-                  className={`tab-item ${activeTab === 'anabada' ? 'active' : ''}`}
-                  onClick={() => handleTabChange('anabada')}
-                >
-                  <iconify-icon icon="mdi:swap-horizontal" width="20" height="20"></iconify-icon>
-                  아나바다장터
-                </button>
-                <button 
-                  className={`tab-item ${activeTab === 'pointshop' ? 'active' : ''}`}
-                  onClick={() => handleTabChange('pointshop')}
-                >
-                  <iconify-icon icon="mdi:gift" width="20" height="20"></iconify-icon>
-                  포인트샵
-                </button>
-                <button 
-                  className={`tab-item ${activeTab === 'mypage' ? 'active' : ''}`}
-                  onClick={() => handleTabChange('mypage')}
-                >
-                  <iconify-icon icon="mdi:account" width="20" height="20"></iconify-icon>
-                  마이페이지
-                </button>
-                <button 
-                  className={`tab-item ${activeTab === 'settings' ? 'active' : ''}`}
-                  onClick={() => handleTabChange('settings')}
-                >
-                  <iconify-icon icon="mdi:cog" width="20" height="20"></iconify-icon>
-                  설정
-                </button>
-              </div>
-            </div>
-          </div>
-
+    <div className="user-page bg-white">
+      <div className="container">
           {/* 메인 콘텐츠 */}
-          <div className="col-md-9">
-            <div className="pointshop-content">
+            <div className="pointshop-content p-3">
               {/* 헤더 */}
               <div className="content-header">
                 <h2 className="page-title">PointShop</h2>
@@ -205,69 +133,61 @@ export default function PointShopPage() {
 
               {/* 필터 바 */}
               <div className="filter-bar">
-                <div className="row align-items-center">
-                  <div className="col-md-8">
+                <div className="row align-items-center g-3">
+                  <div className="col-lg-8 col-md-12">
                     <div className="filter-controls d-flex flex-wrap gap-3">
                       {/* 카테고리 선택 */}
-                      <select
-                        className="filter-select"
+                      <FilterSelect
                         value={selectedCategory}
                         onChange={(e) => setSelectedCategory(e.target.value)}
-                      >
-                        {CATEGORIES.map(category => (
-                          <option key={category.value} value={category.value}>
-                            {category.label}
-                          </option>
-                        ))}
-                      </select>
+                        options={CATEGORIES}
+                      />
 
                       {/* 정렬 선택 */}
-                      <select
-                        className="filter-select"
+                      <FilterSelect
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value)}
-                      >
-                        {SORT_OPTIONS.map(option => (
-                          <option key={option.value} value={option.value}>
-                            {option.label}
-                          </option>
-                        ))}
-                      </select>
+                        options={SORT_OPTIONS}
+                      />
 
                       {/* 검색 */}
-                      <input
+                      <FilterInput
                         type="text"
-                        className="filter-input"
                         placeholder="상품 검색..."
                         value={searchKeyword}
                         onChange={(e) => setSearchKeyword(e.target.value)}
                       />
 
                       {/* 가격 범위 */}
-                      <div className="price-range d-flex gap-2">
-                        <input
+                      <div className="price-range d-flex align-items-center gap-2">
+                        <FilterInput
                           type="number"
-                          className="filter-input"
                           placeholder="최소"
                           value={priceRange.min}
                           onChange={(e) => setPriceRange(prev => ({ ...prev, min: e.target.value }))}
+                          className="price-range-input"
                         />
-                        <span>~</span>
-                        <input
+                        <span className="price-range-separator">~</span>
+                        <FilterInput
                           type="number"
-                          className="filter-input"
                           placeholder="최대"
                           value={priceRange.max}
                           onChange={(e) => setPriceRange(prev => ({ ...prev, max: e.target.value }))}
+                          className="price-range-input"
                         />
                       </div>
                     </div>
                   </div>
-                  <div className="col-md-4 text-right">
-                    <button className="btn btn-sm btn-outline-secondary" onClick={resetFilters}>
+                  <div className="col-lg-4 col-md-12 text-lg-end text-md-start">
+                    <Button 
+                      variant="default" 
+                      size="sm" 
+                      onClick={resetFilters}
+                      className="pointshop-reset-btn"
+                    >
                       <iconify-icon icon="mdi:refresh" width="16" height="16"></iconify-icon>
                       필터 초기화
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -276,27 +196,28 @@ export default function PointShopPage() {
               <div className="products-grid">
                 {loading ? (
                   <div className="text-center py-5">
-                    <div className="spinner-border text-primary" role="status">
-                      <span className="sr-only">Loading...</span>
-                    </div>
-                    <p className="mt-3">상품을 불러오는 중...</p>
+                    <Loading variant="spinner" text="상품을 불러오는 중..." />
                   </div>
                 ) : error ? (
                   <div className="text-center py-5">
-                    <iconify-icon icon="mdi:alert-circle" width="64" height="64" style={{ color: '#dc3545' }}></iconify-icon>
-                    <h5 className="mt-3 text-danger">오류가 발생했습니다</h5>
-                    <p className="text-muted">{error}</p>
-                    <button className="btn btn-primary mt-3" onClick={() => dispatch(fetchItemsThunk())}>
+                    <iconify-icon icon="mdi:alert-circle" width="64" height="64" className="pointshop-error-icon"></iconify-icon>
+                    <h5 className="mt-3 pointshop-error-title">오류가 발생했습니다</h5>
+                    <p className="pointshop-error-text">{error}</p>
+                    <Button 
+                      variant="main1" 
+                      className="mt-3" 
+                      onClick={() => dispatch(fetchItemsThunk())}
+                    >
                       다시 시도
-                    </button>
+                    </Button>
                   </div>
                 ) : currentItems.length > 0 ? (
                   <PointShop items={currentItems} loading={loading} error={error} />
                 ) : (
                   <div className="no-products text-center py-5">
-                    <iconify-icon icon="mdi:package-variant" width="64" height="64" style={{ color: '#ccc' }}></iconify-icon>
-                    <h5 className="mt-3 text-muted">상품이 없습니다.</h5>
-                    <p className="text-muted">
+                    <iconify-icon icon="mdi:package-variant" width="64" height="64" className="pointshop-empty-icon"></iconify-icon>
+                    <h5 className="mt-3 pointshop-empty-title">상품이 없습니다.</h5>
+                    <p className="pointshop-empty-text">
                       {searchKeyword || selectedCategory !== 'all' || priceRange.min || priceRange.max 
                         ? '검색 조건에 맞는 상품이 없습니다.' 
                         : '등록된 상품이 없습니다.'}
@@ -325,10 +246,8 @@ export default function PointShopPage() {
                   <PointShop items={filteredItems.slice(0, 4)} />
                 </div>
               )}
-            </div>
           </div>
         </div>
-      </div>
     </div>
   );
 }

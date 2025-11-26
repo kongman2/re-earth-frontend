@@ -1,0 +1,50 @@
+// AuthPageLayout.scss
+// 로그인/회원가입 공통 레이아웃 스타일
+
+@import '../../styles/variables';
+
+.auth-page {
+   background-color: #ffffff;
+   padding: 80px;
+   border-radius: 20px;
+   max-width: 920px;
+   margin: 0 auto;
+
+   @media (max-width: 646px) {
+      padding: 30px;
+      width: 100%;
+   }
+}
+
+.auth-page__content {
+   width: 100%;
+}
+
+.auth-page__form {
+   width: 100%;
+   max-width: 400px;
+   padding: 0;
+   margin: 0 auto;
+
+   @media (max-width: 646px) {
+      width: 100%;
+   }
+}
+
+/* 공통 폼 스타일은 _form.scss에서 관리됨 */
+
+/* 소셜 로그인 컨테이너 (로그인 페이지 전용) */
+.socialLogin {
+   width: 100%;
+   max-width: 400px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 10px;
+   margin: auto;
+
+   @media (max-width: 646px) {
+      width: 100%;
+   }
+}
+

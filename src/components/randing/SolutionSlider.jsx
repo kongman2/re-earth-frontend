@@ -1,50 +1,45 @@
 // re-earth-frontend/src/components/randing/SolutionSlider.jsx
 import { useState, useEffect, useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { EffectFade, Pagination, Mousewheel } from 'swiper/modules'
+import { Pagination, Mousewheel } from 'swiper/modules'
 import 'swiper/css'
-import 'swiper/css/effect-fade'
 import 'swiper/css/pagination'
+import './SolutionSlider.scss'
 
-// ✅ 이미지 import (상대경로는 파일 위치에 맞춰 조정)
+// 이미지 import
 import imgProblem1 from '../../assets/images/환경문제1img.png'
 import imgProblem2 from '../../assets/images/환경문제2img.png'
 import imgProblem3 from '../../assets/images/환경문제3img.png'
 
 const SolutionSlider = () => {
-   const [isMobile, setIsMobile] = useState(() => {
-      if (typeof window !== 'undefined') {
-         return window.innerWidth <= 991.98
-      }
-      return true
-   })
+   const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 991)
    const swiperRef = useRef(null)
 
    useEffect(() => {
-      const checkScreenSize = () => {
-         const width = window.innerWidth
-         const newIsMobile = width <= 991.98
+      let timeoutId
+      const checkMobile = () => {
+         clearTimeout(timeoutId)
+         timeoutId = setTimeout(() => {
+            const newIsMobile = window.innerWidth <= 991
+            if (newIsMobile !== isMobile) {
          setIsMobile(newIsMobile)
       }
-
-      checkScreenSize()
-
-      let resizeTimeout
-      const debouncedResize = () => {
-         clearTimeout(resizeTimeout)
-         resizeTimeout = setTimeout(checkScreenSize, 300)
+         }, 100)
       }
-
-      window.addEventListener('resize', debouncedResize)
-      const onOrient = () => setTimeout(checkScreenSize, 350)
-      window.addEventListener('orientationchange', onOrient)
-
+      window.addEventListener('resize', checkMobile)
       return () => {
-         window.removeEventListener('resize', debouncedResize)
-         window.removeEventListener('orientationchange', onOrient)
-         clearTimeout(resizeTimeout)
+         window.removeEventListener('resize', checkMobile)
+         clearTimeout(timeoutId)
       }
-   }, [])
+   }, [isMobile])
+
+   // direction 변경 시 Swiper 업데이트
+   useEffect(() => {
+      if (swiperRef.current) {
+         swiperRef.current.changeDirection(isMobile ? 'horizontal' : 'vertical')
+         swiperRef.current.update()
+      }
+   }, [isMobile])
 
    const solutionData = [
       {
@@ -100,49 +95,75 @@ const SolutionSlider = () => {
       </svg>
    )
 
-   const swiperConfig = {
-      modules: [EffectFade, Pagination, Mousewheel],
-      spaceBetween: isMobile ? 16 : 30,
-      effect: isMobile ? 'slide' : 'fade',
-      loop: !isMobile,
-      mousewheel: isMobile ? false : { enabled: true, invert: false },
-      pagination: { clickable: true },
-      speed: isMobile ? 450 : 650,
-      autoHeight: isMobile,
-      allowTouchMove: true,
-      simulateTouch: true,
-      onSwiper: (swiper) => {
-         swiperRef.current = swiper
-      },
-   }
-
    return (
       <div className="cards-swiper">
-         <Swiper key={`swiper-${isMobile ? 'mobile' : 'desktop'}`} {...swiperConfig} className="blog-slider">
+         <Swiper
+            modules={[Pagination, Mousewheel]}
+            spaceBetween={0}
+            slidesPerView={1}
+            direction={isMobile ? 'horizontal' : 'vertical'}
+            loop={!isMobile}
+            speed={isMobile ? 450 : 650}
+            mousewheel={!isMobile ? { 
+               enabled: true, 
+               forceToAxis: true,
+               releaseOnEdges: true,
+               sensitivity: 1,
+               thresholdDelta: 50
+            } : false}
+            pagination={{ clickable: true }}
+            onSwiper={(swiper) => {
+               swiperRef.current = swiper
+            }}
+            onResize={(swiper) => {
+               swiper.update()
+            }}
+            onAfterInit={(swiper) => {
+               const isCurrentlyMobile = window.innerWidth <= 991
+               if (!isCurrentlyMobile && swiper.pagination?.el) {
+                  const handleClick = (e) => {
+                     const bullet = e.target.closest('.swiper-pagination-bullet')
+                     if (bullet && swiper.pagination?.bullets) {
+                        const index = Array.from(swiper.pagination.bullets).indexOf(bullet)
+                        if (index !== -1) swiper.slideToLoop(index)
+                     }
+                  }
+                  swiper.pagination.el.addEventListener('click', handleClick)
+               }
+            }}
+            className="blog-slider"
+         >
             {solutionData.map((item) => (
                <SwiperSlide key={item.id}>
-                  <div className="blog-slider__item">
-                     <article className="q-card">
-                        <div className="q-card__media">
-                           <img src={item.question.image} alt={item.question.alt} />
+                  <div className="blog-slider__item d-flex flex-column flex-md-row gap-3">
+                     {/* Question Card */}
+                     <div className="q-card col-md-8 col-12 mb-lg-0 p-3 p-md-4">
+                        <div className="row align-items-center h-100">
+                           <div className="q-card__media col-md-6 col-12 mb-3 mb-md-0">
+                              <img src={item.question.image} alt={item.question.alt} className="img-fluid" />
+                           </div>
+                           <div className="q-card__body col-md-6 col-12">
+                              <span className="eyebrow mb-1 mb-md-3">question</span>
+                              <h3 className="q-card__title mb-1 mb-md-3" dangerouslySetInnerHTML={{ __html: item.question.title }} />
+                              <p className="q-card__desc" dangerouslySetInnerHTML={{ __html: item.question.description }} />
+                           </div>
                         </div>
-                        <div className="q-card__body">
-                           <span className="eyebrow">question</span>
-                           <h3 className="q-title" dangerouslySetInnerHTML={{ __html: item.question.title }} />
-                           <p className="q-desc" dangerouslySetInnerHTML={{ __html: item.question.description }} />
+                     </div>
+                     
+                     {/* Solution Card */}
+                     <div className="s-card col-md-4 col-12 p-3 p-md-4 d-flex flex-column justify-content-center">
+                        <span className="s-card__eyebrow mb-1 mb-md-3">solution</span>
+                        <div className="s-card__content d-flex flex-column justify-content-center align-items-center">
+                           <h4 className="s-card__title mb-1 mb-md-3">{item.solution.title}</h4>
+                           <div className="s-card__visual mb-1 mb-md-3" aria-hidden="true">
+                              <RecycleIcon />
+                           </div>
+                           <div className="s-card__cta d-flex flex-column align-items-center">
+                              <strong>{item.solution.effect}</strong>
+                              <span className="s-card__desc">{item.solution.description}</span>
+                           </div>
                         </div>
-                     </article>
-                     <aside className="s-card">
-                        <span className="s-eyebrow">solution</span>
-                        <h4 className="s-title">{item.solution.title}</h4>
-                        <div className="s-visual" aria-hidden="true">
-                           <RecycleIcon />
-                        </div>
-                        <p className="s-cta">
-                           <strong>{item.solution.effect}</strong>
-                           <span>{item.solution.description}</span>
-                        </p>
-                     </aside>
+                     </div>
                   </div>
                </SwiperSlide>
             ))}

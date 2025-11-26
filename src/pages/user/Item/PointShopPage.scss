@@ -1,15 +1,10 @@
 /* 포인트샵 페이지 스타일 */
-.pointshop-page {
-  min-height: 100vh;
-  background-color: #ffffff;
-  padding: 20px 0;
-}
 
 /* 사이드바 스타일 */
 .pointshop-sidebar {
   padding: 20px;
-  background-color: var(--bg-gray);
-  border-radius: var(--border-radius);
+  background-color: $color-bg-gray;
+  border-radius: $radius-lg;
   height: fit-content;
   position: sticky;
   top: 20px;
@@ -19,8 +14,8 @@
     align-items: center;
     gap: 12px;
     padding: 15px;
-    background-color: var(--maincolor);
-    border-radius: var(--border-radius);
+    background-color: $color-sub-green;
+    border-radius: $radius-lg;
     margin-bottom: 20px;
 
     .user-avatar {
@@ -31,12 +26,12 @@
       height: 40px;
       background-color: rgba(255, 255, 255, 0.2);
       border-radius: 50%;
-      color: var(--maintext);
+      color: $color-text-primary;
     }
 
     .user-name {
       font-weight: 600;
-      color: var(--maintext);
+      color: $color-text-primary;
     }
   }
 
@@ -52,8 +47,8 @@
       padding: 12px 16px;
       background: none;
       border: none;
-      border-radius: var(--border-radius);
-      color: var(--maintext);
+      border-radius: $radius-lg;
+      color: $color-text-primary;
       font-size: 0.9rem;
       font-weight: 500;
       text-align: left;
@@ -62,12 +57,12 @@
 
       &:hover {
         background-color: rgba(255, 255, 255, 0.7);
-        color: var(--subcolor-d);
+        color: $color-main;
       }
 
       &.active {
-        background-color: var(--maincolor);
-        color: var(--maintext);
+        background-color: $color-sub-green;
+        color: $color-text-primary;
         font-weight: 600;
       }
 
@@ -86,15 +81,15 @@
     .page-title {
       font-size: 2rem;
       font-weight: 700;
-      color: var(--maintext);
+      color: $color-text-primary;
       margin: 0;
     }
   }
 
   .filter-bar {
-    background-color: var(--bg-gray);
+    background-color: $color-bg-gray;
     padding: 20px;
-    border-radius: var(--border-radius);
+    border-radius: $radius-lg;
     margin-bottom: 30px;
 
     .filter-controls {
@@ -102,7 +97,7 @@
         align-items: center;
 
         span {
-          color: var(--subtext);
+          color: $color-text-secondary;
           font-weight: 500;
         }
 
@@ -159,12 +154,12 @@
 
   .no-products {
     h5 {
-      color: var(--subtext);
+      color: $color-text-secondary;
       font-weight: 500;
     }
 
     p {
-      color: var(--subtext);
+      color: $color-text-secondary;
       font-size: 0.9rem;
     }
   }
@@ -203,8 +198,8 @@
 }
 
 @media (max-width: 767.98px) {
-  .pointshop-page {
-    padding: 10px 0;
+  .user-page {
+    // padding은 user-page-wrapper에서 관리
   }
 
   .pointshop-sidebar {
@@ -256,9 +251,9 @@
 
   .product-detail {
     background: #ffffff;
-    border-radius: var(--border-radius);
+    border-radius: $radius-lg;
     overflow: hidden;
-    box-shadow: var(--box-shadow);
+    box-shadow: $shadow-card-inner;
 
     .product-image-section {
       .product-main-image {
@@ -274,13 +269,13 @@
       .product-title {
         font-size: 2rem;
         font-weight: 700;
-        color: var(--maintext);
+        color: $color-text-primary;
         margin-bottom: 15px;
       }
 
       .product-description {
         font-size: 1rem;
-        color: var(--subtext);
+        color: $color-text-secondary;
         line-height: 1.6;
         margin-bottom: 20px;
       }
@@ -288,7 +283,7 @@
       .product-price {
         font-size: 1.5rem;
         font-weight: 700;
-        color: var(--subcolor-d);
+        color: $color-main;
         margin-bottom: 20px;
       }
 
@@ -299,23 +294,23 @@
 
         .btn-purchase {
           flex: 1;
-          background: var(--maincolor);
-          color: var(--maintext);
+          background: $color-sub-green;
+          color: $color-text-primary;
           border: none;
           padding: 15px 30px;
-          border-radius: var(--border-radius);
+          border-radius: $radius-lg;
           font-weight: 600;
           font-size: 1rem;
           cursor: pointer;
           transition: all 0.3s ease;
 
           &:hover {
-            background: var(--subcolor-d);
+            background: $color-main;
             transform: translateY(-2px);
           }
 
           &:disabled {
-            background: var(--subtext);
+            background: $color-text-secondary;
             cursor: not-allowed;
             transform: none;
           }
@@ -324,15 +319,15 @@
         .btn-back {
           padding: 15px 30px;
           background: transparent;
-          border: 2px solid var(--maincolor);
-          color: var(--maintext);
-          border-radius: var(--border-radius);
+          border: 2px solid $color-sub-green;
+          color: $color-text-primary;
+          border-radius: $radius-lg;
           font-weight: 600;
           cursor: pointer;
           transition: all 0.3s ease;
 
           &:hover {
-            background: var(--maincolor);
+            background: $color-sub-green;
           }
         }
       }
@@ -345,7 +340,7 @@
         h5 {
           font-size: 1.25rem;
           font-weight: 600;
-          color: var(--maintext);
+          color: $color-text-primary;
           margin-bottom: 15px;
         }
 
@@ -361,12 +356,12 @@
 
           .spec-label {
             font-weight: 500;
-            color: var(--subtext);
+            color: $color-text-secondary;
           }
 
           .spec-value {
             font-weight: 600;
-            color: var(--maintext);
+            color: $color-text-primary;
           }
         }
       }
@@ -379,7 +374,7 @@
     h4 {
       font-size: 1.5rem;
       font-weight: 600;
-      color: var(--maintext);
+      color: $color-text-primary;
       margin-bottom: 30px;
       text-align: center;
     }

@@ -2,11 +2,13 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { useNavigate } from 'react-router-dom';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import '../mainpage.scss';
+
 import ArrowIcon from '../../../../components/common/ArrowIcon';
 
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+import '../mainpage.scss';
 
 const NEWS = [
   { 
@@ -53,12 +55,12 @@ export default function NewsSection() {
       <div className="container">
         <div className="row">
           {/* 첫 번째 카드 - 제목, 설명, 화살표 */}
-          <div className="col-md-3 mb-5">
+          <div className="col-md-3 mb-3 mb-md-0">
             <div className="h-100 d-flex flex-column justify-content-center">
-              <h2 className="font-weight-bold mb-2 main--section__title main--section__title--news">
+              <h2 className="font-weight-bold mb-1 main--section__title main--section__title--news">
                 NEWS
               </h2>
-              <p className="text-muted mb-4">"지구를 위한 뉴스 큐레이션"</p>
+              <p className="text-muted mb-3">"지구를 위한 뉴스 큐레이션"</p>
               <div className="d-flex align-items-center">
                 <a 
                   href="#" 

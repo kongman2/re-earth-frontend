@@ -1,10 +1,10 @@
 // re-earth-frontend/src/components/layout/TableContent.scss
 .table-content {
   &__title {
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: $font-h3;
+    font-weight: $weight-medium;
     margin-bottom: 20px;
-    color: var(--maintext);
+    color: $color-text-primary;
   }
 
   &__main {
@@ -30,30 +30,30 @@
     border: 2px solid #e9ecef;
     width: 120px;
     padding: 8px 16px;
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: $font-body-regular;
+    font-weight: $weight-medium;
     text-align: center;
-    color: var(--subtext);
+    color: $color-text-secondary;
     cursor: pointer;
     border-radius: 8px;
     transition: all 0.3s ease;
     
     &:hover {
-      border-color: var(--maincolor);
-     color: var(--maintext);
+      border-color: $color-sub-green;
+     color: $color-text-primary;
 
     }
     
     &--active {
-      background-color: var(--maincolor);
-      border-color: var(--maincolor);
-      color: var(--maintext);
+      background-color: $color-sub-green;
+      border-color: $color-sub-green;
+      color: $color-text-primary;
     }
   }
 
   &__filter-bar {
-    background-color: var(--point-r);
-    border-radius: var(--border-radius);
+    background-color: $color-point-orange;
+    border-radius: $radius-lg;
     padding: 10px;
     margin-bottom: 0;
     width: 100%;
@@ -74,15 +74,15 @@
     background: none;
     border: none;
     cursor: pointer;
-    padding: 4px;
+    padding: 0;
   }
 
   &__filter-menu {
     position: absolute;
     top: 100%;
     right: 0;
-    background: var(--point-y);
-    border-radius: var(--border-radius);
+    background: $color-point-yellow;
+    border-radius: $radius-lg;
     z-index: 1000;
     min-width: 300px;
     margin-top: 8px;
@@ -100,7 +100,7 @@
   &__filter-clear {
     background: none;
     border: none;
-    color: var(--point-b);
+    color: $color-point-blue;
     font-size: 0.75rem;
     cursor: pointer;
     
@@ -125,7 +125,7 @@
   &__filter-group .table-content__filter-label {
     font-size: 0.75rem;
     font-weight: 500;
-    color: var(--maintext);
+    color: $color-text-primary;
   }
 
   &__date-range {
@@ -136,7 +136,7 @@
 
   &__date-separator {
     font-size: 0.875rem;
-    color: var(--subtext);
+    color: $color-text-secondary;
     font-weight: 500;
   }
 
@@ -153,7 +153,7 @@
 
   &__amount-separator {
     font-size: 0.875rem;
-    color: var(--subtext);
+    color: $color-text-secondary;
     font-weight: 500;
   }
 
@@ -175,7 +175,7 @@
       padding: 15px 20px;
       text-align: left;
       font-weight: 600;
-      color: var(--maintext);
+      color: $color-text-primary;
       font-size: 0.875rem;
       white-space: nowrap;
       border-bottom: 1px solid #e9ecef;
@@ -185,7 +185,7 @@
       padding: 15px 20px;
       border-bottom: 1px solid #f8f9fa;
       font-size: 0.875rem;
-      color: var(--maintext);
+      color: $color-text-primary;
     }
     
     tr:last-child td {
@@ -196,7 +196,7 @@
       transition: background-color 0.3s ease;
       
       &:hover {
-        background-color: var(--bg-gray);
+        background-color: $color-bg-gray;
       }
     }
   }
@@ -215,7 +215,7 @@
   &__details-link {
     background: none;
     border: none;
-    color: var(--point-b);
+    color: $color-point-blue;
     text-decoration: none;
     font-weight: 500;
     cursor: pointer;
@@ -229,6 +229,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 8px;
   }
 
   &__pagination-btn {
@@ -253,7 +254,7 @@
   }
 
   &__pagination-page {
-    background: none;
+    all: unset;
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -261,20 +262,17 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--maintext);
+    font-size: $font-body-regular;
+    font-weight: $weight-medium;
+    color: $color-text-secondary;
     transition: all 0.3s ease;
     
     &:hover {
-      background-color: var(--subcolor-m);
-      border-color: var(--subcolor-d);
+      background-color: $color-bg-sub-m;
     }
     
     &--active {
-      background-color: var(--subcolor-d);
-      border-color: var(--subcolor-d);
-      color: #ffffff;
+      color: $color-text-primary;
     }
   }
 }

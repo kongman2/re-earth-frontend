@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Icon } from '@iconify/react';
 import './TableContent.scss';
-import ArrowIcon from '../common/ArrowIcon';
 
 const TableContent = ({ 
   title, 
@@ -461,7 +461,7 @@ const TableContent = ({
           onClick={() => onPageChange && onPageChange(currentPage - 1)}
           disabled={currentPage <= 1}
         >
-          <ArrowIcon direction="left" size={24} color="var(--maincolor)" />
+          <Icon icon="mdi:chevron-left" width={24} height={24} />
         </button>
         
         <div className="table-content__pagination-pages">
@@ -481,7 +481,7 @@ const TableContent = ({
           onClick={() => onPageChange && onPageChange(currentPage + 1)}
           disabled={currentPage >= totalPages}
         >
-          <ArrowIcon direction="right" size={24} color="var(--maincolor)" />
+          <Icon icon="mdi:chevron-right" width={24} height={24} />
         </button>
       </div>
     </div>

@@ -11,7 +11,7 @@
     
     &:hover {
       transform: translateY(-2px);
-      box-shadow: var(--box-shadow);
+      box-shadow: $shadow-card-inner;
     }
 
     .card-body {
@@ -55,25 +55,25 @@
   /* 각 액션별 색상 */
   .action-certify {
     .action-title {
-      color: var(--point-y); /* #ffce55 */
+      color: $color-point-yellow; /* #ffce55 */
     }
   }
   
   .action-donate {
     .action-title {
-      color: var(--subcolor-d); /* #72c63a */
+      color: $color-main; /* #72c63a */
     }
   }
   
   .action-shop {
     .action-title {
-      color: var(--point-b); /* #1d6ff2 */
+      color: $color-point-blue; /* #1d6ff2 */
     }
   }
   
   .action-community {
     .action-title {
-      color: var(--point-r); /* #fb6e52 */
+      color: $color-point-orange; /* #fb6e52 */
     }
   }
 }

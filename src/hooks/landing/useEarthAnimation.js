@@ -197,8 +197,31 @@ const useEarthAnimation = () => {
   const applyStages = useCallback((p) => {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    const w0 = stateRef.current.baseSize?.w0 || (wrapElRef.current?.getBoundingClientRect().width || 0);
-    const h0 = stateRef.current.baseSize?.h0 || (wrapElRef.current?.getBoundingClientRect().height || 0);
+    // baseSize가 없으면 현재 크기를 사용하고, 리사이즈 시 업데이트
+    let w0 = stateRef.current.baseSize?.w0;
+    let h0 = stateRef.current.baseSize?.h0;
+    
+    if (!w0 || !h0) {
+      // CSS 변수로 설정된 크기를 읽어서 사용
+      if (wrapElRef.current) {
+        const computedStyle = getComputedStyle(wrapElRef.current);
+        const minWidth = parseFloat(computedStyle.getPropertyValue('--wrap-min')) || 360;
+        const fluidWidth = computedStyle.getPropertyValue('--wrap-fluid') || '86vmin';
+        const maxWidth = parseFloat(computedStyle.getPropertyValue('--wrap-max')) || 1100;
+        
+        // clamp 계산을 시뮬레이션
+        const vmin = Math.min(vw, vh);
+        const fluidValue = parseFloat(fluidWidth) || 86;
+        const calculatedWidth = Math.max(minWidth, Math.min(vmin * (fluidValue / 100), maxWidth));
+        
+        w0 = calculatedWidth;
+        h0 = calculatedWidth; // aspect-ratio 1:1
+        stateRef.current.baseSize = { w0, h0 };
+      } else {
+        w0 = w0 || 500;
+        h0 = h0 || 500;
+      }
+    }
 
     updateBackgroundByProgress(p);
 
@@ -339,6 +362,7 @@ const useEarthAnimation = () => {
 
     if (stateRef.current.finished && y < stateRef.current.animEndY - REENTER_HYSTERESIS_PX) {
       stateRef.current.finished = false;
+      stateRef.current.revealed = false; // revealed 상태도 리셋
       document.body.classList.remove('earth-done');
       lockSnap(true);
       stateRef.current.pSmooth = Math.min(stateRef.current.pSmooth, S2);
@@ -346,15 +370,45 @@ const useEarthAnimation = () => {
       requestTick();
     }
 
+    // 지구 애니메이션이 완료되고 아래로 내려갈 때 스크롤 스냅 다시 활성화
     if (stateRef.current.finished && !stateRef.current.revealed && y >= (stateRef.current.fullTop + REVEAL_AFTER_PX)) {
       stateRef.current.revealed = true;
+      lockSnap(false);
+    }
+    
+    // 지구 애니메이션이 완료되지 않았거나 위로 올라갔을 때는 스크롤 스냅 활성화
+    if (!stateRef.current.finished && scrollerRef.current.classList.contains('no-snap')) {
       lockSnap(false);
     }
   }, [getRawProgress, requestTick, lockSnap]);
 
   const onResize = useCallback(() => {
-    const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
-    if (isMobile) return;
+    // 모바일에서도 반응형 처리
+    if (!wrapElRef.current) return;
+    
+    // CSS 변수로 설정된 크기를 다시 계산
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const computedStyle = getComputedStyle(wrapElRef.current);
+    const minWidth = parseFloat(computedStyle.getPropertyValue('--wrap-min')) || 360;
+    const fluidWidth = computedStyle.getPropertyValue('--wrap-fluid') || '86vmin';
+    const maxWidth = parseFloat(computedStyle.getPropertyValue('--wrap-max')) || 1100;
+    
+    // clamp 계산
+    const vmin = Math.min(vw, vh);
+    const fluidMatch = fluidWidth.match(/(\d+(?:\.\d+)?)vmin/);
+    const fluidValue = fluidMatch ? parseFloat(fluidMatch[1]) : 86;
+    const calculatedWidth = Math.max(minWidth, Math.min(vmin * (fluidValue / 100), maxWidth));
+    const calculatedHeight = calculatedWidth; // aspect-ratio 1:1
+    
+    // baseSize 업데이트
+    stateRef.current.baseSize = { w0: calculatedWidth, h0: calculatedHeight };
+    
+    // 현재 애니메이션 진행 중이면 크기 즉시 업데이트
+    if (wrapElRef.current && stateRef.current.pSmooth < S1) {
+      wrapElRef.current.style.width = calculatedWidth + 'px';
+      wrapElRef.current.style.height = calculatedHeight + 'px';
+    }
 
     updateRootSizeFromWrapper();
     updateOrbitLayout();
@@ -370,19 +424,35 @@ const useEarthAnimation = () => {
   }, [updateRootSizeFromWrapper, updateOrbitLayout, recalcBoundaries, getRawProgress, requestTick]);
 
   const setupLanding = useCallback(() => {
-    updateRootSizeFromWrapper();
     if (!wrapElRef.current) return;
     
-    const r = wrapElRef.current.getBoundingClientRect();
+    // CSS 변수로 설정된 크기를 계산
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const computedStyle = getComputedStyle(wrapElRef.current);
+    const minWidth = parseFloat(computedStyle.getPropertyValue('--wrap-min')) || 360;
+    const fluidWidth = computedStyle.getPropertyValue('--wrap-fluid') || '86vmin';
+    const maxWidth = parseFloat(computedStyle.getPropertyValue('--wrap-max')) || 1100;
+    
+    // clamp 계산: min(vmin * fluid%, max) 형태
+    const vmin = Math.min(vw, vh);
+    const fluidMatch = fluidWidth.match(/(\d+(?:\.\d+)?)vmin/);
+    const fluidValue = fluidMatch ? parseFloat(fluidMatch[1]) : 86;
+    const calculatedWidth = Math.max(minWidth, Math.min(vmin * (fluidValue / 100), maxWidth));
+    const calculatedHeight = calculatedWidth; // aspect-ratio 1:1
+    
     wrapElRef.current.style.position = 'fixed';
     wrapElRef.current.style.left = '50%';
     wrapElRef.current.style.top = '100%';
     wrapElRef.current.style.transform = 'translate(-50%, -50%)';
-    wrapElRef.current.style.width = r.width + 'px';
-    wrapElRef.current.style.height = r.height + 'px';
+    wrapElRef.current.style.width = calculatedWidth + 'px';
+    wrapElRef.current.style.height = calculatedHeight + 'px';
     wrapElRef.current.style.zIndex = '6';
     
-    stateRef.current.baseSize = { w0: r.width, h0: r.height };
+    stateRef.current.baseSize = { w0: calculatedWidth, h0: calculatedHeight };
+    
+    // CSS 변수 업데이트
+    updateRootSizeFromWrapper();
     
     if (svgOrbitRef.current) svgOrbitRef.current.style.opacity = 0;
     if (titleElRef.current) titleElRef.current.style.opacity = 1;

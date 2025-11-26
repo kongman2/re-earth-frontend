@@ -1,0 +1,125 @@
+// EarthAnimation.scss
+
+@import '../../styles/variables';
+
+.earth {
+   position: absolute;
+   inset: 0;
+   margin: auto;
+   width: calc(var(--s) * 1px);
+   height: calc(var(--s) * 1px);
+   border-radius: 50%;
+   overflow: hidden;
+   z-index: 1;
+   will-change: border-radius, transform;
+   background: radial-gradient(120% 120% at 30% 28%, #5bbeff 0%, #3d99eb 35%, var(--b) 58%, #205fae 78%, #0e4a93 100%);
+   box-shadow: inset -28px -32px 64px rgba(0, 0, 0, 0.35), inset 10px 12px 20px rgba(255, 255, 255, 0.15), 0 30px 60px rgba(0, 0, 0, 0.14);
+
+   &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(45% 45% at 32% 26%, rgba(255, 255, 255, 0.48) 0%, rgba(255, 255, 255, 0.18) 18%, rgba(255, 255, 255, 0) 36%);
+      mix-blend-mode: screen;
+   }
+
+   &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(100% 100% at 70% 75%, rgba(0, 0, 0, 0) 44%, rgba(0, 0, 0, 0.18) 72%, rgba(0, 0, 0, 0.35) 100%);
+      mix-blend-mode: multiply;
+   }
+}
+
+.earth__face {
+   --size: calc((var(--s) * 0.1) * 1px);
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   width: 45%;
+   height: 20%;
+   transform: translate(-50%, -75%) scale(var(--faceScale, 1));
+   transform-origin: 50% 60%;
+}
+
+.earth__eye {
+   position: absolute;
+   top: 0;
+   width: var(--size);
+   height: var(--size);
+   background: #000;
+   border-radius: 50%;
+
+   &:nth-of-type(1) {
+      left: 0;
+   }
+
+   &:nth-of-type(2) {
+      right: 0;
+   }
+}
+
+@keyframes blink {
+   0%, 73%, 75%, 100% {
+      transform: scaleY(1);
+   }
+   74% {
+      transform: scaleY(0.1);
+   }
+}
+
+.earth__eye--blinking {
+   animation: blink 10s linear infinite;
+}
+
+.earth__mouth {
+   position: absolute;
+   left: 40%;
+   bottom: 0;
+   width: var(--size);
+   height: var(--size);
+   background: #000;
+   clip-path: circle(50% at 50% 0);
+}
+
+.earth__map {
+   --starter: calc(var(--s) * 0.05);
+   position: absolute;
+   top: 30%;
+   left: 50%;
+   width: calc(var(--starter) * 1px);
+   height: calc(var(--starter) * 1px);
+   margin: calc(var(--starter) * -1px) 0 0 calc(var(--starter) * -1px);
+   background: linear-gradient(145deg, #e6f47a 0%, var(--g) 55%, #b5d84f 100%);
+   border-radius: calc(var(--starter) * 1px);
+   box-shadow: calc(var(--s) * -1px) 0 0 calc((var(--s) * 0.2) * 1px) var(--g), calc((var(--s) * 0.825) * -1px) 0 0 calc((var(--s) * 0.175) * 1px) var(--g), calc((var(--s) * 0.75) * -1px) calc((var(--s) * 0.4) * 1px) 0 calc((var(--s) * 0.15) * 1px) var(--g),
+      calc((var(--s) * 0.15) * 1px) 0 0 calc((var(--s) * 0.075) * 1px) var(--g), calc((var(--s) * 0.075) * 1px) calc((var(--s) * 0.3) * 1px) 0 calc((var(--s) * 0.125) * 1px) var(--g), calc((var(--s) * 0.6) * 1px) calc((var(--s) * 0.15) * 1px) 0 calc((var(--s) * 0.25) * 1px) var(--g),
+      calc((var(--s) * 1.1) * 1px) calc((var(--s) * 0.4) * 1px) 0 calc((var(--s) * 0.2) * 1px) var(--g), calc((var(--s) * 2) * 1px) 0 0 calc((var(--s) * 0.2) * 1px) var(--g), calc((var(--s) * 2.175) * 1px) 0 0 calc((var(--s) * 0.175) * 1px) var(--g),
+      calc((var(--s) * 2.25) * 1px) calc((var(--s) * 0.4) * 1px) 0 calc((var(--s) * 0.15) * 1px) var(--g), calc((var(--s) * 3) * 1px) 0 0 0 var(--g), calc((var(--s) * 3.15) * 1px) 0 0 calc((var(--s) * 0.075) * 1px) var(--g),
+      calc((var(--s) * 3.075) * 1px) calc((var(--s) * 0.3) * 1px) 0 calc((var(--s) * 0.125) * 1px) var(--g), calc((var(--s) * 3.6) * 1px) calc((var(--s) * 0.15) * 1px) 0 calc((var(--s) * 0.25) * 1px) var(--g);
+}
+
+.earth__clouds {
+   --starter: calc(var(--s) * 0.05);
+   position: absolute;
+   top: 60%;
+   left: 50%;
+   width: calc(var(--starter) * 4px);
+   height: calc(var(--starter) * 2px);
+   background: var(--c);
+   border-radius: 50%;
+   transform: translate(-50%, -50%);
+   animation: cloud-rotate 60s linear infinite;
+   mix-blend-mode: soft-light;
+   filter: blur(0.4px) drop-shadow(0 1px 1px rgba(255, 255, 255, 0.35));
+}
+
+@keyframes cloud-rotate {
+   to {
+      transform: translate(-50%, -50%) translate(calc(var(--s) * -3px), 0);
+   }
+}
+

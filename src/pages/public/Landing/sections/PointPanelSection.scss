@@ -1,0 +1,61 @@
+// PointPanelSection.scss
+// Point panel showcase sections
+
+#showcase1.panel.showcase1,
+#showcase2.panel.showcase2 {
+   text-align: center;
+   padding: 120px 24px 40px;
+   scroll-snap-align: start;
+   height: 100vh;
+   min-height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+#showcase1.panel.showcase1 {
+   background: linear-gradient(to bottom, #ff6b6b 0%, #ffd93d 60%, #ffffff 100%);
+}
+
+#showcase2.panel.showcase2 {
+   background: linear-gradient(to bottom, #d1e95d 0%, #ffffff 60%, #ffffff 100%);
+}
+
+.highlight-text1 {
+   font-size: clamp(20px, 3vw, 32px);
+   font-weight: 800;
+   color: #000;
+   text-shadow: none;
+   opacity: 0;
+   position: relative;
+   z-index: 10;
+   
+   .char {
+      display: inline-block;
+      position: relative;
+   }
+}
+
+.highlight-text2 {
+   font-size: clamp(20px, 3vw, 48px);
+   font-weight: 800;
+   color: #000;
+   text-shadow: none;
+   opacity: 0;
+   position: relative;
+   z-index: 10;
+   line-height: 1.2;
+   
+   .word,
+   [class*="word"] {
+      display: inline-block !important;
+      position: relative;
+      margin-right: 0.2em;
+      transform-origin: center center;
+      
+      &:last-child {
+         margin-right: 0;
+      }
+   }
+}
+

@@ -1,0 +1,30 @@
+// EarthOrbit.scss
+
+@import '../../styles/variables';
+
+/* Orbiting Text */
+.earth-orbit {
+   position: absolute;
+   inset: 0;
+   width: 100%;
+   height: 100%;
+   pointer-events: none;
+   overflow: visible;
+   z-index: 2;
+   opacity: 0;
+}
+
+.orbit-scale,
+.orbit-rotator {
+   transform-box: view-box;
+   transform-origin: 50% 50%;
+}
+
+.orbit-text {
+   fill: $color-point-orange;
+   font-weight: 600;
+   font-size: calc(var(--s) * 0.024px);
+   letter-spacing: 0.02em;
+   word-spacing: 0.02em;
+}
+

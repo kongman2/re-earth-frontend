@@ -1,0 +1,151 @@
+// IntroSection.scss
+// Hero section with Earth animation
+
+/* ========== 지구 애니메이션 변수 ========== */
+$earth-size: 300px;
+$earth-color-blue: $color-point-blue;
+$earth-color-green: $color-sub-green;
+$earth-cloud-color: rgba(255, 255, 255, 0.35);
+$earth-orbit-scale: 1.2;
+$earth-wrap-min: 360px;
+$earth-wrap-fluid: 86vmin;
+$earth-wrap-max: 1100px;
+$earth-title-lift: 0vh;
+
+/* 반응형 변수 */
+$earth-wrap-min-mobile: 220px;
+$earth-wrap-fluid-mobile: 66vmin;
+$earth-wrap-max-mobile: 360px;
+
+$earth-wrap-min-tablet-sm: 260px;
+$earth-wrap-fluid-tablet-sm: 70vmin;
+$earth-wrap-max-tablet-sm: 480px;
+
+$earth-wrap-min-tablet: 340px;
+$earth-wrap-fluid-tablet: 72vmin;
+$earth-wrap-max-tablet: 760px;
+
+$earth-wrap-min-desktop: 420px;
+$earth-wrap-fluid-desktop: 74vmin;
+$earth-wrap-max-desktop: 1024px;
+$earth-title-lift-desktop: 2vh;
+
+$earth-wrap-min-large: 520px;
+$earth-wrap-fluid-large: 76vmin;
+$earth-wrap-max-large: 1200px;
+
+/* CSS 변수로 내보내기 (JavaScript에서 동적 변경 가능) */
+:root {
+   --s: #{$earth-size};
+   --b: #{$earth-color-blue};
+   --g: #{$earth-color-green};
+   --c: #{$earth-cloud-color};
+   --orbitScale: #{$earth-orbit-scale};
+   --wrap-min: #{$earth-wrap-min};
+   --wrap-fluid: #{$earth-wrap-fluid};
+   --wrap-max: #{$earth-wrap-max};
+   --titleLift: #{$earth-title-lift};
+}
+
+/* 반응형 변수 조정 */
+@media (max-width: 480px) {
+   :root {
+      --wrap-min: #{$earth-wrap-min-mobile};
+      --wrap-fluid: #{$earth-wrap-fluid-mobile};
+      --wrap-max: #{$earth-wrap-max-mobile};
+   }
+}
+
+@media (min-width: 481px) and (max-width: 767.98px) {
+   :root {
+      --wrap-min: #{$earth-wrap-min-tablet-sm};
+      --wrap-fluid: #{$earth-wrap-fluid-tablet-sm};
+      --wrap-max: #{$earth-wrap-max-tablet-sm};
+   }
+}
+
+@media (min-width: 768px) {
+   :root {
+      --wrap-min: #{$earth-wrap-min-tablet};
+      --wrap-fluid: #{$earth-wrap-fluid-tablet};
+      --wrap-max: #{$earth-wrap-max-tablet};
+   }
+}
+
+@media (min-width: 1024px) {
+   :root {
+      --wrap-min: #{$earth-wrap-min-desktop};
+      --wrap-fluid: #{$earth-wrap-fluid-desktop};
+      --wrap-max: #{$earth-wrap-max-desktop};
+      --titleLift: #{$earth-title-lift-desktop};
+   }
+}
+
+@media (min-width: 1440px) {
+   :root {
+      --wrap-min: #{$earth-wrap-min-large};
+      --wrap-fluid: #{$earth-wrap-fluid-large};
+      --wrap-max: #{$earth-wrap-max-large};
+   }
+}
+
+.hero-title {
+   position: fixed;
+   left: 50%;
+   top: calc(50% - var(--titleLift));
+   transform: translate(-50%, -50%);
+   font-weight: 800;
+   font-size: clamp(24px, 7vw, 36px);
+   line-height: 1.2;
+   text-align: center;
+   color: #111;
+   z-index: 8;
+   pointer-events: none;
+   opacity: 1;
+   transition: opacity 0.25s linear;
+   white-space: nowrap;
+
+   .t-em1 {
+      color: $color-point-orange;
+   }
+
+   .t-em2 {
+      color: $color-point-yellow;
+   }
+}
+
+.panel--intro {
+   position: relative;
+}
+
+/* Earth wrapper */
+.earth-wrap {
+   position: relative;
+   width: clamp(var(--wrap-min), var(--wrap-fluid), var(--wrap-max));
+   aspect-ratio: 1/1;
+   overflow: visible;
+   z-index: 6;
+   will-change: width, height, top, left, transform;
+}
+
+/* 반응형 */
+@media (min-width: 768px) {
+   .hero-title {
+      font-size: clamp(32px, 4.5vw, 56px);
+
+      .hero-br {
+         display: none;
+      }
+   }
+}
+
+@media (max-height: 700px) {
+   :root {
+      --titleLift: 6vh;
+   }
+}
+
+/* JavaScript에서 동적으로 설정되는 변수들 */
+/* --s: 지구 크기 (useEarthAnimation.js에서 동적 설정) */
+/* --gradAlpha: 그라데이션 투명도 (useEarthAnimation.js에서 동적 설정) */
+

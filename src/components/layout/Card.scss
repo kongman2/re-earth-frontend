@@ -1,0 +1,59 @@
+// Card.scss
+// 공통 Card 컴포넌트 스타일
+
+@import '../../styles/variables';
+
+.card {
+   background-color: #ffffff;
+   border-radius: $radius-lg;
+   box-shadow: $shadow-card;
+   overflow: hidden;
+   transition: all 0.3s ease;
+
+   // 기본 스타일
+   &--default {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+   }
+
+   // 아웃라인 스타일
+   &--outline {
+      border: 2px solid $color-sub-green;
+      box-shadow: none;
+   }
+
+   // 그림자 강화
+   &--elevated {
+      box-shadow: $shadow-elevated;
+   }
+
+   // 클릭 가능한 카드
+   &--clickable {
+      cursor: pointer;
+
+      &:hover {
+         transform: translateY(-2px);
+         box-shadow: $shadow-elevated;
+      }
+
+      &:active {
+         transform: translateY(0);
+      }
+   }
+
+   // 카드 섹션
+   &__header {
+      padding: 20px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+   }
+
+   &__body {
+      padding: 20px;
+   }
+
+   &__footer {
+      padding: 20px;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      background-color: $color-bg-sub-m;
+   }
+}
+

@@ -1,0 +1,372 @@
+// Button.scss
+@import '../../styles/variables';
+
+.btn {
+   border: none;
+   height: $height-input-default;
+   padding: 0;
+   border-radius: $radius-lg;
+   display: inline-block;
+   text-align: center;
+   color: $color-text-primary;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   font-family: $font-body;
+   font-size: $font-button;
+   font-weight: $weight-regular;
+
+   @media (max-width: 768px) {
+      height: $height-input-tablet;
+   }
+
+   @media (max-width: 576px) {
+      height: $height-input-mobile;
+   }
+
+   &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+   }
+
+   // 기본 스타일
+   &.btn--default {
+      min-width: 100px;
+      max-width: 200px;
+      font-weight: $weight-bold;
+   }
+
+   // Main1 (초록색)
+   &.btn--main1 {
+      color: $color-text-primary;
+      background-color: $color-sub-green;
+      min-width: 100px;
+      max-width: 200px;
+      font-weight: $weight-bold;
+
+      &:hover:not(:disabled) {
+         background-color: darken($color-sub-green, 10%);
+      }
+   }
+
+   // Main2 (진한 초록색)
+   &.btn--main2 {
+      background-color: $color-main;
+      color: $color-text-primary;
+      min-width: 100px;
+      max-width: 200px;
+      font-weight: $weight-bold;
+
+      &:hover:not(:disabled) {
+         background-color: darken($color-main, 10%);
+         color: $color-bg-white;
+      }
+   }
+
+   // Main3 (주황색)
+   &.btn--main3 {
+      background-color: $color-point-orange;
+      color: $color-text-primary;
+      min-width: 100px;
+      max-width: 200px;
+      font-weight: $weight-bold;
+
+      &:hover:not(:disabled) {
+         background-color: darken($color-point-orange, 10%);
+         color: $color-bg-white;
+      }
+   }
+
+   // Point (노란색)
+   &.btn--point {
+      background-color: $color-point-yellow;
+      color: $color-text-primary;
+      border: none;
+      border-radius: $radius-lg;
+      padding: 10px;
+      font-weight: $weight-medium;
+      transition: all 0.3s ease;
+
+      &:hover:not(:disabled) {
+         background-color: $color-point-yellow;
+         opacity: 0.9;
+         transform: translateY(-1px);
+         box-shadow: $shadow-card;
+      }
+
+      &:active:not(:disabled) {
+         transform: translateY(0);
+         box-shadow: $shadow-card-inner;
+      }
+   }
+
+   // Find (링크 스타일)
+   &.btn--find {
+      text-decoration: underline;
+      color: $color-text-secondary;
+      margin-top: 10px;
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 0;
+      font-weight: $weight-regular;
+      font-size: $font-caption;
+
+      &:hover:not(:disabled) {
+         color: $color-text-primary;
+      }
+   }
+
+   // Google (흰색 배경)
+   &.btn--google {
+      background-color: $color-bg-white;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: $shadow-card-inner;
+
+      &:hover:not(:disabled) {
+         background-color: darken($color-bg-white, 5%);
+         transform: translateY(-1px);
+      }
+   }
+
+   // Kakao (노란색 배경)
+   &.btn--kakao {
+      background-color: $color-point-yellow;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: $shadow-card-inner;
+
+      &:hover:not(:disabled) {
+         background-color: darken($color-point-yellow, 10%);
+         transform: translateY(-1px);
+      }
+   }
+
+   &.btn--landing {
+      background-color: rgba(255, 255, 255, 0.5);
+      color: $color-point-blue;
+      border: 2px solid $color-bg-white;
+      font-weight: $weight-bold;
+      font-family: $font-heading;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: $shadow-card-inner;
+      
+      &:hover {
+         background-color: $color-bg-white;
+         color: $color-point-blue;
+      }
+   }
+   &.btn--guide {   
+      color: $color-text-primary;
+      font-weight: $weight-medium;
+      background-color: $color-sub-green;
+      min-width: 100px;
+      max-width: 200px;
+      height: auto;
+
+      &:hover:not(:disabled) {
+         background-color: darken($color-sub-green, 10%);
+      }
+   }
+
+   // 아이콘/내용 래퍼
+   .btn--inside {
+      width: 87.5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      margin: 10px 25px;
+      color: $color-text-primary;
+      font-size: $font-body-regular;
+
+      img {
+         width: 8%;
+         height: 100%;
+      }
+
+      span {
+         width: 62.5%;
+         text-align: center;
+         font-family: $font-body;
+         font-size: $font-body-regular;
+      }
+
+      @media (max-width: 646px) {
+         margin: 0;
+      }
+   }
+
+   // 크기 변형
+   &.btn--sm {
+      padding: 8px 16px;
+      font-size: $font-caption;
+      min-width: 80px;
+      max-width: 150px;
+   }
+
+   &.btn--lg {
+      padding: 18px 32px;
+      font-size: $font-body-large;
+      min-width: 120px;
+      max-width: 250px;
+   }
+
+   // 전체 너비
+   &.btn--full-width {
+      width: 100%;
+      max-width: 100%;
+   }
+
+}
+
+// 관리자 전용 버튼 스타일
+.admin-table-actions {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  
+  .btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+    
+    &.btn-edit {
+      background: $color-point-yellow;
+      color: $color-text-primary;
+      border: none;
+      
+      &:hover {
+        background: #f0c14b;
+      }
+    }
+    
+    &.btn-delete {
+      background: $color-point-orange;
+      color: #ffffff;
+      border: none;
+      
+      &:hover {
+        background: #e55a46;
+      }
+    }
+  }
+}
+
+// 관리자 모달 액션 버튼
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 32px;
+  
+  .btn-action {
+    flex: 1;
+    padding: 12px 24px;
+    border: none;
+    border-radius: $radius-lg;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    &.btn-approve {
+      background: $color-sub-green;
+      color: $color-text-primary;
+      
+      &:hover {
+        background: $color-main;
+        transform: translateY(-2px);
+      }
+    }
+    
+    &.btn-reject {
+      background: $color-point-orange;
+      color: #ffffff;
+      
+      &:hover {
+        background: #e55a46;
+        transform: translateY(-2px);
+      }
+    }
+    
+    &.btn-warn {
+      background: $color-point-yellow;
+      color: $color-text-primary;
+      
+      &:hover {
+        background: #f0c14b;
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+   // 레거시 호환성: 기존 코드에서 사용하는 스페이스 방식 클래스 지원
+   // 예: className="btn default main1"
+   .btn.default {
+     min-width: 100px;
+     max-width: 200px;
+     padding: 15px 20px;
+     font-weight: 700;
+   }
+ 
+   .btn.main1 {
+     color: $color-text-primary;
+     background-color: $color-sub-green;
+     
+     &:hover {
+       background-color: #b2d700;
+     }
+   }
+ 
+   .btn.main2 {
+     background-color: $color-main;
+     color: $color-text-primary;
+     
+     &:hover {
+       background-color: #5b9e2f;
+       color: #ffffff;
+     }
+   }
+ 
+   .btn.main3 {
+     background-color: $color-point-orange;
+     color: $color-text-primary;
+     
+     &:hover {
+       background-color: #de6148;
+       color: #ffffff;
+     }
+   }
+ 
+   .btn-point {
+     background-color: $color-point-yellow;
+     color: $color-text-primary;
+     border: none;
+     border-radius: $radius-lg;
+     padding: 10px;
+     font-weight: 500;
+     transition: all 0.3s ease;
+     cursor: pointer;
+     
+     &:hover {
+       background-color: $color-point-yellow;
+       opacity: 0.9;
+       transform: translateY(-1px);
+       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+     }
+     
+     &:active {
+       transform: translateY(0);
+       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+     }
+   }
+

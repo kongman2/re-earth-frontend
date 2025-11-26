@@ -6,17 +6,38 @@
   min-height: 300px;
   overflow: hidden;
   border-radius: 16px;
-  box-shadow: var(--box-shadow);
+  box-shadow: $shadow-card-inner;
 
   .hero-swiper {
     width: 100%;
     height: 100%;
+    
+    // Swiper 슬라이드 겹침 방지
+    .swiper-slide {
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      
+      &.swiper-slide-active {
+        z-index: 10;
+        opacity: 1;
+      }
+      
+      &.swiper-slide-prev,
+      &.swiper-slide-next {
+        z-index: 1;
+        opacity: 0;
+      }
+    }
   }
 
   .hero-slide {
     position: relative;
     width: 100%;
     height: 100%;
+    overflow: hidden;
+    isolation: isolate;
 
     .hero-card {
       position: relative;
@@ -24,6 +45,7 @@
       height: 100%;
       border-radius: 16px;
       overflow: hidden;
+      isolation: isolate;
     }
 
     .hero-image {
@@ -48,19 +70,29 @@
       left: 0;
       width: 100%;
       height: 100%;
-      box-shadow: var(--box-shadow);
+      box-shadow: $shadow-card-inner;
       z-index: 2;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 16px;
-    }
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
+      pointer-events: none;
+      isolation: isolate;
 
       .hero-title {
         font-size: 2rem;
         font-weight: 700;
         color: #ffffff;
-        font-family: var(--headings);
+        font-family: $font-heading;
+        text-align: center;
+        padding: 0 20px;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        word-break: keep-all;
+        line-height: 1.3;
+        pointer-events: none;
+        position: relative;
+        z-index: 3;
         
         @media (max-width: 768px) {
           font-size: 2.2rem;
@@ -68,9 +100,11 @@
         
         @media (max-width: 480px) {
           font-size: 1.8rem;
+          padding: 0 16px;
         }
       }
     }
+  }
   }
 
   // 커스텀 네비게이션 버튼
@@ -93,12 +127,12 @@
     }
 
     svg {
-      color: var(--maintext);
+      color: $color-text-primary;
       transition: color 0.3s ease;
     }
 
     &:hover svg path {
-      fill: var(--subcolor-d);
+      fill: $color-main;
     }
   }
 
