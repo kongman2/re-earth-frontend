@@ -57,12 +57,13 @@ export default function PointPanelSection() {
                   duration: 2.5,
                   opacity: 0,
                   rotation: "random(-2000, 2000)",
-                  physics2D: () => ({
-                     angle: "random(240, 320)",
-                     velocity: "random(300, 600)",
-                     gravity: 800
-                  }),
-                  stagger: 0.015
+                  x: () => `random(-500, 500)`,
+                  y: () => `random(400, 800)`,
+                  ease: "power2.out",
+                  stagger: {
+                     each: 0.015,
+                     from: "random"
+                  }
                },
                3
             )

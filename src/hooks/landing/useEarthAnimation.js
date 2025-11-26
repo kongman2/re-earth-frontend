@@ -364,6 +364,7 @@ const useEarthAnimation = () => {
       stateRef.current.finished = false;
       stateRef.current.revealed = false; // revealed 상태도 리셋
       document.body.classList.remove('earth-done');
+      document.body.classList.remove('earth-revealed');
       lockSnap(true);
       stateRef.current.pSmooth = Math.min(stateRef.current.pSmooth, S2);
       stateRef.current.pTarget = Math.min(getRawProgress(), S2);
@@ -373,6 +374,7 @@ const useEarthAnimation = () => {
     // 지구 애니메이션이 완료되고 아래로 내려갈 때 스크롤 스냅 다시 활성화
     if (stateRef.current.finished && !stateRef.current.revealed && y >= (stateRef.current.fullTop + REVEAL_AFTER_PX)) {
       stateRef.current.revealed = true;
+      document.body.classList.add('earth-revealed');
       lockSnap(false);
     }
     

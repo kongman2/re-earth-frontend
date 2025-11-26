@@ -1,9 +1,21 @@
 // PanelFull.scss
-// Full panel section
 
 .panel--full {
    height: 100vh;
    min-height: 100vh;
    scroll-snap-align: start;
+   
+   // 지구 애니메이션이 완료되고 revealed 상태가 될 때까지 숨기기
+   opacity: 0;
+   visibility: hidden;
+   pointer-events: none;
+   transition: opacity 0.6s ease-in-out 0.2s, visibility 0.6s ease-in-out 0.2s;
+}
+
+// 애니메이션이 완료되고 revealed 상태가 되면 표시
+body.earth-revealed .panel--full {
+   opacity: 1;
+   visibility: visible;
+   pointer-events: auto;
 }
 
